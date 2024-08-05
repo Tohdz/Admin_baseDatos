@@ -445,6 +445,44 @@ PROFILE:FIDE_PROYECTO_FINAL_PROF*/
             FROM DUAL;
         END IF;
     END;*/   
-    
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------    
+INSERT INTO FIDE_ESTADOS_TB (DESCRIPCION, ESTADO) VALUES ('Activo', 1);
+INSERT INTO FIDE_ESTADOS_TB (DESCRIPCION, ESTADO) VALUES ('Inactivo', 0);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO FIDE_SEDES_TB (NOMBRE, CIUDAD, DIRECCION, TELEFONO, ESTADO)
+VALUES ('Taller TF', 'San Jose', 'Bajo Piuses', '89984395', 1);
+
+INSERT INTO FIDE_SEDES_TB (NOMBRE, CIUDAD, DIRECCION, TELEFONO, ESTADO)
+VALUES ('Taller Los Amigos', 'Heredia', 'El Carao', '72063542', 1);
+
+INSERT INTO FIDE_SEDES_TB (NOMBRE, CIUDAD, DIRECCION, TELEFONO, ESTADO)
+VALUES ('Taller Sebas', 'Alajuela', 'San Rafael', '88888888', 1);
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO FIDE_USUARIOS_TB (ID_USUARIO,NOMBRE, APELLIDO, TELEFONO, CORREO, USERNAME, UPASSWORD, ID_SEDE, ESTADO)
+VALUES (115470088,'Hector', 'Hernandez', '72063542', 'hhernan93vargas@gmail.com', 'hhernan', '$2a$12$pmBd.ZI04Cw/Oa1SKRXX1ead2W1sVn/1avq6GBjc76Tfaf1PYW4re', 1, 1);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+INSERT INTO FIDE_ROLES_TB (NOMBRE, ID_USUARIO)
+VALUES ('ROLE_ADMIN', 115470088);
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
