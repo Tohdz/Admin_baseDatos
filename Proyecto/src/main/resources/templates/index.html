@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TuJuego.Com</title>
+        <!-- Agregamos estilos CSS personalizados aquí -->
+        <style>
+            /* Estilos generales */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8f9fa;
+                color: #333;
+                margin: 0;
+                padding: 0;
+                min-height: 100vh; /* Asegura que el cuerpo ocupe al menos la altura completa de la ventana */
+                display: flex;
+                flex-direction: column; /* Establece el flujo de la página en una columna */
+            }
+            .container {
+                flex: 1; /* Permite que el contenedor principal crezca para llenar el espacio disponible */
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            h2 {
+                color: #007bff;
+            }
+            p {
+                line-height: 1.6;
+            }
+            /* Estilos para el video incrustado */
+            .video-container {
+                position: relative;
+                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+                height: 0;
+                overflow: hidden;
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .video-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            /* Estilos para el footer */
+            footer {
+                background-color: #343a40;
+                color: #fff;
+                padding: 20px 0;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        <br></br> 
+        <section th:replace="~{carrito/fragmentos :: filtros}"/>
+        <br></br>
+        <section th:replace="~{carrito/fragmentos :: listadoJuegos}"/>
+        <br></br>
+        <article  style="background-color: rgba(0, 0, 0, 0.5);">
+            <div class="container mt-4" style="text-align: justify; color: white;">
+                <h2 style="text-align: center;" class="mb-4" th:text="#{index.titulobienvenida}"></h2>
+                <br></br>
+                <p th:text="#{index.texto1}"></p>
+                <p th:text="#{index.texto2}"></p>
+                <p th:text="#{index.texto3}"></p>
+                <p th:text="#{index.texto4}"></p>
+                <p th:text="#{index.texto5}"></p>
+                <p th:text="#{index.texto6}"></p>
+                <p th:text="#{index.texto7}"></p>
+                <p th:text="#{index.texto8}"></p>
+                <p th:text="#{index.texto9}"></p>
+                <p th:text="#{index.texto10}"></p>
+                <p th:text="#{index.texto11}"></p>
+                <p th:text="#{index.texto12}"></p>
+                <p th:text="#{index.texto13}"></p>
+                <p th:text="#{index.texto14}"></p>
+                <br></br>
+            </div>
+        </article>
+        <br></br>
+        <article  style="background-color: rgba(0, 0, 0, 0.5);">
+            <div class="container mt-4" style="text-align: center; color: white;">
+                <h2 class="mb-4" th:text="#{index.ultimasnoticias}"></h2>
+            </div>
+        </article>
+        <section>
+            <div class="container-fluid video-container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <section>
+                            <div class="ratio ratio-16x9">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/aBLHyN_4FzM?si=E6ARnhWHeguqOcwX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-4">
+                        <section>
+                            <div class="ratio ratio-16x9">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/6At0P_w7kZc?si=l7yW2BVvMFQMqeLl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-4">
+                        <section>
+                            <div class="ratio ratio-16x9">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/o7ZKqMnefsg?si=n0NZQ3ddaZdILyKZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br></br>
+        <section>
+            <div class="container-fluid video-container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <section>
+                            <div class="ratio ratio-16x9">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/P0rworTFhsc?si=kJL4QDatoKI42byi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-4">
+                        <section>
+                            <div class="ratio ratio-16x9">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/TzawPvFWm-c?si=RXPu_F4JFSxjWQgL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-4">
+                        <section>
+                            <div class="ratio ratio-16x9">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/oGD_S_RldRc?si=4rBiCJmtNtq84UoC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+
+        <!-- Sección de Contáctenos en el pie de página -->
+        <footer th:replace="~{layout/plantilla :: footer}">
+        </footer>             
+    </body>
+</html>

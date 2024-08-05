@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://thymeleaf.org/extras/spring-securit
+      y">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TechShop</title>
+        <style>
+            body {
+                text-align: center;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
+            <article  style="background-color: rgba(0, 0, 0, 0.5);">
+                <div class="container mt-4" style="text-align: center; color: white;">
+                    <h1 class="mb-4">[[#{mensaje.gracias}]]</h1>
+                </div>
+            </article>            
+        </div>
+        <div th:unless="${#authorization.expression('isAuthenticated()')}">
+
+            <article  style="background-color: rgba(0, 0, 0, 0.5);">
+                <div class="container mt-4" style="text-align: center; color: white;">
+                    <h1 class="mb-4">[[#{mensaje.inicia}]]</h1>
+                </div>
+            </article>
+        </div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <footer th:replace="~{layout/plantilla :: footer}"/>
+    </body>
+</html>
