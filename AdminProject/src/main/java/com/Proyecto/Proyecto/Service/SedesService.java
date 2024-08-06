@@ -13,4 +13,8 @@ import java.util.List;
  */
 public interface SedesService {
     public List<Sedes> getSedes();
+    public Sedes getSede(Sedes categoria);
+    public void save(Sedes categoria);
+    public void delete(Sedes categoria);
+    public void update(Long IDS,String NAME,String CITY,String DIR,String PHONE,boolean EST);
 }

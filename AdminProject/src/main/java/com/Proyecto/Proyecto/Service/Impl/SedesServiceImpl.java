@@ -4,9 +4,11 @@
  */
 package com.Proyecto.Proyecto.Service.Impl;
 
+import com.Proyecto.Proyecto.Dao.SedesDao;
 import com.Proyecto.Proyecto.Domain.Sedes;
 import com.Proyecto.Proyecto.Service.SedesService;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,10 +17,33 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SedesServiceImpl implements SedesService {
+    
+    @Autowired
+    private SedesDao sedesDao;
 
     @Override
     public List<Sedes> getSedes() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return sedesDao.getSedes();
+    }
+
+    @Override
+    public Sedes getSede(Sedes sede) {
+        return sedesDao.getSede(sede.getIdSede());
+    }
+
+    @Override
+    public void save(Sedes sede) {
+        sedesDao.saveSede(sede);
+    }
+
+    @Override
+    public void delete(Sedes sede) {
+        sedesDao.deleteSede(sede.getIdSede());
+    }
+
+    @Override
+    public void update(Long IDS, String NAME, String CITY, String DIR, String PHONE, boolean EST) {
+        sedesDao.updateSede(IDS, NAME, CITY, DIR, PHONE, EST);
     }
 
     

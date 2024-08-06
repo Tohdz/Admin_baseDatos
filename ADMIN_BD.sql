@@ -798,7 +798,8 @@ EXCEPTION
     VCOD NUMBER;
     VMES VARCHAR2(1024);
  BEGIN
-   OPEN DATOS FOR SELECT ID_SEDE,NOMBRE,CIUDAD,DIRECCION,TELEFONO,ESTADO FROM FIDE_SEDES_TB;
+   OPEN DATOS FOR SELECT ID_SEDE,NOMBRE,CIUDAD,DIRECCION,TELEFONO,ESTADO FROM FIDE_SEDES_TB
+   WHERE ESTADO=1;
 EXCEPTION
      WHEN NO_DATA_FOUND THEN
         VMES := SQLERRM;
@@ -847,42 +848,75 @@ EXCEPTION
         DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
 END;*/
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*CREATE OR REPLACE EDITIONABLE PROCEDURE ADD_CONTACTO (NOMBRE IN VARCHAR2,APELLIDO IN VARCHAR2,NUMERO IN NUMBER,MENSAJE IN VARCHAR2 ) AS
-
-BEGIN
-    INSERT INTO CONTACTO (NOMBRE,APELLIDO,NUMERO,MENSAJE) VALUES (NOMBRE,APELLIDO,NUMERO,MENSAJE);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_SEDES_TB_GET_SEDES_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_SEDE,NOMBRE,CIUDAD,DIRECCION,TELEFONO,ESTADO FROM FIDE_SEDES_TB;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SEDES_TB_GET_SEDES_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Create or replace PROCEDURE FIDE_SEDES_TB_GET_SEDESBYID_SP (IDS IN NUMBER, DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_SEDE,NOMBRE,CIUDAD,DIRECCION,TELEFONO,ESTADO FROM FIDE_SEDES_TB
+   WHERE ID_SEDE = IDS;
 EXCEPTION
     WHEN VALUE_ERROR THEN
-        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SEDES_TB_GET_SEDESBYID_SP',SYSDATE, VCOD || ' - '|| VMES );
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SEDES_TB_GET_SEDESBYID_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE  PROCEDURE FIDE_SEDES_TB_ADD_SEDE_SP (NOMB IN VARCHAR2,CIT IN VARCHAR2,DIR IN VARCHAR2,TEL IN VARCHAR2,EST IN NUMBER) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    INSERT INTO FIDE_SEDES_TB (NOMBRE,CIUDAD,DIRECCION,TELEFONO,ESTADO) VALUES (NOMB,CIT,DIR,TEL,EST);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SEDES_TB_ADD_SEDE_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*CREATE OR REPLACE EDITIONABLE PROCEDURE DELETE_CONTACTO (CID IN NUMBER ) AS
+/*CREATE OR REPLACE  PROCEDURE FIDE_SEDES_TB_DELETE_SEDE_SP (IDS IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
 BEGIN
-    DELETE FROM CONTACTO WHERE ID_CONTACTO=CID;
-    IF SQL%ROWCOUNT = 0 THEN
-        DBMS_OUTPUT.PUT_LINE('No se encontró el ID para eliminar.');
-    END IF;
+    DELETE FROM FIDE_SEDES_TB WHERE ID_SEDE=IDS;
 EXCEPTION
     WHEN VALUE_ERROR THEN
-        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SEDES_TB_DELETE_SEDE_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*create or replace PROCEDURE GET_CONTACTO (DATOS OUT SYS_REFCURSOR)
- AS
- BEGIN
-   OPEN DATOS FOR SELECT ID_CONTACTO,NOMBRE,APELLIDO,NUMERO,MENSAJE FROM CONTACTO;
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_SEDES_TB_UPDATE_SEDE_SP (IDS IN NUMBER,NOMB IN VARCHAR2,CIT IN VARCHAR2,DIR IN VARCHAR2,TEL IN VARCHAR2,EST IN NUMBER) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    UPDATE FIDE_SEDES_TB SET NOMBRE=NOMB,CIUDAD=CIT,DIRECCION=DIR,TELEFONO=TEL,ESTADO=EST WHERE ID_SEDE=IDS;
 EXCEPTION
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error inesperado al abrir el cursor: ' || SQLERRM);
- END;*/
-
-
-
-
-
-
-
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SEDES_TB_UPDATE_SEDE_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
