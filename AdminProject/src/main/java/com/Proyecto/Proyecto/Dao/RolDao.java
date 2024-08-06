@@ -22,9 +22,8 @@ public class RolDao  {
     
     public void save(Rol rol) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("ADD_ROL")
-                .withCatalogName("PACKAGE_ROL")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_ROLES_TB_ADD_ROL_SP")
                 .declareParameters(
                         new SqlParameter("RNAME", Types.VARCHAR),
                         new SqlParameter("IDUSER", Types.BIGINT)

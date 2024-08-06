@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.Proyecto.Proyecto.Dao.RolDao;
 import com.Proyecto.Proyecto.Dao.UsuarioDao;
 import com.Proyecto.Proyecto.Domain.Rol;
+import com.Proyecto.Proyecto.Domain.Sedes;
 import com.Proyecto.Proyecto.Domain.Usuario;
 import com.Proyecto.Proyecto.Service.UsuarioService;
 import jakarta.persistence.EntityManager;
@@ -88,8 +89,13 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     @Override
-    public void updateuser(Long USERID, String USNAM, String CONTRAS, String NOMBR, String APELLI, String MAIL, String PHONE, boolean ACTV) {
-        usuarioDao.updateusuario(USERID, USNAM, CONTRAS, NOMBR, APELLI, MAIL, PHONE, ACTV);
+    public void updateuser(Long USERID, String USNAM, String CONTRAS, String NOMBR, String APELLI, String MAIL, String PHONE,Long IDS, boolean ACTV) {
+        usuarioDao.updateusuario(USERID, USNAM, CONTRAS, NOMBR, APELLI, MAIL, PHONE,IDS, ACTV);
+    }
+
+    @Override
+    public List<Sedes> getSedes() {
+        return usuarioDao.getSedes();
     }
   
 }

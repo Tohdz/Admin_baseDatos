@@ -8,11 +8,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import lombok.Data;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Data
-@Table(name = "ROL")
+@Table(name = "FIDE_ROLES_TB")
 public class Rol implements Serializable {
     private static final long serialVersionUID = 1L;
     

@@ -44,9 +44,10 @@
                                 [[#{plantilla.admin}]]
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" th:href="@{/juego/juegos}">[[#{plantilla.juegos}]]</a></li>
-                                <li><a class="dropdown-item" th:href="@{/categoria/categorias}" sec:authorize="hasRole('ROLE_ADMIN')">[[#{plantilla.categorias}]]</a></li>
-                                <li><a class="dropdown-item" th:href="@{/usuario/listado}" sec:authorize="hasRole('ROLE_ADMIN')">[[#{plantilla.usuarios}]]</a></li>
+                                <li><a class="dropdown-item" th:href="@{/juego/juegos}">Games</a></li>
+                                <li><a class="dropdown-item" th:href="@{/categoria/categorias}" sec:authorize="hasRole('ROLE_ADMIN')">Categories</a></li>
+                                <li><a class="dropdown-item" th:href="@{/usuario/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Users</a></li>
+                                <li><a class="dropdown-item" th:href="@{/usuario/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Workshops</a></li>
                             </ul>
                         </div>
                         <a class="nav-link fs-5 me-3" th:href="@{/contacto/contactos}">[[#{plantilla.contacto}]]</a>

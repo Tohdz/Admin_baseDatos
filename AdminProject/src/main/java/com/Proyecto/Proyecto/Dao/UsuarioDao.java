@@ -5,6 +5,7 @@
 package com.Proyecto.Proyecto.Dao;
 
 import com.Proyecto.Proyecto.Domain.Rol;
+import com.Proyecto.Proyecto.Domain.Sedes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.Proyecto.Proyecto.Domain.Usuario;
 import java.sql.ResultSet;
@@ -30,9 +31,8 @@ public class UsuarioDao {
 
     public List<Usuario> getListUsuario() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_USUARIOS")
-                .withCatalogName("PACKAGE_USUARIO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOS_SP")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override
@@ -40,11 +40,12 @@ public class UsuarioDao {
                         Usuario usuario = new Usuario();
                         usuario.setIdUsuario(rs.getLong("ID_USUARIO"));
                         usuario.setUsername(rs.getString("USERNAME"));
-                        usuario.setPassword(rs.getString("PASSWORD"));
+                        usuario.setPassword(rs.getString("UPASSWORD"));
                         usuario.setNombre(rs.getString("NOMBRE"));
-                        usuario.setApellidos(rs.getString("APELLIDOS"));
+                        usuario.setApellidos(rs.getString("APELLIDO"));
                         usuario.setCorreo(rs.getString("CORREO"));
                         usuario.setTelefono(rs.getString("TELEFONO"));
+                        usuario.setIdSede(rs.getLong("ID_SEDE"));
                         usuario.setEstado(rs.getBoolean("ESTADO"));
                         return usuario;
                     }
@@ -57,9 +58,8 @@ public class UsuarioDao {
 
     public Usuario getIdUsuario(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_USUARIOBYID")
-                .withCatalogName("PACKAGE_USUARIO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOBYID_SP")
                 .declareParameters(new SqlParameter("UID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override
@@ -67,11 +67,12 @@ public class UsuarioDao {
                         Usuario usuario = new Usuario();
                         usuario.setIdUsuario(rs.getLong("ID_USUARIO"));
                         usuario.setUsername(rs.getString("USERNAME"));
-                        usuario.setPassword(rs.getString("PASSWORD"));
+                        usuario.setPassword(rs.getString("UPASSWORD"));
                         usuario.setNombre(rs.getString("NOMBRE"));
-                        usuario.setApellidos(rs.getString("APELLIDOS"));
+                        usuario.setApellidos(rs.getString("APELLIDO"));
                         usuario.setCorreo(rs.getString("CORREO"));
                         usuario.setTelefono(rs.getString("TELEFONO"));
+                        usuario.setIdSede(rs.getLong("ID_SEDE"));
                         usuario.setEstado(rs.getBoolean("ESTADO"));
                         return usuario;
                     }
@@ -85,9 +86,8 @@ public class UsuarioDao {
 
     public Usuario getUsername(String username) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_USUARIOBYUSERNAME")
-                .withCatalogName("PACKAGE_USUARIO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOBYUSERNAME_SP")
                 .declareParameters(new SqlParameter("UNAME", Types.VARCHAR), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override
@@ -95,11 +95,12 @@ public class UsuarioDao {
                         Usuario usuario = new Usuario();
                         usuario.setIdUsuario(rs.getLong("ID_USUARIO"));
                         usuario.setUsername(rs.getString("USERNAME"));
-                        usuario.setPassword(rs.getString("PASSWORD"));
+                        usuario.setPassword(rs.getString("UPASSWORD"));
                         usuario.setNombre(rs.getString("NOMBRE"));
-                        usuario.setApellidos(rs.getString("APELLIDOS"));
+                        usuario.setApellidos(rs.getString("APELLIDO"));
                         usuario.setCorreo(rs.getString("CORREO"));
                         usuario.setTelefono(rs.getString("TELEFONO"));
+                        usuario.setIdSede(rs.getLong("ID_SEDE"));
                         usuario.setEstado(rs.getBoolean("ESTADO"));
                         return usuario;
                     }
@@ -113,9 +114,8 @@ public class UsuarioDao {
 
     public Usuario getUsernameandPassword(String username, String password) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_USERNAMEANDPASSWORD")
-                .withCatalogName("PACKAGE_USUARIO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_USERNAMEANDPASSWORD_SP")
                 .declareParameters(new SqlParameter("UNAME", Types.VARCHAR), new SqlParameter("PASS", Types.VARCHAR), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override
@@ -123,11 +123,12 @@ public class UsuarioDao {
                         Usuario usuario = new Usuario();
                         usuario.setIdUsuario(rs.getLong("ID_USUARIO"));
                         usuario.setUsername(rs.getString("USERNAME"));
-                        usuario.setPassword(rs.getString("PASSWORD"));
+                        usuario.setPassword(rs.getString("UPASSWORD"));
                         usuario.setNombre(rs.getString("NOMBRE"));
-                        usuario.setApellidos(rs.getString("APELLIDOS"));
+                        usuario.setApellidos(rs.getString("APELLIDO"));
                         usuario.setCorreo(rs.getString("CORREO"));
                         usuario.setTelefono(rs.getString("TELEFONO"));
+                        usuario.setIdSede(rs.getLong("ID_SEDE"));
                         usuario.setEstado(rs.getBoolean("ESTADO"));
                         return usuario;
                     }
@@ -142,9 +143,8 @@ public class UsuarioDao {
 
     public Usuario getUsernameORCorreo(String username, String correo) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_USERNAMEORCORREO")
-                .withCatalogName("PACKAGE_USUARIO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_USERNAMEORCORREO_SP")
                 .declareParameters(new SqlParameter("UNAME", Types.VARCHAR), new SqlParameter("CORR", Types.VARCHAR), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override
@@ -152,11 +152,12 @@ public class UsuarioDao {
                         Usuario usuario = new Usuario();
                         usuario.setIdUsuario(rs.getLong("ID_USUARIO"));
                         usuario.setUsername(rs.getString("USERNAME"));
-                        usuario.setPassword(rs.getString("PASSWORD"));
+                        usuario.setPassword(rs.getString("UPASSWORD"));
                         usuario.setNombre(rs.getString("NOMBRE"));
-                        usuario.setApellidos(rs.getString("APELLIDOS"));
+                        usuario.setApellidos(rs.getString("APELLIDO"));
                         usuario.setCorreo(rs.getString("CORREO"));
                         usuario.setTelefono(rs.getString("TELEFONO"));
+                        usuario.setIdSede(rs.getLong("ID_SEDE"));
                         usuario.setEstado(rs.getBoolean("ESTADO"));
                         return usuario;
                     }
@@ -171,34 +172,36 @@ public class UsuarioDao {
 
     public void saveUsuario(Usuario usuario) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("ADD_USUARIO")
-                .withCatalogName("PACKAGE_USUARIO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_ADD_USUARIO_SP")
                 .declareParameters(
+                        new SqlParameter("USID", Types.BIGINT),
                         new SqlParameter("UNAME", Types.VARCHAR),
                         new SqlParameter("PASS", Types.VARCHAR),
                         new SqlParameter("UNOM", Types.VARCHAR),
                         new SqlParameter("APELL", Types.VARCHAR),
                         new SqlParameter("CORRE", Types.VARCHAR),
                         new SqlParameter("TEL", Types.VARCHAR),
+                        new SqlParameter("IDS", Types.BIGINT),
                         new SqlParameter("EST", Types.BOOLEAN)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("USID", usuario.getIdUsuario());
         mapSqlParameterSource.addValue("UNAME", usuario.getUsername());
         mapSqlParameterSource.addValue("PASS", usuario.getPassword());
         mapSqlParameterSource.addValue("UNOM", usuario.getNombre());
         mapSqlParameterSource.addValue("APELL", usuario.getApellidos());
         mapSqlParameterSource.addValue("CORRE", usuario.getCorreo());
         mapSqlParameterSource.addValue("TEL", usuario.getTelefono());
+        mapSqlParameterSource.addValue("IDS", usuario.getIdSede());
         mapSqlParameterSource.addValue("EST", usuario.isEstado());
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
 
     public void deleteUsuario(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("DELETE_USUARIO")
-                .withCatalogName("PACKAGE_USUARIO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_DELETE_USUARIO_SP")
                 .declareParameters(new SqlParameter("USEID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("USEID", id);
@@ -207,9 +210,8 @@ public class UsuarioDao {
 
     public boolean USUARIO_EXISTE(String username, String correo) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withCatalogName("PACKAGE_USUARIO")
-                .withFunctionName("USUARIO_EXISTE")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withFunctionName("FIDE_USUARIOS_TB_USUARIO_EXISTE_FN")
                 .declareParameters(
                         new SqlParameter("UNAME", Types.VARCHAR),
                         new SqlParameter("CORRE", Types.VARCHAR))
@@ -224,9 +226,8 @@ public class UsuarioDao {
 
     public List<Rol> getroles(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_ROLES")
-                .withCatalogName("PACKAGE_USUARIO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_ROLES_SP")
                 .declareParameters(new SqlParameter("UID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Rol>() {
                     @Override
@@ -243,11 +244,10 @@ public class UsuarioDao {
         return rolList;
     }
 
-    public void updateusuario(Long USERID, String USNAM, String CONTRAS, String NOMBR, String APELLI, String MAIL, String PHONE, boolean ACTV) {
+    public void updateusuario(Long USERID, String USNAM, String CONTRAS, String NOMBR, String APELLI, String MAIL, String PHONE,Long IDS, boolean ACTV) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("UPDATE_USUARIO")
-                .withCatalogName("PACKAGE_USUARIO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_UPDATE_USUARIO_SP")
                 .declareParameters(
                         new SqlParameter("USERID", Types.BIGINT),
                         new SqlParameter("USNAM", Types.VARCHAR),
@@ -256,6 +256,7 @@ public class UsuarioDao {
                         new SqlParameter("APELLI", Types.VARCHAR),
                         new SqlParameter("MAIL", Types.VARCHAR),
                         new SqlParameter("PHONE", Types.VARCHAR),
+                        new SqlParameter("IDS", Types.BIGINT),
                         new SqlParameter("ACTV", Types.BOOLEAN)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
@@ -266,8 +267,29 @@ public class UsuarioDao {
         mapSqlParameterSource.addValue("APELLI", APELLI);
         mapSqlParameterSource.addValue("MAIL", MAIL);
         mapSqlParameterSource.addValue("PHONE", PHONE);
+        mapSqlParameterSource.addValue("IDS", IDS);
         mapSqlParameterSource.addValue("ACTV", ACTV);
         simpleJdbcCall.execute(mapSqlParameterSource);
+    }
+    
+    public List<Sedes> getSedes() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_SEDES_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Sedes>() {
+                    @Override
+                    public Sedes mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Sedes sede = new Sedes();
+                        sede.setIdSede(rs.getLong("ID_SEDE")); 
+                        sede.setNombre(rs.getString("NOMBRE")); 
+                        return sede;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Sedes> sedesList = (List<Sedes>) results.get("DATOS");
+        return sedesList;
     }
 
 }

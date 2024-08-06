@@ -28,7 +28,6 @@ public class ContactosDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("GET_CONTACTO")
-                .withCatalogName("PACKAGE_CONTACTO")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Contactos>() {
                     @Override
@@ -52,7 +51,6 @@ public class ContactosDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("ADD_CONTACTO")
-                .withCatalogName("PACKAGE_CONTACTO")
                 .declareParameters(
                         new SqlParameter("NOMBRE", Types.VARCHAR),
                         new SqlParameter("APELLIDO", Types.VARCHAR),
@@ -71,7 +69,6 @@ public class ContactosDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("DELETE_CONTACTO")
-                .withCatalogName("PACKAGE_CONTACTO")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("CID", id);

@@ -23,32 +23,51 @@
                         <form method="POST" th:action="@{/registro/crearUsuario}" th:object="${usuario}" class="was-validated" enctype="multipart/form-data">
                             <div class="card">
                                 <div class="card-header align-items-center">
-                                    <h4>[[#{usuario.activacion}]]</h4>
+                                    <h4>New User</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <label for="username">[[#{usuario.username}]]</label>
-                                        <input type="text" class="form-control" name="username" th:field="*{username}" required="true"/></div>
+                                        <label for="nombre">DNI</label>
+                                        <input type="number" class="form-control" name="idUsuario" required="true"/>
+                                    </div>
                                     <div class="mb-3">
-                                        <label for="nombre">[[#{nombre.nombre}]]</label>
-                                        <input type="text" class="form-control" name="nombre" th:field="*{nombre}" required="true"/></div>
+                                        <label for="nombre">Firstname</label>
+                                        <input type="text" class="form-control" name="nombre" required="true"/>
+                                    </div>
                                     <div class="mb-3">
-                                        <label for="apellidos">[[#{apellido.apellido}]]</label>
-                                        <input type="text" class="form-control" name="apellidos" th:field="*{apellidos}" required="true"/></div>
+                                        <label for="apellidos">Lastname</label>
+                                        <input type="text" class="form-control" name="apellidos" required="true"/>
+                                    </div>
                                     <div class="mb-3">
-                                        <label for="email">[[#{usuario.correo}]]</label>
-                                        <input type="email" class="form-control" name="correo" th:field="*{correo}" required="true"/></div>
+                                        <label for="username">Username</label>
+                                        <input type="text" class="form-control" name="username" required="true"/>
+                                    </div>
                                     <div class="mb-3">
-                                        <label for="telefono">[[#{telefono.telefono}]]</label>
-                                        <input type="tel" class="form-control" name="telefono" th:field="*{telefono}" required="true"/></div>
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control" name="password"  required="true"/>
+                                    </div>
                                     <div class="mb-3">
-                                        <label for="password">[[#{contrasena.contrasena}]]</label>
-                                        <input type="password" class="form-control" name="password" th:field="*{password}" required="true"/>
+                                        <label for="email">Mail</label>
+                                        <input type="email" class="form-control" name="correo"  required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="telefono">Phone</label>
+                                        <input type="tel" class="form-control" name="telefono" required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="idSede">Workshop</label>
+                                        <select class="form-select" 
+                                                name="idSede"
+                                                required="true">
+                                            <option th:each="s : ${sedes}" 
+                                                    th:value="${s.idSede}"
+                                                    th:text="${s.nombre}"></option>
+                                        </select>
                                     </div>                                              
                                 </div>
                                 <div class="card-footer align-items-center">
                                     <button type="submit" class="btn btn-success">
-                                        <i class="fas fa-check"></i>[[#{enviar.enviar}]]
+                                        <i class="fas fa-check"></i>Send
                                     </button>
                                 </div>
                                 <div th:if="${error != null}" class="error-message" style="text-align: center; color: black;">

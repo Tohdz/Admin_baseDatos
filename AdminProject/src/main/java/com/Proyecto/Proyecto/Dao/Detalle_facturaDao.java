@@ -23,7 +23,6 @@ public class Detalle_FacturaDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("ADD_DETALLE_FACTURA")
-                .withCatalogName("PACKAGE_DETALLE_FACTURA")
                 .declareParameters(
                         new SqlParameter("IDFACT", Types.BIGINT),
                         new SqlParameter("IDJUEGO", Types.BIGINT),

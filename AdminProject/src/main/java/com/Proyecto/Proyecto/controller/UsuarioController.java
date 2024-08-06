@@ -22,6 +22,8 @@ public class UsuarioController {
     @GetMapping("/listado")
     public String listado(Model model) {
         var usuarios = usuarioService.getUsuarios();
+        var sedes = usuarioService.getSedes();
+        model.addAttribute("sedes", sedes);
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("totalUsuarios", usuarios.size());
         return "/usuario/listado";
@@ -50,14 +52,16 @@ public class UsuarioController {
     public String usuarioModificar(Usuario usuario, Model model) {
         usuario = usuarioService.getUsuario(usuario);
         model.addAttribute("usuario", usuario);
+        var sedes = usuarioService.getSedes();
+        model.addAttribute("sedes", sedes);
         return "/usuario/modifica";
     }
     
     @PostMapping("/modificar2")
     public String usuarioModificar2(@RequestParam("idUsuario")Long idUsuario, @RequestParam("username") String username,@RequestParam("password") String password, @RequestParam("nombre") String nombre,
-            @RequestParam("apellidos")String apellidos, @RequestParam("correo") String correo,@RequestParam("telefono") String telefono, @RequestParam(value = "estado", defaultValue = "false") boolean estado) {
+            @RequestParam("apellidos")String apellidos, @RequestParam("correo") String correo,@RequestParam("telefono") String telefono,@RequestParam("idSede")Long idSede, @RequestParam(value = "estado", defaultValue = "false") boolean estado) {
         var codigo = new BCryptPasswordEncoder();
-        usuarioService.updateuser(idUsuario,username,codigo.encode(password),nombre,apellidos,correo,telefono,estado);
+        usuarioService.updateuser(idUsuario,username,codigo.encode(password),nombre,apellidos,correo,telefono,idSede,estado);
         return "redirect:/usuario/listado";
     }
 }

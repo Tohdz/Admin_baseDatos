@@ -23,7 +23,9 @@ public class RegistroController {
     private UsuarioService usuarioService;
 
     @GetMapping("/nuevo")
-    public String nuevo(Usuario usuario) {
+    public String nuevo(Usuario usuario,Model model) {
+        var sedes = usuarioService.getSedes();
+        model.addAttribute("sedes", sedes);
         return "/registro/new";
     }
 

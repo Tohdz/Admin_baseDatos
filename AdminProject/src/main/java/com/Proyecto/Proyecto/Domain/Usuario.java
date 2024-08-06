@@ -5,12 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
-import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Entity
@@ -25,23 +21,25 @@ public class Usuario implements Serializable{
     private Long idUsuario;
     @Column(name = "USERNAME")
     private String username;
-    @Column(name = "PASSWORD")
+    @Column(name = "UPASSWORD")
     private String password;
     @Column(name = "NOMBRE")
     private String nombre;
-    @Column(name = "APELLIDOS")
+    @Column(name = "APELLIDO")
     private String apellidos;
     @Column(name = "CORREO")
     private String correo;
     @Column(name = "TELEFONO")
     private String telefono;
+    @Column(name = "ID_SEDE")
+    private Long idSede;
     @Column(name = "ESTADO")
     private boolean estado;
 
     public Usuario() {
     }
 
-    public Usuario(Long idUsuario, String username, String password, String nombre, String apellidos, String correo, String telefono, boolean estado) {
+    public Usuario(Long idUsuario, String username, String password, String nombre, String apellidos, String correo, String telefono, Long idSede, boolean estado) {
         this.idUsuario = idUsuario;
         this.username = username;
         this.password = password;
@@ -49,8 +47,8 @@ public class Usuario implements Serializable{
         this.apellidos = apellidos;
         this.correo = correo;
         this.telefono = telefono;
+        this.idSede = idSede;
         this.estado = estado;
     }
-    
-    
+  
 }

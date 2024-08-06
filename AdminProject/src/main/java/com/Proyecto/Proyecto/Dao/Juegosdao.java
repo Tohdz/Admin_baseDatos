@@ -25,7 +25,6 @@ public class JuegosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("GET_JUEGOS")
-                .withCatalogName("PACKAGE_JUEGO")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Juegos>() {
                     @Override
@@ -52,7 +51,6 @@ public class JuegosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("GET_ONE_JUEGO")
-                .withCatalogName("PACKAGE_JUEGO")
                 .declareParameters(new SqlParameter("JID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Juegos>() {
                     @Override
@@ -80,7 +78,6 @@ public class JuegosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("ADD_JUEGO")
-                .withCatalogName("PACKAGE_JUEGO")
                 .declareParameters(
                         new SqlParameter("IMG", Types.VARCHAR),
                         new SqlParameter("NOM", Types.VARCHAR),
@@ -105,7 +102,6 @@ public class JuegosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("DELETE_JUEGO")
-                .withCatalogName("PACKAGE_JUEGO")
                 .declareParameters(new SqlParameter("JID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("JID", id);
@@ -116,7 +112,6 @@ public class JuegosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("UPDATE_JUEGO")
-                .withCatalogName("PACKAGE_JUEGO")
                 .declareParameters(
                         new SqlParameter("JID", Types.BIGINT),
                         new SqlParameter("IMG", Types.VARCHAR),
@@ -143,7 +138,6 @@ public class JuegosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("GET_CATEGORIAS")
-                .withCatalogName("PACKAGE_JUEGO")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Categorias>() {
                     @Override
@@ -164,7 +158,6 @@ public class JuegosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("GET_JUEGOSBYCATEGORIA")
-                .withCatalogName("PACKAGE_JUEGO")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Juegos>() {
                     @Override
@@ -192,7 +185,6 @@ public class JuegosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("GET_CATEGORIA_DESC")
-                .withCatalogName("PACKAGE_JUEGO")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Categorias>() {
                     @Override
