@@ -130,8 +130,15 @@ public class ItemServiceImpl implements ItemService {
             Detalle_Factura detalle_factura = new Detalle_Factura(factura.getIdFactura(),i.getId_juego(), i.getPrecio(), i.getCantidad());
             Detalle_FacturaDao.savedetalle(detalle_factura);
             Juegos juegos = juegosDao.getIdJuegos(i.getId_juego());
-            juegos.setExistencias(juegos.getExistencias()- i.getCantidad());
-            juegosDao.saveJuegos(juegos);
+            Long id=juegos.getId_juego();
+            String img=juegos.getImagen();
+            String nom=juegos.getNombre();
+            String emp=juegos.getEmpresa();
+            double prec=juegos.getPrecio();
+            int exi=(juegos.getExistencias()- i.getCantidad());
+            boolean est=juegos.isEstado();
+            Long idc=juegos.getIdcategoria();
+            juegosDao.updateJuegos(id,img,nom,emp,prec,exi,est,idc);
             total += i.getPrecio() * i.getCantidad();
         }
         facturaDao.updatefactura(factura.getIdFactura(),total);
