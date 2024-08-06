@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "CATEGORIA")
+@Table(name = "FIDE_CATEGORIAS_TB")
 public class Categorias implements Serializable {
 
     private static final long serialVersionUID = 1L;

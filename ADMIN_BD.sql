@@ -917,8 +917,72 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SEDES_TB_UPDATE_SEDE_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
+/*create or replace PROCEDURE FIDE_CATEGORIAS_TB_GET_CATEGORIA_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_CATEGORIA,DESCRIPCION,IMAGEN,ESTADO FROM FIDE_CATEGORIAS_TB;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CATEGORIAS_TB_GET_CATEGORIA_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_CATEGORIAS_TB_GET_ONE_CATEGORIA_SP (CID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_CATEGORIA,DESCRIPCION,IMAGEN,ESTADO FROM FIDE_CATEGORIAS_TB WHERE ID_CATEGORIA=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CATEGORIAS_TB_GET_ONE_CATEGORIA_SP',SYSDATE, VCOD || ' - '|| VMES );
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CATEGORIAS_TB_GET_ONE_CATEGORIA_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------- 
+/*CREATE OR REPLACE PROCEDURE FIDE_CATEGORIAS_TB_ADD_CATEGORIA_SP (DESCRIP IN VARCHAR2,IMG IN VARCHAR2,ACT IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    INSERT INTO FIDE_CATEGORIAS_TB (DESCRIPCION,IMAGEN,ESTADO) VALUES (DESCRIP,IMG,ACT);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CATEGORIAS_TB_ADD_CATEGORIA_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+-------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_CATEGORIAS_TB_DELETE_CATEGORIA_SP (CID IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    DELETE FROM FIDE_CATEGORIAS_TB WHERE ID_CATEGORIA=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CATEGORIAS_TB_DELETE_CATEGORIA_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_CATEGORIAS_TB_UPDATE_CATEGORIA_SP (CID IN NUMBER,DESCRIP IN VARCHAR2,IMG IN VARCHAR2,ACT IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    UPDATE FIDE_CATEGORIAS_TB SET DESCRIPCION = DESCRIP ,IMAGEN = IMG,ESTADO = ACT WHERE ID_CATEGORIA=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CATEGORIAS_TB_UPDATE_CATEGORIA_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
