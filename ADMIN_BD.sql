@@ -1069,9 +1069,73 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_TIPOS_TB_UPDATE_TIPO_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_PUESTOS_TB_GET_PUESTOS_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_PUESTO,NOMBRE,ESTADO FROM FIDE_PUESTOS_TB;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_PUESTOS_TB_GET_PUESTOS_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_PUESTOS_TB_GET_PUESTO_SP (CID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_PUESTO,NOMBRE,ESTADO FROM FIDE_PUESTOS_TB WHERE ID_PUESTO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_PUESTOS_TB_GET_PUESTO_SP',SYSDATE, VCOD || ' - '|| VMES );
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_PUESTOS_TB_GET_PUESTO_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_PUESTOS_TB_ADD_PUESTO_SP (NOM IN VARCHAR2,ACT IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    INSERT INTO FIDE_PUESTOS_TB (NOMBRE,ESTADO) VALUES (NOM,ACT);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_PUESTOS_TB_ADD_PUESTO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_PUESTOS_TB_DELETE_PUESTO_SP (CID IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    DELETE FROM FIDE_PUESTOS_TB WHERE ID_PUESTO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_PUESTOS_TB_DELETE_PUESTO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_PUESTOS_TB_UPDATE_PUESTO_SP (CID IN NUMBER,NOM IN VARCHAR2,ACT IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    UPDATE FIDE_PUESTOS_TB SET NOMBRE=NOM,ESTADO = ACT WHERE ID_PUESTO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_PUESTOS_TB_UPDATE_PUESTO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
