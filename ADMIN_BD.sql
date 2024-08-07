@@ -466,57 +466,6 @@ VALUES (115470088,'Hector', 'Hernandez', '72063542', 'hhernan93vargas@gmail.com'
 INSERT INTO FIDE_ROLES_TB (NOMBRE, ID_USUARIO)
 VALUES ('ROLE_ADMIN', 115470088);
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*CREATE OR REPLACE PROCEDURE ADD_CATEGORIA (DESCRIP IN VARCHAR2,IMG IN VARCHAR2,ACT IN NUMBER ) AS
-
-BEGIN
-    INSERT INTO CATEGORIA (DESCRIPCION,RUTA_IMAGEN,ESTADO) VALUES (DESCRIP,IMG,ACT);
-EXCEPTION
-    WHEN VALUE_ERROR THEN
-        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
-END;*/
-------------------------------------------------------------------------------------------------------------
-/*CREATE OR REPLACE PROCEDURE DELETE_CATEGORIA (CID IN NUMBER ) AS
-BEGIN
-    DELETE FROM CATEGORIA WHERE ID_CATEGORIA=CID;
-    IF SQL%ROWCOUNT = 0 THEN
-        DBMS_OUTPUT.PUT_LINE('No se encontró el ID para eliminar.');
-    END IF;
-EXCEPTION
-    WHEN VALUE_ERROR THEN
-        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
-END;*/
----------------------------------------------------------------------------------------------------------------------
-/*CREATE OR REPLACE PROCEDURE UPDATE_CATEGORIA (CID IN NUMBER,DESCRIP IN VARCHAR2,IMG IN VARCHAR2,ACT IN NUMBER ) AS
-BEGIN
-    UPDATE CATEGORIA SET DESCRIPCION = DESCRIP ,RUTA_IMAGEN = IMG,ESTADO = ACT WHERE ID_CATEGORIA=CID;
-    IF SQL%ROWCOUNT = 0 THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar.');
-    END IF;
-EXCEPTION
-    WHEN VALUE_ERROR THEN
-        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
-END;*/
-----------------------------------------------------------------------------------------------------------------------------
-/*create or replace PROCEDURE GET_CATEGORIA (DATOS OUT SYS_REFCURSOR)
- AS
- BEGIN
-   OPEN DATOS FOR SELECT ID_CATEGORIA,DESCRIPCION,RUTA_IMAGEN,ESTADO FROM CATEGORIA;
-EXCEPTION
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error inesperado al abrir el cursor: ' || SQLERRM);
- END;*/
------------------------------------------------------------------------------------------------------------------------------
-/*create or replace PROCEDURE GET_ONE_CATEGORIA (CID IN NUMBER,DATOS OUT SYS_REFCURSOR)
- AS
- BEGIN
-   OPEN DATOS FOR SELECT ID_CATEGORIA,DESCRIPCION,RUTA_IMAGEN,ESTADO FROM CATEGORIA WHERE ID_CATEGORIA=CID;
-EXCEPTION
-    WHEN VALUE_ERROR THEN
-        DBMS_OUTPUT.PUT_LINE('Error: Se espera un tipo de dato diferente en los parámetros de entrada.');
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error inesperado al abrir el cursor: ' || SQLERRM);
- END;*/
----------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------
 /*CREATE OR REPLACE PROCEDURE ADD_JUEGO (IMG IN VARCHAR2,NOM IN VARCHAR2,EMP IN VARCHAR2,PREC IN NUMBER,EXI IN NUMBER,EST IN NUMBER,ID_CAT IN NUMBER ) AS 
 BEGIN
@@ -596,7 +545,52 @@ EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('Error inesperado al abrir el cursor: ' || SQLERRM);
 END;*/
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE  PROCEDURE ADD_FACTURA (USID IN NUMBER,FECHA IN DATE,TOTAL IN NUMBER) AS
+
+BEGIN
+    INSERT INTO FACTURA (ID_USUARIO,FECHA,TOTAL) VALUES (USID,FECHA,TOTAL);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE GET_FACTURA_ID (FECH IN DATE,DATOS OUT SYS_REFCURSOR)
+ AS
+ BEGIN
+   OPEN DATOS FOR SELECT ID_FACTURA FROM FACTURA WHERE FECHA=FECH;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        DBMS_OUTPUT.PUT_LINE('Error: Se espera un tipo de dato diferente en los parámetros de entrada.');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error inesperado al abrir el cursor: ' || SQLERRM);
+ END;*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE UPDATE_FACTURA (FID IN NUMBER,TOTL IN NUMBER) AS
+
+BEGIN
+    UPDATE FACTURA SET TOTAL=TOTL WHERE ID_FACTURA=FID;
+    IF SQL%ROWCOUNT = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Error al actualizar.');
+    END IF;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
+END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE ADD_DETALLE_FACTURA (IDFACT IN NUMBER,IDJUEGO IN NUMBER,PRECIO IN NUMBER,CANTIDAD IN NUMBER ) AS
+BEGIN
+    INSERT INTO DETALLE_FACTURA (ID_FACTURA,ID_JUEGO,PRECIO,CANTIDAD) VALUES (IDFACT,IDJUEGO,PRECIO,CANTIDAD);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
+END;*/
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 /*CREATE OR REPLACE  PROCEDURE FIDE_ROLES_TB_ADD_ROL_SP (RNAME IN VARCHAR2,IDUSER IN NUMBER) AS
     VCOD NUMBER;
@@ -807,48 +801,6 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_USUARIOS_TB_GET_SEDES_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*CREATE OR REPLACE  PROCEDURE ADD_FACTURA (USID IN NUMBER,FECHA IN DATE,TOTAL IN NUMBER) AS
-
-BEGIN
-    INSERT INTO FACTURA (ID_USUARIO,FECHA,TOTAL) VALUES (USID,FECHA,TOTAL);
-EXCEPTION
-    WHEN VALUE_ERROR THEN
-        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
-END;*/
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*create or replace PROCEDURE GET_FACTURA_ID (FECH IN DATE,DATOS OUT SYS_REFCURSOR)
- AS
- BEGIN
-   OPEN DATOS FOR SELECT ID_FACTURA FROM FACTURA WHERE FECHA=FECH;
-EXCEPTION
-    WHEN VALUE_ERROR THEN
-        DBMS_OUTPUT.PUT_LINE('Error: Se espera un tipo de dato diferente en los parámetros de entrada.');
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error inesperado al abrir el cursor: ' || SQLERRM);
- END;*/
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*CREATE OR REPLACE PROCEDURE UPDATE_FACTURA (FID IN NUMBER,TOTL IN NUMBER) AS
-
-BEGIN
-    UPDATE FACTURA SET TOTAL=TOTL WHERE ID_FACTURA=FID;
-    IF SQL%ROWCOUNT = 0 THEN
-        DBMS_OUTPUT.PUT_LINE('Error al actualizar.');
-    END IF;
-EXCEPTION
-    WHEN VALUE_ERROR THEN
-        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
-END;*/
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*CREATE OR REPLACE PROCEDURE ADD_DETALLE_FACTURA (IDFACT IN NUMBER,IDJUEGO IN NUMBER,PRECIO IN NUMBER,CANTIDAD IN NUMBER ) AS
-BEGIN
-    INSERT INTO DETALLE_FACTURA (ID_FACTURA,ID_JUEGO,PRECIO,CANTIDAD) VALUES (IDFACT,IDJUEGO,PRECIO,CANTIDAD);
-EXCEPTION
-    WHEN VALUE_ERROR THEN
-        DBMS_OUTPUT.PUT_LINE('Error: Se espera otro tipo de dato de entrada.');
-END;*/
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*create or replace PROCEDURE FIDE_SEDES_TB_GET_SEDES_SP (DATOS OUT SYS_REFCURSOR)
  AS
@@ -983,11 +935,71 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CATEGORIAS_TB_UPDATE_CATEGORIA_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
+/*create or replace PROCEDURE FIDE_SERVICIOS_TB_GET_SERVICIOS_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_SERVICIO,NOMBRE,ESTADO FROM FIDE_SERVICIOS_TB;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SERVICIOS_TB_GET_SERVICIOS_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_SERVICIOS_TB_GET_SERVICIO_SP (CID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_SERVICIO,NOMBRE,ESTADO FROM FIDE_SERVICIOS_TB WHERE ID_SERVICIO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SERVICIOS_TB_GET_SERVICIO_SP',SYSDATE, VCOD || ' - '|| VMES );
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SERVICIOS_TB_GET_SERVICIO_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_SERVICIOS_TB_ADD_SERVICIO_SP (NOM IN VARCHAR2,ACT IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    INSERT INTO FIDE_SERVICIOS_TB (NOMBRE,ESTADO) VALUES (NOM,ACT);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SERVICIOS_TB_ADD_SERVICIO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_SERVICIOS_TB_DELETE_SERVICIO_SP (CID IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    DELETE FROM FIDE_SERVICIOS_TB WHERE ID_SERVICIO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SERVICIOS_TB_DELETE_SERVICIO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_SERVICIOS_TB_UPDATE_SERVICIO_SP (CID IN NUMBER,NOM IN VARCHAR2,ACT IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    UPDATE FIDE_SERVICIOS_TB SET NOMBRE=NOM,ESTADO = ACT WHERE ID_SERVICIO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SERVICIOS_TB_UPDATE_SERVICIO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
 
 
 

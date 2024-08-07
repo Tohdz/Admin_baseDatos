@@ -27,10 +27,10 @@ public class CategoriaController {
         return "/categoria/categorias";
     }
 
-    @GetMapping("/nuevo")
-    public String categoriaNuevo(Categorias categoria) {
-        return "/categoria/modifica";
-    }
+//    @GetMapping("/nuevo")
+//    public String categoriaNuevo(Categorias categoria) {
+//        return "/categoria/modifica";
+//    }
 
     @PostMapping("/guardar")
     public String categoriaGuardar(@RequestParam(value = "estado", defaultValue = "false") boolean estado,Categorias categoria) {

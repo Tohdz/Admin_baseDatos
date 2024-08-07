@@ -39,6 +39,14 @@
                     </div>
                     <!-- Menú de navegación -->
                     <div class="d-flex">
+                        <a class="nav-link fs-5 me-3" th:href="@{/contacto/contactos}">[[#{plantilla.contacto}]]</a>
+                        <a class="nav-link fs-5 me-3" th:href="@{/nosotros}">[[#{plantilla.nosotros}]]</a>
+                        <!-- Carrito de compras -->
+                        <div>
+                            <a class="nav-link fs-5 me-3" th:href="@{/carrito/listado}">
+                                <i class="fas fa-shopping-cart"></i> <!-- Ícono de carrito -->
+                            </a>
+                        </div>
                         <div class="dropdown me-3">
                             <a class="nav-link fs-5 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" sec:authorize="hasRole('ROLE_ADMIN')">
                                 [[#{plantilla.admin}]]
@@ -48,16 +56,11 @@
                                 <li><a class="dropdown-item" th:href="@{/categoria/categorias}" sec:authorize="hasRole('ROLE_ADMIN')">Categories</a></li>
                                 <li><a class="dropdown-item" th:href="@{/usuario/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Users</a></li>
                                 <li><a class="dropdown-item" th:href="@{/sedes/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Workshops</a></li>
+                                <li><a class="dropdown-item" th:href="@{/servicios/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Services</a></li>
+                                <li><a class="dropdown-item" th:href="@{/sedes/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Job Titles</a></li>
+                                <li><a class="dropdown-item" th:href="@{/sedes/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Vehicles Type</a></li>
                             </ul>
                         </div>
-                        <a class="nav-link fs-5 me-3" th:href="@{/contacto/contactos}">[[#{plantilla.contacto}]]</a>
-                        <a class="nav-link fs-5 me-3" th:href="@{/nosotros}">[[#{plantilla.nosotros}]]</a>
-                        <!-- Carrito de compras -->
-                        <div>
-                            <a class="nav-link fs-5 me-3" th:href="@{/carrito/listado}">
-                                <i class="fas fa-shopping-cart"></i> <!-- Ícono de carrito -->
-                            </a>
-                        </div>                                             
                     </div>
                     <!-- Login -->
                     <div class="col-md-3 d-flex justify-content-end"> <!-- Mantenemos el bloque del login en el lado derecho -->
@@ -97,6 +100,7 @@
                         </div>
                     </nav>
                 </section>
+            </nav>
         </header>
         <footer th:fragment="footer" class="bg-dark text-white mt-5 p-2" style="background-color: rgba(0, 0, 0, 0.5); color: white !important;">
             <!-- Tu contenido de footer aquí -->
