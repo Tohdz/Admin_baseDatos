@@ -65,7 +65,7 @@ public class ProjectConfig implements WebMvcConfigurer {
     @Bean
      public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {http.authorizeHttpRequests((request) -> request.requestMatchers("/", "/index","/mensaje", "/errores/**", "/js/**", "/css/**","/images/**", "/webjars/**","/registro/**","/nosotros","/contacto/**", "/juego/**" , "/juegosPorCategoria").permitAll()
                  .requestMatchers("/juego/juegos","/juegosPorCategoria","/facturar/**","/carrito/**").hasRole("USER").requestMatchers(
-                         "/juego/**","/categoria/**","/usuario/**","/sedes/**","/servicios/**").hasRole("ADMIN")).formLogin((form) -> form.loginPage("/login").permitAll()).logout((logout) -> logout.permitAll());
+                         "/juego/**","/categoria/**","/usuario/**","/sedes/**","/servicios/**","/tipos/**").hasRole("ADMIN")).formLogin((form) -> form.loginPage("/login").permitAll()).logout((logout) -> logout.permitAll());
          return http.build();
      }
     

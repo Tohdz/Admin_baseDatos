@@ -935,6 +935,7 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CATEGORIAS_TB_UPDATE_CATEGORIA_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*create or replace PROCEDURE FIDE_SERVICIOS_TB_GET_SERVICIOS_SP (DATOS OUT SYS_REFCURSOR)
  AS
     VCOD NUMBER;
@@ -1000,9 +1001,73 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_SERVICIOS_TB_UPDATE_SERVICIO_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
-
-
-
+----------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_TIPOS_TB_GET_TIPOS_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_TIPO,NOMBRE,ESTADO FROM FIDE_TIPOS_TB;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_TIPOS_TB_GET_TIPOS_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_TIPOS_TB_GET_TIPO_SP (CID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_TIPO,NOMBRE,ESTADO FROM FIDE_TIPOS_TB WHERE ID_TIPO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_TIPOS_TB_GET_TIPO_SP',SYSDATE, VCOD || ' - '|| VMES );
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_TIPOS_TB_GET_TIPO_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_TIPOS_TB_ADD_TIPO_SP (NOM IN VARCHAR2,ACT IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    INSERT INTO FIDE_TIPOS_TB (NOMBRE,ESTADO) VALUES (NOM,ACT);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_TIPOS_TB_ADD_TIPO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_TIPOS_TB_DELETE_TIPO_SP (CID IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    DELETE FROM FIDE_TIPOS_TB WHERE ID_TIPO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_TIPOS_TB_DELETE_TIPO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE PROCEDURE FIDE_TIPOS_TB_UPDATE_TIPO_SP (CID IN NUMBER,NOM IN VARCHAR2,ACT IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    UPDATE FIDE_TIPOS_TB SET NOMBRE=NOM,ESTADO = ACT WHERE ID_TIPO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_TIPOS_TB_UPDATE_TIPO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
 
 
 
