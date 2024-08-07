@@ -1057,7 +1057,7 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_TIPOS_TB_DELETE_TIPO_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-CREATE OR REPLACE PROCEDURE FIDE_TIPOS_TB_UPDATE_TIPO_SP (CID IN NUMBER,NOM IN VARCHAR2,ACT IN NUMBER ) AS
+/*CREATE OR REPLACE PROCEDURE FIDE_TIPOS_TB_UPDATE_TIPO_SP (CID IN NUMBER,NOM IN VARCHAR2,ACT IN NUMBER ) AS
     VCOD NUMBER;
     VMES VARCHAR2(1024);
 BEGIN
@@ -1068,7 +1068,7 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_TIPOS_TB_UPDATE_TIPO_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
