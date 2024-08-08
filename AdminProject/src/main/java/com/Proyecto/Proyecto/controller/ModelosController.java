@@ -8,6 +8,8 @@ import com.Proyecto.Proyecto.Domain.Marcas;
 import com.Proyecto.Proyecto.Domain.Modelos;
 import com.Proyecto.Proyecto.Service.ModelosService;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,10 @@ public class ModelosController {
         model.addAttribute("modelos", modelos);
         List<Marcas> marcas = modelosService.getMarcas();
         model.addAttribute("marcas", marcas);
+        List<Marcas> marcas2 = modelosService.getMarcas();
+        Map<Long, String> marcasMap = marcas2.stream()
+                .collect(Collectors.toMap(Marcas::getIdMarca, Marcas::getNombre));
+        model.addAttribute("marcasMap", marcasMap);
         return "/modelos/listado";
     }
 

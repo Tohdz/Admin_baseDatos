@@ -81,7 +81,7 @@
                                             <tr th:each="modelo, contador : ${modelos}">
                                                 <td style="color: white; "th:text="${contador.count}"></td>
                                                 <td style="color: white; "th:text="${modelo.nombre}"</td>
-                                                <td style="color: white; "th:text="${modelo.idMarca}"</td>
+                                                <td style="color: white; "th:text="${marcasMap[modelo.idMarca]}"</td>
                                                 <td style="color: white; "th:text="${modelo.estado}"></td>
                                                 <td>
                                                     <div>

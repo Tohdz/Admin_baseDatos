@@ -20,9 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  *
  * @author hhern
@@ -30,6 +33,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Controller
 @RequestMapping("/empleados")
 public class EmpleadoController {
+
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     @Autowired
     private EmpleadoService empleadoService;
@@ -42,12 +46,19 @@ public class EmpleadoController {
         model.addAttribute("puestos", puestos);
         List<Sedes> sedes = empleadoService.getSedes();
         model.addAttribute("sedes", sedes);
+        List<Puestos> puestos2 = empleadoService.getPuestos();
+        Map<Long, String> puestosMap = puestos2.stream()
+                .collect(Collectors.toMap(Puestos::getIdPuesto, Puestos::getNombre));
+        model.addAttribute("puestosMap", puestosMap);
+        List<Sedes> sedes2 = empleadoService.getSedes();
+        Map<Long, String> sedesMap = sedes2.stream()
+                .collect(Collectors.toMap(Sedes::getIdSede, Sedes::getNombre));
+        model.addAttribute("sedesMap", sedesMap);
         return "/empleados/listado";
     }
 
-
     @PostMapping("/guardar")
-    public String empleadoGuardar(@RequestParam(value = "estado", defaultValue = "false") boolean estado,Empleado empleado){
+    public String empleadoGuardar(@RequestParam(value = "estado", defaultValue = "false") boolean estado, Empleado empleado) {
         empleado.setEstado(estado);
         empleadoService.save(empleado);
         return "redirect:/empleados/listado";
@@ -71,7 +82,7 @@ public class EmpleadoController {
     }
 
     @PostMapping("/modificar2")
-    public String empleadoModificar2(@RequestParam("idEmpleado")Long idEmpleado, @RequestParam("nombre") String nombre,@RequestParam("apellido")String apellido, @RequestParam("telefono") String telefono,@RequestParam("correo")String correo, @RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha,@RequestParam("salario")String salario,@RequestParam("idPuesto")Long idPuesto,@RequestParam("idSede")Long idSede,@RequestParam(value="estado",defaultValue = "false") boolean estado) {
+    public String empleadoModificar2(@RequestParam("idEmpleado") Long idEmpleado, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido, @RequestParam("telefono") String telefono, @RequestParam("correo") String correo, @RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam("salario") String salario, @RequestParam("idPuesto") Long idPuesto, @RequestParam("idSede") Long idSede, @RequestParam(value = "estado", defaultValue = "false") boolean estado) {
         empleadoService.update(idEmpleado, nombre, apellido, telefono, correo, fecha, salario, idPuesto, idSede, estado);
         return "redirect:/empleados/listado";
     }
