@@ -12,7 +12,7 @@ import java.util.List;
  * @author hhern
  */
 public interface PuestosService {
-     public List<Puestos> getPuestos();
+    public List<Puestos> getPuestos();
     public Puestos getPuesto(Puestos puesto);
     public void save(Puestos puesto);
     public void delete(Puestos puesto);
