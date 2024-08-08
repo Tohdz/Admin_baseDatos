@@ -1338,8 +1338,72 @@ EXCEPTION
 END;*/
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
+/*create or replace PROCEDURE FIDE_VEHICULOS_TB_GET_VEHICULOS_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT PLACA,ID_MARCA,ID_MODELO,ID_TIPO,AÑO,ID_SEDE,ID_USUARIO,ESTADO FROM FIDE_VEHICULOS_TB;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_GET_VEHICULOS_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_VEHICULOS_TB_GET_VEHICULO_SP (PLACA IN VARCHAR2,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT PLACA,ID_MARCA,ID_MODELO,ID_TIPO,AÑO,ID_SEDE,ID_USUARIO,ESTADO FROM FIDE_VEHICULOS_TB WHERE PLACA=PLACA;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_GET_VEHICULO_SP',SYSDATE, VCOD || ' - '|| VMES );
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_GET_VEHICULO_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_VEHICULOS_TB_ADD_VEHICULO_SP (PLAC IN VARCHAR2,MID IN NUMBER,IDM IN NUMBER,TID IN NUMBER,ANO IN NUMBER,IDS IN NUMBER,USID IN NUMBER,ACT IN NUMBER) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    INSERT INTO FIDE_VEHICULOS_TB (PLACA,ID_MARCA,ID_MODELO,ID_TIPO,AÑO,ID_SEDE,ID_USUARIO,ESTADO) VALUES (PLAC,MID,IDM,TID,ANO,IDS,USID,ACT);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_ADD_VEHICULO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_VEHICULOS_TB_DELETE_VEHICULO_SP (PLACA IN VARCHAR2) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    DELETE FROM FIDE_VEHICULOS_TB WHERE PLACA=PLACA;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_DELETE_VEHICULO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_VEHICULOS_TB_UPDATE_VEHICULO_SP (PLAC IN VARCHAR2,MID IN NUMBER,IDM IN NUMBER,TID IN NUMBER,ANO IN NUMBER,IDS IN NUMBER,USID IN NUMBER,ACT IN NUMBER) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    UPDATE FIDE_VEHICULOS_TB SET ID_MARCA=MID,ID_MODELO=IDM,ID_TIPO=TID,AÑO=ANO,ID_SEDE=IDS,ID_USUARIO=USID,ESTADO=ACT WHERE PLACA=PLAC;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_UPDATE_VEHICULO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
