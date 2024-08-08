@@ -11,8 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
-import lombok.Data;
+import java.time.LocalDate;
 import java.util.Date;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
  *
@@ -37,7 +40,8 @@ public class Empleado implements Serializable {
     @Column(name = "CORREO")
     private String correo;
     @Column(name = "FECHA_CONTRATO")
-    private Date fecha;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date  fecha;
     @Column(name = "SALARIO")
     private String salario;
     @Column(name = "ID_PUESTO")

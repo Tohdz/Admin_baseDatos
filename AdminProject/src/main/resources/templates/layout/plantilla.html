@@ -51,11 +51,12 @@
                                 [[#{plantilla.admin}]]
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" th:href="@{/juego/juegos}">Games</a></li>
                                 <li><a class="dropdown-item" th:href="@{/categoria/categorias}" sec:authorize="hasRole('ROLE_ADMIN')">Categories</a></li>
+                                <li><a class="dropdown-item" th:href="@{/juego/juegos}">Games</a></li>
                                 <li><a class="dropdown-item" th:href="@{/usuario/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Users</a></li>
                                 <li><a class="dropdown-item" th:href="@{/sedes/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Workshops</a></li>
                                 <li><a class="dropdown-item" th:href="@{/servicios/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Services</a></li>
+                                <li><a class="dropdown-item" th:href="@{/empleados/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Employees</a></li>
                                 <li><a class="dropdown-item" th:href="@{/puestos/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Job Titles</a></li>
                                 <li><a class="dropdown-item" th:href="@{/tipos/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Vehicle Types</a></li>
                                 <li><a class="dropdown-item" th:href="@{/marcas/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Brands</a></li>

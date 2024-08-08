@@ -155,7 +155,7 @@ public class EmpleadoDao {
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     
-    public List<Puestos> getListPuestos() {
+    public List<Puestos> getPuestos() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_PUESTOS_TB_GET_PUESTOS_SP")
