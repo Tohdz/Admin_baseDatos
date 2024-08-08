@@ -1269,23 +1269,75 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MODELOS_TB_UPDATE_MODELO_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*create or replace PROCEDURE FIDE_MODELOS_TB_GET_MARCAS_SP (DATOS OUT SYS_REFCURSOR)
+/*create or replace PROCEDURE FIDE_EMPLEADOS_TB_GET_EMPLEADOS_SP (DATOS OUT SYS_REFCURSOR)
  AS
     VCOD NUMBER;
     VMES VARCHAR2(1024);
  BEGIN
-   OPEN DATOS FOR SELECT ID_MARCA,NOMBRE,ESTADO FROM FIDE_MARCAS_TB;
+   OPEN DATOS FOR SELECT ID_EMPLEADO,NOMBRE,APELLIDO,TELEFONO,CORREO,FECHA_CONTRATO,SALARIO,ID_PUESTO,ID_SEDE,ESTADO FROM FIDE_EMPLEADOS_TB;
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
         VMES := SQLERRM;
         VCOD := SQLCODE;
-        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MODELOS_TB_GET_MARCAS_SP',SYSDATE, VCOD || ' - '|| VMES );
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_EMPLEADOS_TB_GET_EMPLEADOS_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_EMPLEADOS_TB_GET_EMPLEADO_SP (EID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_EMPLEADO,NOMBRE,APELLIDO,TELEFONO,CORREO,FECHA_CONTRATO,SALARIO,ID_PUESTO,ID_SEDE,ESTADO FROM FIDE_EMPLEADOS_TB WHERE ID_EMPLEADO=EID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_EMPLEADOS_TB_GET_EMPLEADO_SP',SYSDATE, VCOD || ' - '|| VMES );
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_EMPLEADOS_TB_GET_EMPLEADO_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_EMPLEADOS_TB_ADD_EMPLEADO_SP (NOM IN VARCHAR2,APE IN VARCHAR2,TEL IN VARCHAR2,CORRE IN VARCHAR2,FECH IN DATE,SAL IN VARCHAR2,IDP IN NUMBER,IDS IN NUMBER,ACT IN NUMBER) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    INSERT INTO FIDE_EMPLEADOS_TB (NOMBRE,APELLIDO,TELEFONO,CORREO,FECHA_CONTRATO,SALARIO,ID_PUESTO,ID_SEDE,ESTADO) VALUES (NOM,APE,TEL,CORRE,FECH,SAL,IDP,IDS,ACT);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_EMPLEADOS_TB_ADD_EMPLEADO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_EMPLEADOS_TB_DELETE_EMPLEADO_SP (EID IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    DELETE FROM FIDE_EMPLEADOS_TB WHERE ID_EMPLEADO=EID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_EMPLEADOS_TB_DELETE_EMPLEADO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_EMPLEADOS_TB_UPDATE_EMPLEADO_SP (EID IN NUMBER,NOM IN VARCHAR2,APE IN VARCHAR2,TEL IN VARCHAR2,CORRE IN VARCHAR2,FECH IN DATE,SAL IN VARCHAR2,IDP IN NUMBER,IDS IN NUMBER,ACT IN NUMBER) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    UPDATE FIDE_EMPLEADOS_TB SET NOMBRE=NOM,APELLIDO=APE,TELEFONO=TEL,CORREO=CORRE,FECHA_CONTRATO=FECH,SALARIO=SAL,ID_PUESTO=IDP,ID_SEDE=IDS,ESTADO=ACT WHERE ID_EMPLEADO=EID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_EMPLEADOS_TB_UPDATE_EMPLEADO_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 

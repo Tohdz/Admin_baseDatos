@@ -120,7 +120,7 @@ public class ModelosDao {
     public List<Marcas> getMarcas() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
-                .withProcedureName("FIDE_MODELOS_TB_GET_MARCAS_SP")
+                .withProcedureName("FIDE_MARCAS_TB_GET_MARCAS_SP")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Marcas>() {
                     @Override
