@@ -4,7 +4,11 @@
  */
 package com.Proyecto.Proyecto.Dao;
 
+import com.Proyecto.Proyecto.Domain.Marcas;
+import com.Proyecto.Proyecto.Domain.Modelos;
 import com.Proyecto.Proyecto.Domain.Sedes;
+import com.Proyecto.Proyecto.Domain.Tipos;
+import com.Proyecto.Proyecto.Domain.Usuario;
 import com.Proyecto.Proyecto.Domain.Vehiculos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -166,4 +170,97 @@ public class VehiculosDao {
         List<Sedes> sedeList = (List<Sedes>) results.get("DATOS");
         return sedeList;
     }
+    
+    public List<Usuario> getListUsuario() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOS_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Usuario>() {
+                    @Override
+                    public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Usuario usuario = new Usuario();
+                        usuario.setIdUsuario(rs.getLong("ID_USUARIO"));
+                        usuario.setUsername(rs.getString("USERNAME"));
+                        usuario.setPassword(rs.getString("UPASSWORD"));
+                        usuario.setNombre(rs.getString("NOMBRE"));
+                        usuario.setApellidos(rs.getString("APELLIDO"));
+                        usuario.setCorreo(rs.getString("CORREO"));
+                        usuario.setTelefono(rs.getString("TELEFONO"));
+                        usuario.setIdSede(rs.getLong("ID_SEDE"));
+                        usuario.setEstado(rs.getBoolean("ESTADO"));
+                        return usuario;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Usuario> usuarioList = (List<Usuario>) results.get("DATOS");
+        return usuarioList;
+    }
+    
+     public List<Tipos> getListTipos() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_TIPOS_TB_GET_TIPOS_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Tipos>() {
+                    @Override
+                    public Tipos mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Tipos tipo = new Tipos();
+                        tipo.setIdTipo(rs.getLong("ID_TIPO"));
+                        tipo.setNombre(rs.getString("NOMBRE"));
+                        tipo.setEstado(rs.getBoolean("ESTADO"));
+                        return tipo;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Tipos> tipoList = (List<Tipos>) results.get("DATOS");
+        return tipoList;
+    }
+     
+    public List<Marcas> getListMarcas() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_MARCAS_TB_GET_MARCAS_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Marcas>() {
+                    @Override
+                    public Marcas mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Marcas marca = new Marcas();
+                        marca.setIdMarca(rs.getLong("ID_MARCA"));
+                        marca.setNombre(rs.getString("NOMBRE"));
+                        marca.setEstado(rs.getBoolean("ESTADO"));
+                        return marca;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Marcas> marcaList = (List<Marcas>) results.get("DATOS");
+        return marcaList;
+    }
+    
+    public List<Modelos> getModelos(Long MID) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_MODELOS_TB_GET_MODELOSBYMARCA_SP")
+                .declareParameters(new SqlParameter("MID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Modelos>() {
+                    @Override
+                    public Modelos mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Modelos modelo = new Modelos();
+                        modelo.setIdModelo(rs.getLong("ID_MODELO"));
+                        modelo.setNombre(rs.getString("NOMBRE"));
+                        modelo.setIdMarca(rs.getLong("ID_MARCA"));
+                        modelo.setEstado(rs.getBoolean("ESTADO"));
+                        return modelo;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+         mapSqlParameterSource.addValue("MID", MID);
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Modelos> modeloList = (List<Modelos>) results.get("DATOS");
+        return modeloList;
+    }
+
 }

@@ -1269,6 +1269,19 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MODELOS_TB_UPDATE_MODELO_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_MODELOS_TB_GET_MODELOSBYMARCA_SP (MID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_MODELO,NOMBRE,ID_MARCA,ESTADO FROM FIDE_MODELOS_TB WHERE ID_MARCA=MID;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MODELOS_TB_GET_MODELOSBYMARCA_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*create or replace PROCEDURE FIDE_EMPLEADOS_TB_GET_EMPLEADOS_SP (DATOS OUT SYS_REFCURSOR)
