@@ -34,13 +34,12 @@
                     <!-- Logo -->
                     <div class="col-md-6 d-flex align-items-center">
                         <a th:href="@{/}">
-                            <img src="/images/fondo5.png" alt="Logo" class="img-fluid" style="max-height: 40px;" /> 
+                            <img src="/images/hhernan.png" alt="Logo" class="img-fluid" style="max-height: 80px;" /> 
                         </a>
                     </div>
                     <!-- Menú de navegación -->
                     <div class="d-flex">
-                        <a class="nav-link fs-5 me-3" th:href="@{/contacto/contactos}">[[#{plantilla.contacto}]]</a>
-                        <a class="nav-link fs-5 me-3" th:href="@{/nosotros}">[[#{plantilla.nosotros}]]</a>
+                        <a class="nav-link fs-5 me-3" th:href="@{/nosotros}">About us</a>
                         <!-- Carrito de compras -->
                         <div>
                             <a class="nav-link fs-5 me-3" th:href="@{/carrito/listado}">
@@ -86,13 +85,12 @@
                     </div>
                 </div>
                 </section>
-                <section
+                <!--<section
                     <nav class="navbar navbar-expand-sm navbar-dark p-0" style="background-color: rgba(0,0,0,0); color: white;">
                         <div class="container">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">[[#{plantilla.idioma}]]</a>
-                                    <!-- Establece un ancho máximo y ajusta la posición del menú desplegable -->
                                     <ul class="dropdown-menu dropdown-menu-transparent" style="background-color: rgba(0,0,0,0.5); max-width: 50px; left: -3rem;">
                                         <li><a style="color: white; "class="dropdown-item" th:href="@{/(lang=es)}">ES</a></li>
                                         <li><a style="color: white; "class="dropdown-item" th:href="@{/(lang=en)}">EN</a></li>
@@ -101,16 +99,14 @@
                             </ul>
                         </div>
                     </nav>
-                </section>
+                </section>-->
             </nav>
         </header>
         <footer th:fragment="footer" class="bg-dark text-white mt-5 p-2" style="background-color: rgba(0, 0, 0, 0.5); color: white !important;">
             <!-- Tu contenido de footer aquí -->
             <div class="container">
                 <div class="col">
-                    <p class="lead text-center">
-                        TuJuegoCom@gmail.com
-                    </p>
+                    <p class="lead text-center">Work with the best mechanical technicians in Costa Rica</p>
                 </div>
             </div>
         </footer>
