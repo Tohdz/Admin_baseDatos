@@ -97,5 +97,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     public List<Sedes> getSedes() {
         return usuarioDao.getSedes();
     }
+
+    @Override
+    public List<Sedes> getSedesbyState() {
+        return usuarioDao.getSedesbyState();
+    }
   
 }

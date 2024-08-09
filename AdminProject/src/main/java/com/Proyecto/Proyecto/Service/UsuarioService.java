@@ -18,6 +18,8 @@ public interface UsuarioService {
     public List<Usuario> getUsuarios();
     
     public List<Sedes> getSedes();
+    
+    public List<Sedes> getSedesbyState();
     // Se obtiene un Usuario, a partir del id de un usuario
     public Usuario getUsuario(Usuario usuario);
     

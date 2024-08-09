@@ -117,6 +117,27 @@ public class ModelosDao {
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     
+    public List<Marcas> getMarcasbyState() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_MARCAS_TB_GET_MARCASBYSTATE_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Marcas>() {
+                    @Override
+                    public Marcas mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Marcas marca = new Marcas();
+                        marca.setIdMarca(rs.getLong("ID_MARCA"));
+                        marca.setNombre(rs.getString("NOMBRE"));
+                        marca.setEstado(rs.getBoolean("ESTADO"));
+                        return marca;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Marcas> marcaList = (List<Marcas>) results.get("DATOS");
+        return marcaList;
+    }
+    
     public List<Marcas> getMarcas() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")

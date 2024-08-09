@@ -272,6 +272,30 @@ public class UsuarioDao {
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     
+    public List<Sedes> getSedesbyState() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_SEDES_TB_GET_SEDESBYSTATE_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Sedes>() {
+                    @Override
+                    public Sedes mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Sedes sede = new Sedes();
+                        sede.setIdSede(rs.getLong("ID_SEDE"));
+                        sede.setNombre(rs.getString("NOMBRE"));
+                        sede.setCiudad(rs.getString("CIUDAD"));
+                        sede.setDireccion(rs.getString("DIRECCION"));
+                        sede.setTelefono(rs.getString("TELEFONO"));
+                        sede.setEstado(rs.getBoolean("ESTADO"));
+                        return sede;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Sedes> sedeList = (List<Sedes>) results.get("DATOS");
+        return sedeList;
+    }
+    
     public List<Sedes> getSedes() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")

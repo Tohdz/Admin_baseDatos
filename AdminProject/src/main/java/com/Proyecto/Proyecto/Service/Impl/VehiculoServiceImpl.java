@@ -33,32 +33,32 @@ public class VehiculoServiceImpl implements VehiculosService{
     }
 
     @Override
-    public List<Marcas> getMarcas() {
-        var lista = vehiculosDao.getListMarcas();
+    public List<Marcas> getMarcasbyState() {
+        var lista = vehiculosDao.getMarcasbyState();
         return lista;
     }
 
     @Override
-    public List<Modelos> getModelos(Long MID) {
-        var lista = vehiculosDao.getModelos(MID);
+    public List<Modelos> getModelosbyMarca(Long MID) {
+        var lista = vehiculosDao.getModelosbyMarca(MID);
         return lista;
     }
 
     @Override
-    public List<Tipos> getTipos() {
-        var lista = vehiculosDao.getListTipos();
+    public List<Tipos> getTiposbyState() {
+        var lista = vehiculosDao.getTiposbyState();
         return lista;
     }
 
     @Override
-    public List<Sedes> getSedes() {
-        var lista = vehiculosDao.getSedes();
+    public List<Sedes> getSedesbyState() {
+        var lista = vehiculosDao.getSedesbyState();
         return lista;
     }
 
     @Override
-    public List<Usuario> getUsuarios() {
-        var lista = vehiculosDao.getListUsuario();
+    public List<Usuario> getUsuariosbyState() {
+        var lista = vehiculosDao.getListUsuariobyState();
         return lista;
     }
 
@@ -83,8 +83,32 @@ public class VehiculoServiceImpl implements VehiculosService{
     }
 
     @Override
-    public List<Modelos> getModelos2() {
-        var lista = vehiculosDao.getListModelos();
+    public List<Modelos> getModelos() {
+        var lista = vehiculosDao.getModelos();
+        return lista;
+    }
+
+    @Override
+    public List<Marcas> getMarcas() {
+        var lista = vehiculosDao.getMarcas();
+        return lista;
+    }
+
+    @Override
+    public List<Tipos> getTipos() {
+        var lista = vehiculosDao.getTipos();
+        return lista;
+    }
+
+    @Override
+    public List<Sedes> getSedes() {
+        var lista = vehiculosDao.getSedes();
+        return lista;
+    }
+
+    @Override
+    public List<Usuario> getUsuarios() {
+        var lista = vehiculosDao.getUsuarios();
         return lista;
     }
     

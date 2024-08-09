@@ -17,15 +17,19 @@ import java.util.List;
  * @author hhern
  */
 public interface VehiculosService {
+        public Vehiculos getVehiculo(Vehiculos vehiculo);
     public List<Vehiculos> getVehiculos();
-    public List<Marcas> getMarcas();
-    public List<Modelos> getModelos(Long MID);
-    public List<Modelos> getModelos2();
-    public List<Tipos> getTipos();
-    public List<Sedes> getSedes();
-    public List<Usuario> getUsuarios();
-    public Vehiculos getVehiculo(Vehiculos vehiculo);
+    public List<Marcas> getMarcasbyState();
+    public List<Modelos> getModelosbyMarca(Long MID);
+     public List<Tipos> getTiposbyState();
+    public List<Sedes> getSedesbyState();
+    public List<Usuario> getUsuariosbyState();
     public void save(Vehiculos vehiculo);
     public void delete(Vehiculos vehiculo);
     public void update(String plac,Long mid,Long idm,Long tid,int ano,Long ids,Long usid,boolean act);
+    public List<Modelos> getModelos();
+    public List<Marcas> getMarcas();
+    public List<Tipos> getTipos();
+    public List<Sedes> getSedes();
+    public List<Usuario> getUsuarios();
 }

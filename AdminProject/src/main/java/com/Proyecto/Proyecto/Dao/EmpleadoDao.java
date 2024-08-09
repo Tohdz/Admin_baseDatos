@@ -155,6 +155,51 @@ public class EmpleadoDao {
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     
+    public List<Puestos> getPuestosbyState() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_PUESTOS_TB_GET_PUESTOSBYSTATE_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Puestos>() {
+                    @Override
+                    public Puestos mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Puestos puesto = new Puestos();
+                        puesto.setIdPuesto(rs.getLong("ID_PUESTO"));
+                        puesto.setNombre(rs.getString("NOMBRE"));
+                        puesto.setEstado(rs.getBoolean("ESTADO"));
+                        return puesto;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Puestos> puestoList = (List<Puestos>) results.get("DATOS");
+        return puestoList;
+    }
+    
+    public List<Sedes> getSedesbyState() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_SEDES_TB_GET_SEDESBYSTATE_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Sedes>() {
+                    @Override
+                    public Sedes mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Sedes sede = new Sedes();
+                        sede.setIdSede(rs.getLong("ID_SEDE"));
+                        sede.setNombre(rs.getString("NOMBRE"));
+                        sede.setCiudad(rs.getString("CIUDAD"));
+                        sede.setDireccion(rs.getString("DIRECCION"));
+                        sede.setTelefono(rs.getString("TELEFONO"));
+                        sede.setEstado(rs.getBoolean("ESTADO"));
+                        return sede;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Sedes> sedeList = (List<Sedes>) results.get("DATOS");
+        return sedeList;
+    }
+    
     public List<Puestos> getPuestos() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")

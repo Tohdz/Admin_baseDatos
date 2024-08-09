@@ -19,4 +19,5 @@ public interface ModelosService {
     public void delete(Modelos modelo);
     public void update(Long CID, String NOM,Long MID,boolean ACT);
     public List<Marcas> getMarcas();
+    public List<Marcas> getMarcasbyState();
 }

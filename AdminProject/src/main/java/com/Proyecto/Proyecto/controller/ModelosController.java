@@ -32,8 +32,9 @@ public class ModelosController {
     private String listado(Model model) {
         var modelos = modelosService.getModelos();
         model.addAttribute("modelos", modelos);
-        List<Marcas> marcas = modelosService.getMarcas();
+        List<Marcas> marcas = modelosService.getMarcasbyState();
         model.addAttribute("marcas", marcas);
+        //
         List<Marcas> marcas2 = modelosService.getMarcas();
         Map<Long, String> marcasMap = marcas2.stream()
                 .collect(Collectors.toMap(Marcas::getIdMarca, Marcas::getNombre));
@@ -59,7 +60,7 @@ public class ModelosController {
     public String modeloModificar(Modelos modelo, Model model) {
         modelo = modelosService.getModelo(modelo);
         model.addAttribute("modelo", modelo);
-        List<Marcas> marcas = modelosService.getMarcas();
+        List<Marcas> marcas = modelosService.getMarcasbyState();
         model.addAttribute("marcas", marcas);
         return "/modelos/modifica";
     }

@@ -49,6 +49,11 @@ public class ModelosServiceImpl implements ModelosService {
     }
 
     @Override
+    public List<Marcas> getMarcasbyState() {
+        return modelosDao.getMarcasbyState();
+    }
+
+    @Override
     public List<Marcas> getMarcas() {
         return modelosDao.getMarcas();
     }

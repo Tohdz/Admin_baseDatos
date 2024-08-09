@@ -42,14 +42,16 @@ public class EmpleadoController {
     private String listado(Model model) {
         var empleados = empleadoService.getEmpleados();
         model.addAttribute("empleados", empleados);
-        List<Puestos> puestos = empleadoService.getPuestos();
+        List<Puestos> puestos = empleadoService.getPuestosbyState();
         model.addAttribute("puestos", puestos);
-        List<Sedes> sedes = empleadoService.getSedes();
+        List<Sedes> sedes = empleadoService.getSedesbyState();
         model.addAttribute("sedes", sedes);
+        //
         List<Puestos> puestos2 = empleadoService.getPuestos();
         Map<Long, String> puestosMap = puestos2.stream()
                 .collect(Collectors.toMap(Puestos::getIdPuesto, Puestos::getNombre));
         model.addAttribute("puestosMap", puestosMap);
+        //
         List<Sedes> sedes2 = empleadoService.getSedes();
         Map<Long, String> sedesMap = sedes2.stream()
                 .collect(Collectors.toMap(Sedes::getIdSede, Sedes::getNombre));
@@ -74,9 +76,9 @@ public class EmpleadoController {
     public String empleadoModificar(Empleado empleado, Model model) {
         empleado = empleadoService.getEmpleado(empleado);
         model.addAttribute("empleado", empleado);
-        List<Puestos> puestos = empleadoService.getPuestos();
+        List<Puestos> puestos = empleadoService.getPuestosbyState();
         model.addAttribute("puestos", puestos);
-        List<Sedes> sedes = empleadoService.getSedes();
+        List<Sedes> sedes = empleadoService.getSedesbyState();
         model.addAttribute("sedes", sedes);
         return "/empleados/modifica";
     }

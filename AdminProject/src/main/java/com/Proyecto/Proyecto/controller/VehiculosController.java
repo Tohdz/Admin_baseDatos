@@ -38,13 +38,13 @@ public class VehiculosController {
     private String listado(Model model) {
         var vehiculos = vehiculosService.getVehiculos();
         model.addAttribute("vehiculos", vehiculos);
-        List<Marcas> marcas = vehiculosService.getMarcas();
+        List<Marcas> marcas = vehiculosService.getMarcasbyState();
         model.addAttribute("marcas", marcas);
-        List<Tipos> tipos = vehiculosService.getTipos();
+        List<Tipos> tipos = vehiculosService.getTiposbyState();
         model.addAttribute("tipos", tipos);
-        List<Sedes> sedes = vehiculosService.getSedes();
+        List<Sedes> sedes = vehiculosService.getSedesbyState();
         model.addAttribute("sedes", sedes);
-        List<Usuario> usuarios = vehiculosService.getUsuarios();
+        List<Usuario> usuarios = vehiculosService.getUsuariosbyState();
         model.addAttribute("usuarios", usuarios);
         //
         List<Marcas> marcas2 = vehiculosService.getMarcas();
@@ -52,7 +52,7 @@ public class VehiculosController {
                 .collect(Collectors.toMap(Marcas::getIdMarca, Marcas::getNombre));
         model.addAttribute("marcasMap", marcasMap);
         //
-        List<Modelos> modelos2 = vehiculosService.getModelos2();
+        List<Modelos> modelos2 = vehiculosService.getModelos();
         Map<Long, String> modelosMap = modelos2.stream()
                 .collect(Collectors.toMap(Modelos::getIdModelo, Modelos::getNombre));
         model.addAttribute("modelosMap", modelosMap);
@@ -77,7 +77,7 @@ public class VehiculosController {
     @GetMapping("/getModelos")
     @ResponseBody // Esto indica que el retorno es JSON
     public List<Modelos> getModelos(@RequestParam Long idMarca) {
-        List<Modelos> modelos = vehiculosService.getModelos(idMarca);
+        List<Modelos> modelos = vehiculosService.getModelosbyMarca(idMarca);
         return modelos;
     }
 
@@ -98,13 +98,13 @@ public class VehiculosController {
     public String vehiculoModificar(Vehiculos vehiculo, Model model) {
         vehiculo = vehiculosService.getVehiculo(vehiculo);
         model.addAttribute("vehiculo", vehiculo);
-        List<Marcas> marcas = vehiculosService.getMarcas();
+        List<Marcas> marcas = vehiculosService.getMarcasbyState();
         model.addAttribute("marcas", marcas);
-        List<Tipos> tipos = vehiculosService.getTipos();
+        List<Tipos> tipos = vehiculosService.getTiposbyState();
         model.addAttribute("tipos", tipos);
-        List<Sedes> sedes = vehiculosService.getSedes();
+        List<Sedes> sedes = vehiculosService.getSedesbyState();
         model.addAttribute("sedes", sedes);
-        List<Usuario> usuarios = vehiculosService.getUsuarios();
+        List<Usuario> usuarios = vehiculosService.getUsuariosbyState();
         model.addAttribute("usuarios", usuarios);
         return "/vehiculos/modifica";
     }

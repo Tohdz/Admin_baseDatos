@@ -26,9 +26,10 @@ public class UsuarioController {
     @GetMapping("/listado")
     public String listado(Model model) {
         var usuarios = usuarioService.getUsuarios();
-        var sedes = usuarioService.getSedes();
+        var sedes = usuarioService.getSedesbyState();
         model.addAttribute("sedes", sedes);
         model.addAttribute("usuarios", usuarios);
+        //
         List<Sedes> sedes2 = usuarioService.getSedes();
         Map<Long, String> sedesMap = sedes2.stream()
                 .collect(Collectors.toMap(Sedes::getIdSede, Sedes::getNombre));
@@ -59,7 +60,7 @@ public class UsuarioController {
     public String usuarioModificar(Usuario usuario, Model model) {
         usuario = usuarioService.getUsuario(usuario);
         model.addAttribute("usuario", usuario);
-        var sedes = usuarioService.getSedes();
+        var sedes = usuarioService.getSedesbyState();
         model.addAttribute("sedes", sedes);
         return "/usuario/modifica";
     }

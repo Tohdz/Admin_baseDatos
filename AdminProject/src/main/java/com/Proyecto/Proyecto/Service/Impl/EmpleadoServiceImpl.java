@@ -61,4 +61,16 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     public void update(Long EID, String NOM, String APE, String TEL, String CORRE, Date FECH, String SAL, Long IDP, Long IDS, boolean ACT) {
         empleadoDao.updateEmpleado(EID, NOM, APE, TEL, CORRE, FECH, SAL, IDP, IDS, ACT);
     }
+
+    @Override
+    public List<Puestos> getPuestosbyState() {
+        var lista = empleadoDao.getPuestosbyState();
+        return lista;
+    }
+
+    @Override
+    public List<Sedes> getSedesbyState() {
+        var lista = empleadoDao.getSedesbyState();
+        return lista;
+    }
 }

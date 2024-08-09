@@ -17,10 +17,12 @@ import java.util.List;
  */
 public interface EmpleadoService {
     public List<Empleado> getEmpleados();
-    public List<Puestos> getPuestos();
-    public List<Sedes> getSedes();
     public Empleado getEmpleado(Empleado empleado);
+    public List<Puestos> getPuestosbyState();
+    public List<Sedes> getSedesbyState();
     public void save(Empleado empleado);
     public void delete(Empleado empleado);
     public void update(Long EID,String NOM,String APE,String TEL,String CORRE,Date FECH,String SAL,Long IDP,Long IDS,boolean ACT);
+    public List<Puestos> getPuestos();
+    public List<Sedes> getSedes();
 }
