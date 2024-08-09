@@ -262,5 +262,27 @@ public class VehiculosDao {
         List<Modelos> modeloList = (List<Modelos>) results.get("DATOS");
         return modeloList;
     }
+    
+    public List<Modelos> getListModelos() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_MODELOS_TB_GET_MODELOS_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Modelos>() {
+                    @Override
+                    public Modelos mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Modelos modelo = new Modelos();
+                        modelo.setIdModelo(rs.getLong("ID_MODELO"));
+                        modelo.setNombre(rs.getString("NOMBRE"));
+                        modelo.setIdMarca(rs.getLong("ID_MARCA"));
+                        modelo.setEstado(rs.getBoolean("ESTADO"));
+                        return modelo;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Modelos> modeloList = (List<Modelos>) results.get("DATOS");
+        return modeloList;
+    }
 
 }

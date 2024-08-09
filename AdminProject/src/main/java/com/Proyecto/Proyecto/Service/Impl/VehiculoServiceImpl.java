@@ -81,5 +81,11 @@ public class VehiculoServiceImpl implements VehiculosService{
     public void update(String plac, Long mid, Long idm, Long tid, int ano, Long ids, Long usid, boolean act) {
         vehiculosDao.updateVehiculo(plac, mid, idm, tid, ano, ids, usid, act);
     }
+
+    @Override
+    public List<Modelos> getModelos2() {
+        var lista = vehiculosDao.getListModelos();
+        return lista;
+    }
     
 }

@@ -134,12 +134,12 @@
                                             <tr th:each="vehiculo, contador : ${vehiculos}">
                                                 <td style="color: white; "th:text="${contador.count}"></td>
                                                 <td style="color: white; "th:text="${vehiculo.placa}"</td>
-                                                <td style="color: white; "th:text="${vehiculo.idMarca}"</td>
-                                                <td style="color: white; "th:text="${vehiculo.idModelo}"></td>
-                                                <td style="color: white; "th:text="${vehiculo.idTipo}"></td>
+                                                <td style="color: white; "th:text="${marcasMap[vehiculo.idMarca]}"</td>
+                                                <td style="color: white; "th:text="${modelosMap[vehiculo.idModelo]}"></td>
+                                                <td style="color: white; "th:text="${tiposMap[vehiculo.idTipo]}"></td>
                                                 <td style="color: white; "th:text="${vehiculo.ano}"></td>
-                                                <td style="color: white; "th:text="${vehiculo.idSede}"></td>
-                                                <td style="color: white; "th:text="${vehiculo.idUsuario}"></td>
+                                                <td style="color: white; "th:text="${sedesMap[vehiculo.idSede]}"></td>
+                                                <td style="color: white; "th:text="${usuariosMap[vehiculo.idUsuario]}"></td>
                                                 <td style="color: white; "th:text="${vehiculo.estado}"></td>
                                                 <td>
                                                     <div>

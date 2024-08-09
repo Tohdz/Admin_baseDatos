@@ -1417,7 +1417,7 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_UPDATE_VEHICULO_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
---
+----
 
 
 

@@ -12,6 +12,8 @@ import com.Proyecto.Proyecto.Domain.Usuario;
 import com.Proyecto.Proyecto.Domain.Vehiculos;
 import com.Proyecto.Proyecto.Service.VehiculosService;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +46,31 @@ public class VehiculosController {
         model.addAttribute("sedes", sedes);
         List<Usuario> usuarios = vehiculosService.getUsuarios();
         model.addAttribute("usuarios", usuarios);
+        //
+        List<Marcas> marcas2 = vehiculosService.getMarcas();
+        Map<Long, String> marcasMap = marcas2.stream()
+                .collect(Collectors.toMap(Marcas::getIdMarca, Marcas::getNombre));
+        model.addAttribute("marcasMap", marcasMap);
+        //
+        List<Modelos> modelos2 = vehiculosService.getModelos2();
+        Map<Long, String> modelosMap = modelos2.stream()
+                .collect(Collectors.toMap(Modelos::getIdModelo, Modelos::getNombre));
+        model.addAttribute("modelosMap", modelosMap);
+        //
+        List<Tipos> tipos2 = vehiculosService.getTipos();
+        Map<Long, String> tiposMap = tipos2.stream()
+                .collect(Collectors.toMap(Tipos::getIdTipo, Tipos::getNombre));
+        model.addAttribute("tiposMap", tiposMap);
+        //
+        List<Sedes> sedes2 = vehiculosService.getSedes();
+        Map<Long, String> sedesMap = sedes2.stream()
+                .collect(Collectors.toMap(Sedes::getIdSede, Sedes::getNombre));
+        model.addAttribute("sedesMap", sedesMap);
+        //
+        List<Usuario> usuarios2 = vehiculosService.getUsuarios();
+        Map<Long, String> usuariosMap = usuarios2.stream()
+                .collect(Collectors.toMap(Usuario::getIdUsuario, Usuario::getUsername));
+        model.addAttribute("usuariosMap", usuariosMap);
         return "/vehiculos/listado";
     }
 

@@ -20,6 +20,7 @@ public interface VehiculosService {
     public List<Vehiculos> getVehiculos();
     public List<Marcas> getMarcas();
     public List<Modelos> getModelos(Long MID);
+    public List<Modelos> getModelos2();
     public List<Tipos> getTipos();
     public List<Sedes> getSedes();
     public List<Usuario> getUsuarios();
