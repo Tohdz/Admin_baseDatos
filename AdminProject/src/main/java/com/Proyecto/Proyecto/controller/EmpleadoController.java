@@ -34,7 +34,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @RequestMapping("/empleados")
 public class EmpleadoController {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    
     @Autowired
     private EmpleadoService empleadoService;
 

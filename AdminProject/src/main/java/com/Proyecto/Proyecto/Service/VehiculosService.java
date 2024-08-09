@@ -17,11 +17,11 @@ import java.util.List;
  * @author hhern
  */
 public interface VehiculosService {
-        public Vehiculos getVehiculo(Vehiculos vehiculo);
+    public Vehiculos getVehiculo(Vehiculos vehiculo);
     public List<Vehiculos> getVehiculos();
     public List<Marcas> getMarcasbyState();
     public List<Modelos> getModelosbyMarca(Long MID);
-     public List<Tipos> getTiposbyState();
+    public List<Tipos> getTiposbyState();
     public List<Sedes> getSedesbyState();
     public List<Usuario> getUsuariosbyState();
     public void save(Vehiculos vehiculo);
