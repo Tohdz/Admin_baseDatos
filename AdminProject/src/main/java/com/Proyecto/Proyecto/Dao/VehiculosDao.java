@@ -45,7 +45,7 @@ public class VehiculosDao {
                         vehiculo.setIdMarca(rs.getLong("ID_MARCA"));
                         vehiculo.setIdModelo(rs.getLong("ID_MODELO"));
                         vehiculo.setIdTipo(rs.getLong("ID_TIPO"));
-                        vehiculo.setAño(rs.getInt("AÑO"));
+                        vehiculo.setAno(rs.getInt("ANO"));
                         vehiculo.setIdSede(rs.getLong("ID_SEDE"));
                         vehiculo.setIdUsuario(rs.getLong("ID_USUARIO"));
                         vehiculo.setEstado(rs.getBoolean("ESTADO"));
@@ -71,7 +71,7 @@ public class VehiculosDao {
                         vehiculo.setIdMarca(rs.getLong("ID_MARCA"));
                         vehiculo.setIdModelo(rs.getLong("ID_MODELO"));
                         vehiculo.setIdTipo(rs.getLong("ID_TIPO"));
-                        vehiculo.setAño(rs.getInt("AÑO"));
+                        vehiculo.setAno(rs.getInt("ANO"));
                         vehiculo.setIdSede(rs.getLong("ID_SEDE"));
                         vehiculo.setIdUsuario(rs.getLong("ID_USUARIO"));
                         vehiculo.setEstado(rs.getBoolean("ESTADO"));
@@ -94,7 +94,7 @@ public class VehiculosDao {
                         new SqlParameter("MID", Types.BIGINT),
                         new SqlParameter("IDM", Types.BIGINT),
                         new SqlParameter("TID", Types.BIGINT),
-                        new SqlParameter("ANO", Types.BIGINT),
+                        new SqlParameter("ANO", Types.INTEGER),
                         new SqlParameter("IDS", Types.BIGINT),
                         new SqlParameter("USID", Types.BIGINT),
                         new SqlParameter("ACT", Types.BOOLEAN)
@@ -104,7 +104,7 @@ public class VehiculosDao {
         mapSqlParameterSource.addValue("MID", vehiculo.getIdMarca());
         mapSqlParameterSource.addValue("IDM", vehiculo.getIdModelo());
         mapSqlParameterSource.addValue("TID", vehiculo.getIdTipo());
-        mapSqlParameterSource.addValue("ANO", vehiculo.getAño());
+        mapSqlParameterSource.addValue("ANO", vehiculo.getAno());
         mapSqlParameterSource.addValue("IDS", vehiculo.getIdSede());
         mapSqlParameterSource.addValue("USID", vehiculo.getIdUsuario());
         mapSqlParameterSource.addValue("ACT", vehiculo.isEstado());

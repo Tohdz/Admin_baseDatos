@@ -36,7 +36,9 @@
                                     <label for="idMarca">Brand</label>
                                     <select class="form-select" 
                                             name="idMarca"
-                                            required="true">
+                                            required="true"
+                                            onchange="updateModels(this.value)">
+                                        <option value="" disabled selected>Select Brand</option>
                                         <option th:each="m : ${marcas}" 
                                                 th:value="${m.idMarca}"
                                                 th:text="${m.nombre}"></option>
@@ -46,10 +48,9 @@
                                     <label for="idModelo">Model</label>
                                     <select class="form-select" 
                                             name="idModelo"
+                                            id="idModelo"
                                             required="true">
-                                        <option th:each="m : ${modelos}" 
-                                                th:value="${m.idModelo}"
-                                                th:text="${m.nombre}"></option>
+
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -57,20 +58,22 @@
                                     <select class="form-select" 
                                             name="idTipo"
                                             required="true">
+                                        <option value="" disabled selected>Select Vehicle Type</option>
                                         <option th:each="t : ${tipos}" 
                                                 th:value="${t.idTipo}"
                                                 th:text="${t.nombre}"></option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="año">Production Year</label>
-                                    <input type="number" class="form-control" name="año" required="true" />
+                                    <label for="ano">Production Year</label>
+                                    <input type="number" class="form-control" name="ano" required="true" />
                                 </div>
                                 <div class="mb-3">
                                     <label for="idSede">Workshop</label>
                                     <select class="form-select" 
                                             name="idSede"
                                             required="true">
+                                        <option value="" disabled selected>Select Workshop</option>
                                         <option th:each="s : ${sedes}" 
                                                 th:value="${s.idSede}"
                                                 th:text="${s.nombre}"></option>
@@ -81,6 +84,7 @@
                                     <select class="form-select" 
                                             name="idUsuario"
                                             required="true">
+                                        <option value="" disabled selected>Select User</option>
                                         <option th:each="u : ${usuarios}" 
                                                 th:value="${u.idUsuario}"
                                                 th:text="${u.username}"></option>
@@ -129,14 +133,13 @@
                                         <tbody>
                                             <tr th:each="vehiculo, contador : ${vehiculos}">
                                                 <td style="color: white; "th:text="${contador.count}"></td>
-                                                <td style="color: white; "th:text="${vehiculo.nombre}"</td>
-                                                <td style="color: white; "th:text="${vehiculo.apellido}"</td>
-                                                <td style="color: white; "th:text="${vehiculo.telefono}"></td>
-                                                <td style="color: white; "th:text="${vehiculo.correo}"></td>
-                                                <td style="color: white; "th:text="${vehiculo.fecha}"></td>
-                                                <td style="color: white; "th:text="${vehiculo.salario}"></td>
-                                                <td style="color: white; "th:text="${puestosMap[vehiculo.idPuesto]}"></td>
-                                                <td style="color: white; "th:text="${sedesMap[vehiculo.idSede]}"></td>
+                                                <td style="color: white; "th:text="${vehiculo.placa}"</td>
+                                                <td style="color: white; "th:text="${vehiculo.idMarca}"</td>
+                                                <td style="color: white; "th:text="${vehiculo.idModelo}"></td>
+                                                <td style="color: white; "th:text="${vehiculo.idTipo}"></td>
+                                                <td style="color: white; "th:text="${vehiculo.ano}"></td>
+                                                <td style="color: white; "th:text="${vehiculo.idSede}"></td>
+                                                <td style="color: white; "th:text="${vehiculo.idUsuario}"></td>
                                                 <td style="color: white; "th:text="${vehiculo.estado}"></td>
                                                 <td>
                                                     <div>
@@ -171,7 +174,6 @@
                               th:object="${vehiculo}"
                               class="was-validated"                          
                               enctype="multipart/form-data">
-                            <input type="hidden" name="placa" th:field="*{placa}"/>
                             <section th:replace="~{vehiculos/fragmentos :: BotonesModificar}"/>
                             <div id=details>
                                 <div class="container">
@@ -191,7 +193,9 @@
                                                         <select class="form-select" 
                                                                 name="idMarca"
                                                                 th:field="*{idMarca}"
-                                                                required="true">
+                                                                required="true"
+                                                                onchange="updateModels(this.value)">
+                                                            <option value="" disabled selected>Select Brand</option>
                                                             <option th:each="m : ${marcas}" 
                                                                     th:value="${m.idMarca}"
                                                                     th:text="${m.nombre}"></option>
@@ -201,11 +205,9 @@
                                                         <label for="idModelo">Model</label>
                                                         <select class="form-select" 
                                                                 name="idModelo"
+                                                                id="idModelo"
                                                                 th:field="*{idModelo}"
                                                                 required="true">
-                                                            <option th:each="m : ${modelos}" 
-                                                                    th:value="${m.idModelo}"
-                                                                    th:text="${m.nombre}"></option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
@@ -214,14 +216,15 @@
                                                                 name="idTipo"
                                                                 th:field="*{idTipo}"
                                                                 required="true">
+                                                            <option value="" disabled selected>Select Vehicle Type</option>
                                                             <option th:each="t : ${tipos}" 
                                                                     th:value="${t.idTipo}"
                                                                     th:text="${t.nombre}"></option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="año">Production Year</label>
-                                                        <input type="number" class="form-control" name="año" th:field="*{año}" required="true" />
+                                                        <label for="ano">Production Year</label>
+                                                        <input type="number" class="form-control" name="ano" th:field="*{ano}" required="true" />
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="idSede">Workshop</label>
@@ -229,6 +232,7 @@
                                                                 name="idSede"
                                                                 th:field="*{idSede}"
                                                                 required="true">
+                                                            <option value="" disabled selected>Select Workshops</option>
                                                             <option th:each="s : ${sedes}" 
                                                                     th:value="${s.idSede}"
                                                                     th:text="${s.nombre}"></option>
@@ -240,6 +244,7 @@
                                                                 name="idUsuario"
                                                                 th:field="*{idUsuario}"
                                                                 required="true">
+                                                            <option value="" disabled selected>Select User</option>
                                                             <option th:each="u : ${usuarios}" 
                                                                     th:value="${u.idUsuario}"
                                                                     th:text="${u.username}"></option>

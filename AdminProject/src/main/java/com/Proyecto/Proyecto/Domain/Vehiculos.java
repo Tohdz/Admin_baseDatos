@@ -34,8 +34,8 @@ public class Vehiculos implements Serializable {
     private Long idModelo;
     @Column(name = "ID_TIPO")
     private Long idTipo;
-    @Column(name = "AÑO")
-    private int año;
+    @Column(name = "ANO")
+    private int ano;
     @Column(name = "ID_SEDE")
     private Long idSede;
     @Column(name = "ID_USUARIO")
@@ -46,14 +46,16 @@ public class Vehiculos implements Serializable {
     public Vehiculos() {
     }
 
-    public Vehiculos(String placa, Long idMarca, Long idModelo, Long idTipo, int año, Long idSede, Long idUsuario, boolean estado) {
+    public Vehiculos(String placa, Long idMarca, Long idModelo, Long idTipo, int ano, Long idSede, Long idUsuario, boolean estado) {
         this.placa = placa;
         this.idMarca = idMarca;
         this.idModelo = idModelo;
         this.idTipo = idTipo;
-        this.año = año;
+        this.ano = ano;
         this.idSede = idSede;
         this.idUsuario = idUsuario;
         this.estado = estado;
-    } 
+    }
+
+    
 }

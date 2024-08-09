@@ -57,6 +57,7 @@
                                     <select class="form-select" 
                                             name="idPuesto"
                                             required="true">
+                                        <option value="" disabled selected>Select Job Title</option>
                                         <option th:each="p : ${puestos}" 
                                                 th:value="${p.idPuesto}"
                                                 th:text="${p.nombre}"></option>
@@ -67,6 +68,7 @@
                                     <select class="form-select" 
                                             name="idSede"
                                             required="true">
+                                        <option value="" disabled selected>Select Workshop</option>
                                         <option th:each="s : ${sedes}" 
                                                 th:value="${s.idSede}"
                                                 th:text="${s.nombre}"></option>
@@ -199,6 +201,7 @@
                                                                 name="idPuesto"
                                                                 th:field="*{idPuesto}"
                                                                 required="true">
+                                                            <option value="" disabled selected>Select Job Title</option>
                                                             <option th:each="p : ${puestos}" 
                                                                     th:value="${p.idPuesto}"
                                                                     th:text="${p.nombre}"></option>
@@ -210,6 +213,7 @@
                                                                 name="idSede"
                                                                 th:field="*{idSede}"
                                                                 required="true">
+                                                            <option value="" disabled selected>Select Workshop</option>
                                                             <option th:each="s : ${sedes}" 
                                                                     th:value="${s.idSede}"
                                                                     th:text="${s.nombre}"></option>

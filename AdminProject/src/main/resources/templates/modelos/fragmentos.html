@@ -37,6 +37,7 @@
                                     <select class="form-select" 
                                             name="idMarca"
                                             required="true">
+                                        <option value="" disabled selected>Select Brand</option>
                                         <option th:each="m : ${marcas}" 
                                                 th:value="${m.idMarca}"
                                                 th:text="${m.nombre}"></option>
@@ -138,6 +139,7 @@
                                                         <select class="form-select" 
                                                                 name="idMarca"
                                                                 required="true">
+                                                            <option value="" disabled selected>Select Brand</option>
                                                             <option th:each="m : ${marcas}" 
                                                                     th:value="${m.idMarca}"
                                                                     th:text="${m.nombre}"></option>

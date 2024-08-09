@@ -5,7 +5,7 @@
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             $('#blah')
                     .attr('src', e.target.result)
                     .height(200);
@@ -15,7 +15,7 @@ function readURL(input) {
 }
 
 /* La siguiente función se utiliza para activar la cantidad de elementos seleccionados
-* En el carrito de compras utilizando un llamado "ajax" */
+ * En el carrito de compras utilizando un llamado "ajax" */
 function addCard(formulario) {
     var valor = formulario.elements[0].value;
     var url = '/carrito/agregar';
@@ -24,4 +24,21 @@ function addCard(formulario) {
     console.log("Valor:", valor);
     console.log("URL:", url);
     $("#resultsBlock").load(url);
+}
+
+function updateModels(idMarca) {
+    var modeloSelect = document.getElementById('idModelo');
+    modeloSelect.innerHTML = '<option value="">Select Model</option>';
+    if (idMarca) {
+        fetch('/vehiculos/getModelos?idMarca=' + idMarca)
+                .then(response => response.json())
+                .then(modelos => {
+                    modelos.forEach(modelo => {
+                        var option = document.createElement('option');
+                        option.value = modelo.idModelo;
+                        option.text = modelo.nombre;
+                        modeloSelect.add(option);
+                    });
+                });
+    }
 }
