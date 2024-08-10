@@ -1,43 +1,43 @@
 package com.Proyecto.Proyecto.Service.Impl;
 
 import com.Proyecto.Proyecto.Dao.CategoriaDao;
-import com.Proyecto.Proyecto.Dao.JuegosDao;
+import com.Proyecto.Proyecto.Dao.RepuestosDao;
 import com.Proyecto.Proyecto.Domain.Categorias;
-import com.Proyecto.Proyecto.Service.JuegosService;
-import com.Proyecto.Proyecto.Domain.Juegos;
+import com.Proyecto.Proyecto.Domain.Repuestos;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.Proyecto.Proyecto.Service.RepuestosService;
 
 @Service
-public class JuegosServiceImpl implements JuegosService {
+public class RepuestosServiceImpl implements RepuestosService {
 
     @Autowired
-    private JuegosDao juegosDao;
+    private RepuestosDao juegosDao;
     
 
     @Override
     @Transactional(readOnly = true)
-    public List<Juegos> getJuegos() {
+    public List<Repuestos> getJuegos() {
         return juegosDao.getListJuegos();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Juegos getJuego(Juegos juegos) {
+    public Repuestos getJuego(Repuestos juegos) {
         return juegosDao.getIdJuegos(juegos.getId_juego());
     }
 
     @Override
     @Transactional
-    public void save(Juegos juegos) {
+    public void save(Repuestos juegos) {
         juegosDao.saveJuegos(juegos);
     }
 
     @Override
     @Transactional
-    public void delete(Juegos juegos) {
+    public void delete(Repuestos juegos) {
         juegosDao.deleteJuegos(juegos.getId_juego());
     }
 
@@ -52,7 +52,7 @@ public class JuegosServiceImpl implements JuegosService {
     }
 
     @Override
-    public List<Juegos> getJuegosbycate(Long id) {
+    public List<Repuestos> getJuegosbycate(Long id) {
         return juegosDao.getJuegosbycate(id);
     }
 

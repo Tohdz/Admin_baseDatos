@@ -10,22 +10,22 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 
-public class Item extends Juegos {
+public class Item extends Repuestos {
 
     private int cantidad; //Almacenar la cantidad de items de un producto
 
     public Item() {
     }
 
-    public Item(Juegos juegos) {
-        super.setId_juego(juegos.getId_juego());
-        super.setImagen(juegos.getImagen());
-        super.setNombre(juegos.getNombre());
-        super.setEmpresa(juegos.getEmpresa());
-        super.setPrecio(juegos.getPrecio());
-        super.setExistencias(juegos.getExistencias());
-        super.setEstado(juegos.isEstado());
-        super.setIdcategoria(juegos.getIdcategoria());
+    public Item(Repuestos repuesto) {
+        super.setId_juego(repuesto.getId_juego());
+        super.setImagen(repuesto.getImagen());
+        super.setNombre(repuesto.getNombre());
+        super.setEmpresa(repuesto.getEmpresa());
+        super.setPrecio(repuesto.getPrecio());
+        super.setExistencias(repuesto.getExistencias());
+        super.setEstado(repuesto.isEstado());
+        super.setIdcategoria(repuesto.getIdcategoria());
         this.cantidad = 0;
     }
 

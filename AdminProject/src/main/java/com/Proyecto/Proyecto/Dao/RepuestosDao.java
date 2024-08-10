@@ -1,7 +1,7 @@
 package com.Proyecto.Proyecto.Dao;
 
 import com.Proyecto.Proyecto.Domain.Categorias;
-import com.Proyecto.Proyecto.Domain.Juegos;
+import com.Proyecto.Proyecto.Domain.Repuestos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -16,65 +16,65 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 @Repository
-public class JuegosDao {
+public class RepuestosDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public List<Juegos> getListJuegos() {
+    public List<Repuestos> getListJuegos() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("GET_JUEGOS")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
-                .returningResultSet("DATOS", new RowMapper<Juegos>() {
+                .returningResultSet("DATOS", new RowMapper<Repuestos>() {
                     @Override
-                    public Juegos mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        Juegos juego = new Juegos();
-                        juego.setId_juego(rs.getLong("ID_JUEGO"));
-                        juego.setImagen(rs.getString("IMAGEN"));
-                        juego.setNombre(rs.getString("NOMBRE"));
-                        juego.setEmpresa(rs.getString("EMPRESA"));
-                        juego.setPrecio(rs.getDouble("PRECIO"));
-                        juego.setExistencias(rs.getInt("EXISTENCIAS"));
-                        juego.setIdcategoria(rs.getLong("ID_CATEGORIA"));
-                        juego.setEstado(rs.getBoolean("ESTADO"));
-                        return juego;
+                    public Repuestos mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Repuestos repuesto = new Repuestos();
+                        repuesto.setId_juego(rs.getLong("ID_JUEGO"));
+                        repuesto.setImagen(rs.getString("IMAGEN"));
+                        repuesto.setNombre(rs.getString("NOMBRE"));
+                        repuesto.setEmpresa(rs.getString("EMPRESA"));
+                        repuesto.setPrecio(rs.getDouble("PRECIO"));
+                        repuesto.setExistencias(rs.getInt("EXISTENCIAS"));
+                        repuesto.setIdcategoria(rs.getLong("ID_CATEGORIA"));
+                        repuesto.setEstado(rs.getBoolean("ESTADO"));
+                        return repuesto;
                     }
                 });
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
-        List<Juegos> juegoList = (List<Juegos>) results.get("DATOS");
-        return juegoList;
+        List<Repuestos> repuestoList = (List<Repuestos>) results.get("DATOS");
+        return repuestoList;
     }
 
-    public Juegos getIdJuegos(Long id) {
+    public Repuestos getIdJuegos(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("GET_ONE_JUEGO")
                 .declareParameters(new SqlParameter("JID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
-                .returningResultSet("DATOS", new RowMapper<Juegos>() {
+                .returningResultSet("DATOS", new RowMapper<Repuestos>() {
                     @Override
-                    public Juegos mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        Juegos juego = new Juegos();
-                        juego.setId_juego(rs.getLong("ID_JUEGO"));
-                        juego.setImagen(rs.getString("IMAGEN"));
-                        juego.setNombre(rs.getString("NOMBRE"));
-                        juego.setEmpresa(rs.getString("EMPRESA"));
-                        juego.setPrecio(rs.getInt("PRECIO"));
-                        juego.setExistencias(rs.getInt("EXISTENCIAS"));
-                        juego.setIdcategoria(rs.getLong("ID_CATEGORIA"));
-                        juego.setEstado(rs.getBoolean("ESTADO"));
-                        return juego;
+                    public Repuestos mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Repuestos repuesto = new Repuestos();
+                        repuesto.setId_juego(rs.getLong("ID_JUEGO"));
+                        repuesto.setImagen(rs.getString("IMAGEN"));
+                        repuesto.setNombre(rs.getString("NOMBRE"));
+                        repuesto.setEmpresa(rs.getString("EMPRESA"));
+                        repuesto.setPrecio(rs.getInt("PRECIO"));
+                        repuesto.setExistencias(rs.getInt("EXISTENCIAS"));
+                        repuesto.setIdcategoria(rs.getLong("ID_CATEGORIA"));
+                        repuesto.setEstado(rs.getBoolean("ESTADO"));
+                        return repuesto;
                     }
                 });
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("JID", id);
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
-        List<Juegos> juegoList = (List<Juegos>) results.get("DATOS");
-        return juegoList.isEmpty() ? null : juegoList.get(0);
+        List<Repuestos> repuestoList = (List<Repuestos>) results.get("DATOS");
+        return repuestoList.isEmpty() ? null : repuestoList.get(0);
     }
 
-    public void saveJuegos(Juegos juego) {
+    public void saveJuegos(Repuestos repuesto) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("ADD_JUEGO")
@@ -88,13 +88,13 @@ public class JuegosDao {
                         new SqlParameter("ID_CAT", Types.BIGINT)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("IMG", juego.getImagen());
-        mapSqlParameterSource.addValue("NOM", juego.getNombre());
-        mapSqlParameterSource.addValue("EMP", juego.getEmpresa());
-        mapSqlParameterSource.addValue("PREC", juego.getPrecio());
-        mapSqlParameterSource.addValue("EXI", juego.getExistencias());
-        mapSqlParameterSource.addValue("EST", juego.isEstado());
-        mapSqlParameterSource.addValue("ID_CAT", juego.getIdcategoria());
+        mapSqlParameterSource.addValue("IMG", repuesto.getImagen());
+        mapSqlParameterSource.addValue("NOM", repuesto.getNombre());
+        mapSqlParameterSource.addValue("EMP", repuesto.getEmpresa());
+        mapSqlParameterSource.addValue("PREC", repuesto.getPrecio());
+        mapSqlParameterSource.addValue("EXI", repuesto.getExistencias());
+        mapSqlParameterSource.addValue("EST", repuesto.isEstado());
+        mapSqlParameterSource.addValue("ID_CAT", repuesto.getIdcategoria());
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
 
@@ -154,31 +154,31 @@ public class JuegosDao {
         return cateList;
     }
     
-    public List<Juegos> getJuegosbycate(Long id) {
+    public List<Repuestos> getJuegosbycate(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("admin_lenguajes")
                 .withProcedureName("GET_JUEGOSBYCATEGORIA")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
-                .returningResultSet("DATOS", new RowMapper<Juegos>() {
+                .returningResultSet("DATOS", new RowMapper<Repuestos>() {
                     @Override
-                    public Juegos mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        Juegos juego = new Juegos();
-                        juego.setId_juego(rs.getLong("ID_JUEGO"));
-                        juego.setImagen(rs.getString("IMAGEN"));
-                        juego.setNombre(rs.getString("NOMBRE"));
-                        juego.setEmpresa(rs.getString("EMPRESA"));
-                        juego.setPrecio(rs.getDouble("PRECIO"));
-                        juego.setExistencias(rs.getInt("EXISTENCIAS"));
-                        juego.setIdcategoria(rs.getLong("ID_CATEGORIA"));
-                        juego.setEstado(rs.getBoolean("ESTADO"));
-                        return juego;
+                    public Repuestos mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Repuestos repuesto = new Repuestos();
+                        repuesto.setId_juego(rs.getLong("ID_JUEGO"));
+                        repuesto.setImagen(rs.getString("IMAGEN"));
+                        repuesto.setNombre(rs.getString("NOMBRE"));
+                        repuesto.setEmpresa(rs.getString("EMPRESA"));
+                        repuesto.setPrecio(rs.getDouble("PRECIO"));
+                        repuesto.setExistencias(rs.getInt("EXISTENCIAS"));
+                        repuesto.setIdcategoria(rs.getLong("ID_CATEGORIA"));
+                        repuesto.setEstado(rs.getBoolean("ESTADO"));
+                        return repuesto;
                     }
                 });
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("CID", id);
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
-        List<Juegos> juegoList = (List<Juegos>) results.get("DATOS");
-        return juegoList;
+        List<Repuestos> repuestoList = (List<Repuestos>) results.get("DATOS");
+        return repuestoList;
     }
     
     public List<Categorias> getdesc() {

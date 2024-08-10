@@ -1,7 +1,6 @@
 package com.Proyecto.Proyecto.controller;
 
-import com.Proyecto.Proyecto.Domain.Juegos;
-import com.Proyecto.Proyecto.Service.JuegosService;
+import com.Proyecto.Proyecto.Domain.Repuestos;
 import com.Proyecto.Proyecto.Service.CategoriaService; // Importar el servicio de categorías
 import com.Proyecto.Proyecto.Domain.Categorias; // Importar la clase de categorías
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,13 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.Proyecto.Proyecto.Service.RepuestosService;
 
 @Controller
 @RequestMapping("/juego")
-public class JuegosController {
+public class RepuestosController {
 
     @Autowired
-    private JuegosService juegosService;
+    private RepuestosService juegosService;
 
     @Autowired
     private CategoriaService categoriaService;
@@ -41,24 +41,24 @@ public class JuegosController {
     }
 
     @GetMapping("/nuevo")
-    public String hotelNuevo(Juegos juego) {
+    public String hotelNuevo(Repuestos juego) {
         return "/juego/modifica";
     }
 
     @PostMapping("/guardar")
-    public String hotelGuardar(Juegos juego) {
+    public String hotelGuardar(Repuestos juego) {
         juegosService.save(juego);
         return "redirect:/juego/juegos";
     }
 
     @GetMapping("/eliminar/{id_juego}")
-    public String hotelEliminar(Juegos juego) {
+    public String hotelEliminar(Repuestos juego) {
         juegosService.delete(juego);
         return "redirect:/juego/juegos";
     }
 
     @GetMapping("/modificar/{id_juego}")
-    public String hotelModificar(Juegos juego, Model model) {
+    public String hotelModificar(Repuestos juego, Model model) {
         juego = juegosService.getJuego(juego);
         model.addAttribute("juego", juego);
 

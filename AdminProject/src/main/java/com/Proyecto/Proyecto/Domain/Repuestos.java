@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "JUEGO")
-public class Juegos implements Serializable {
+@Table(name = "FIDE_REPUESTOS_TB")
+public class Repuestos implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
@@ -31,7 +31,7 @@ public class Juegos implements Serializable {
     private Long idcategoria;
     
 
-    public Juegos() {
+    public Repuestos() {
     }
 
     

@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Proyecto.Proyecto.Domain.Item;
-import com.Proyecto.Proyecto.Domain.Juegos;
+import com.Proyecto.Proyecto.Domain.Repuestos;
 import com.Proyecto.Proyecto.Service.CategoriaService;
 import com.Proyecto.Proyecto.Service.ItemService;
-import com.Proyecto.Proyecto.Service.JuegosService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.Proyecto.Proyecto.Service.RepuestosService;
 
 @Controller
 public class CarritoController {
@@ -27,14 +27,14 @@ public class CarritoController {
       @Autowired
     private ItemService itemService;
     @Autowired
-    private JuegosService juegosService;
+    private RepuestosService juegosService;
     @Autowired
     private CategoriaService categoriaService;
 
     @GetMapping("/")
     public String mostrarJuegos(Model model) {
         // Lógica para obtener juegos con filtros
-        List<Juegos> juegos = juegosService.getJuegos();
+        List<Repuestos> juegos = juegosService.getJuegos();
         model.addAttribute("juegos", juegos);
 
         // Obtener todas las categorías y agregarlas al modelo
@@ -46,7 +46,7 @@ public class CarritoController {
 
     @GetMapping("/juegosPorCategoria")
     public String mostrarJuegosPorCategoria(@RequestParam(name = "categoriaId", required = false) Long categoriaId, Model model) {
-        List<Juegos> juegos;
+        List<Repuestos> juegos;
         if (categoriaId != null) {
             juegos = juegosService.getJuegosbycate(categoriaId);
         } else {
@@ -85,7 +85,7 @@ public class CarritoController {
         Item item2 = itemService.get(item);
         System.out.println(item);
         if (item2 == null) {
-            Juegos juegos = juegosService.getJuego(item);
+            Repuestos juegos = juegosService.getJuego(item);
             item2 = new Item(juegos);
 
         }
@@ -139,7 +139,7 @@ public class CarritoController {
         Item item2 = itemService.get(item);
         System.out.println(item);
         if (item2 == null) {
-            Juegos juegos = juegosService.getJuego(item);
+            Repuestos juegos = juegosService.getJuego(item);
             item2 = new Item(juegos);
 
         }
@@ -162,7 +162,7 @@ public class CarritoController {
         Item item2 = itemService.get(item);
         System.out.println(item);
         if (item2 == null) {
-            Juegos juegos = juegosService.getJuego(item);
+            Repuestos juegos = juegosService.getJuego(item);
             item2 = new Item(juegos);
 
         }
