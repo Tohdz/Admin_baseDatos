@@ -119,9 +119,9 @@
                                                 <td style="color: white; "th:text="${contador.count}"></td>
                                                 <td style="color: white; "th:text="${cita.placa}"</td>
                                                 <td style="color: white; "th:text="${cita.fechaHora}"</td>
-                                                <td style="color: white; "th:text="${cita.idServicio}"></td>
-                                                <td style="color: white; "th:text="${cita.idEmpleado}"></td>
-                                                <td style="color: white; "th:text="${cita.idSede}"></td>
+                                                <td style="color: white; "th:text="${serviciosMap[cita.idServicio]}"></td>
+                                                <td style="color: white; "th:text="${empleadosMap[cita.idEmpleado]}"></td>
+                                                <td style="color: white; "th:text="${sedesMap[cita.idSede]}"></td>
                                                 <td style="color: white; "th:text="${cita.estado}"></td>
                                                 <td>
                                                     <div>

@@ -14,6 +14,8 @@ import com.Proyecto.Proyecto.Service.CitasService;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -48,15 +50,20 @@ public class CitasController {
         List<Sedes> sedes = citasService.getSedesbyState();
         model.addAttribute("sedes", sedes);
         //
-//        List<Puestos> puestos2 = citasService.getPuestos();
-//        Map<Long, String> puestosMap = puestos2.stream()
-//                .collect(Collectors.toMap(Puestos::getIdPuesto, Puestos::getNombre));
-//        model.addAttribute("puestosMap", puestosMap);
-//        //
-//        List<Sedes> sedes2 = citasService.getSedes();
-//        Map<Long, String> sedesMap = sedes2.stream()
-//                .collect(Collectors.toMap(Sedes::getIdSede, Sedes::getNombre));
-//        model.addAttribute("sedesMap", sedesMap);
+        List<Servicios> servicios2 = citasService.getServicios();
+        Map<Long, String> serviciosMap = servicios2.stream()
+                .collect(Collectors.toMap(Servicios::getIdServicio, Servicios::getNombre));
+        model.addAttribute("serviciosMap", serviciosMap);
+        //
+        List<Empleado> empleados2 = citasService.getEmpleados();
+        Map<Long, String> empleadosMap = empleados2.stream()
+                .collect(Collectors.toMap(Empleado::getIdEmpleado, Empleado::getNombre));
+        model.addAttribute("empleadosMap", empleadosMap);
+        //
+        List<Sedes> sedes2 = citasService.getSedes();
+        Map<Long, String> sedesMap = sedes2.stream()
+                .collect(Collectors.toMap(Sedes::getIdSede, Sedes::getNombre));
+        model.addAttribute("sedesMap", sedesMap);
         return "/citas/listado";
     }
 
