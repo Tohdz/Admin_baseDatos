@@ -11,6 +11,8 @@ import com.Proyecto.Proyecto.Domain.Sedes;
 import com.Proyecto.Proyecto.Service.OrdenesService;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -42,20 +44,20 @@ public class OrdenesController {
         List<Sedes> sedes = ordenesService.getSedesbyState();
         model.addAttribute("sedes", sedes);
         //
-//        List<Servicios> servicios2 = ordenesService.getServicios();
-//        Map<Long, String> serviciosMap = servicios2.stream()
-//                .collect(Collectors.toMap(Servicios::getIdServicio, Servicios::getNombre));
-//        model.addAttribute("serviciosMap", serviciosMap);
-//        //
-//        List<Empleado> empleados2 = ordenesService.getEmpleados();
-//        Map<Long, String> empleadosMap = empleados2.stream()
-//                .collect(Collectors.toMap(Empleado::getIdEmpleado, Empleado::getNombre));
-//        model.addAttribute("empleadosMap", empleadosMap);
-//        //
-//        List<Sedes> sedes2 = ordenesService.getSedes();
-//        Map<Long, String> sedesMap = sedes2.stream()
-//                .collect(Collectors.toMap(Sedes::getIdSede, Sedes::getNombre));
-//        model.addAttribute("sedesMap", sedesMap);
+        List<Citas> citas2 = ordenesService.getCitas();
+        Map<Long, String> citasMap = citas2.stream()
+                .collect(Collectors.toMap(Citas::getIdCita, Citas::getPlaca));
+        model.addAttribute("citasMap", citasMap);
+        //
+        List<Empleado> empleados2 = ordenesService.getEmpleados();
+        Map<Long, String> empleadosMap = empleados2.stream()
+                .collect(Collectors.toMap(Empleado::getIdEmpleado, Empleado::getNombre));
+        model.addAttribute("empleadosMap", empleadosMap);
+        //
+        List<Sedes> sedes2 = ordenesService.getSedes();
+        Map<Long, String> sedesMap = sedes2.stream()
+                .collect(Collectors.toMap(Sedes::getIdSede, Sedes::getNombre));
+        model.addAttribute("sedesMap", sedesMap);
         return "/ordenes/listado";
     }
 

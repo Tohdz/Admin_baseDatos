@@ -35,7 +35,7 @@
                                             required="true">
                                         <option value="" disabled selected>Select Appointment</option>
                                         <option th:each="c : ${citas}" 
-                                                th:value="${c.placa}"
+                                                th:value="${c.idCita}"
                                                 th:text="${c.placa}"></option>
                                     </select>
                                 </div>
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="comentario">Comments</label>
-                                    <input type="text" class="form-control" name="comentario" required="true" />
+                                    <textarea type="text" class="form-control" name="comentario" required="true" ></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="idEmpleado">Employee</label>
@@ -105,11 +105,11 @@
                                         <tbody>
                                             <tr th:each="orden, contador : ${ordenes}">
                                                 <td style="color: white; "th:text="${contador.count}"></td>
-                                                <td style="color: white; "th:text="${orden.idCita}"</td>
+                                                <td style="color: white; "th:text="${citasMap[orden.idCita]}"</td>
                                                 <td style="color: white; "th:text="${orden.fechaHora}"</td>
                                                 <td style="color: white; "th:text="${orden.comentario}"></td>
-                                                <td style="color: white; "th:text="${orden.idEmpleado}"></td>
-                                                <td style="color: white; "th:text="${orden.idSede}"></td>
+                                                <td style="color: white; "th:text="${empleadosMap[orden.idEmpleado]}"></td>
+                                                <td style="color: white; "th:text="${sedesMap[orden.idSede]}"></td>
                                                 <td>
                                                     <div>
                                                         <a th:href="@{/ordenes/eliminar/}+${orden.idOrden}" style="background-color: rgba(255, 0, 0, 0.5); color: white; "class="btn btn-trasparent">
@@ -162,7 +162,7 @@
                                                                 required="true">
                                                             <option value="" disabled selected>Select Appointment</option>
                                                             <option th:each="c : ${citas}" 
-                                                                    th:value="${c.placa}"
+                                                                    th:value="${c.idCita}"
                                                                     th:text="${c.placa}"></option>
                                                         </select>
                                                     </div>
@@ -172,7 +172,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="comentario">Comments</label>
-                                                        <input type="text" class="form-control" name="comentario" th:field="*{comentario}"required="true" />
+                                                        <textarea type="text" class="form-control" name="comentario" th:field="*{comentario}"required="true"></textarea>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="idEmpleado">Employee</label>
