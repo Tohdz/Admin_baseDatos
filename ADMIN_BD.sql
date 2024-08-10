@@ -1534,6 +1534,19 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CITAS_TB_GET_CITAS_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
+ -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ /*create or replace PROCEDURE FIDE_CITAS_TB_GET_CITASBYSTATE_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_CITA,PLACA,FECHA,ID_SERVICIO,ID_EMPLEADO,ID_SEDE,ESTADO FROM FIDE_CITAS_TB WHERE ESTADO=1;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CITAS_TB_GET_CITASBYSTATE_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
  --------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*create or replace PROCEDURE FIDE_CITAS_TB_GET_CITA_SP (CID IN NUMBER,DATOS OUT SYS_REFCURSOR)
  AS
@@ -1589,9 +1602,73 @@ EXCEPTION
 END;*/
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
+/*create or replace PROCEDURE FIDE_ORDENES_TB_GET_ORDENES_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_ORDEN,ID_CITA,FECHA,COMENTARIOS,ID_EMPLEADO,ID_SEDE FROM FIDE_ORDENES_TB;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ORDENES_TB_GET_ORDENES_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_ORDENES_TB_GET_ORDEN_SP (OID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_ORDEN,ID_CITA,FECHA,COMENTARIOS,ID_EMPLEADO,ID_SEDE FROM FIDE_ORDENES_TB WHERE ID_ORDEN=OID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ORDENES_TB_GET_ORDEN_SP',SYSDATE, VCOD || ' - '|| VMES );
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ORDENES_TB_GET_ORDEN_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_ORDENES_TB_ADD_ORDEN_SP (CID IN NUMBER,FECH IN DATE,COMS IN VARCHAR2,EMPID IN NUMBER,IDSED IN NUMBER) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    INSERT INTO FIDE_ORDENES_TB (ID_CITA,FECHA,COMENTARIOS,ID_EMPLEADO,ID_SEDE) VALUES (CID,FECH,COMS,EMPID,IDSED);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ORDENES_TB_ADD_ORDEN_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_ORDENES_TB_DELETE_ORDEN_SP (OID IN NUMBER) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    DELETE FROM FIDE_ORDENES_TB WHERE ID_ORDEN=OID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ORDENES_TB_DELETE_ORDEN_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_ORDENES_TB_UPDATE_ORDEN_SP (OID IN NUMBER,CID IN NUMBER,FECH IN DATE,COMS IN VARCHAR2,EMPID IN NUMBER,IDSED IN NUMBER) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    UPDATE FIDE_ORDENES_TB SET ID_CITA=CID,FECHA=FECH,COMENTARIOS=COMS,ID_EMPLEADO=EMPID,ID_SEDE=IDSED WHERE ID_ORDEN=OID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ORDENES_TB_UPDATE_ORDEN_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
