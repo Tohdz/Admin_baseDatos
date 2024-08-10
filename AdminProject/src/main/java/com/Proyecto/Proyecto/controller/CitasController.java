@@ -11,6 +11,7 @@ import com.Proyecto.Proyecto.Domain.Sedes;
 import com.Proyecto.Proyecto.Domain.Servicios;
 import com.Proyecto.Proyecto.Domain.Vehiculos;
 import com.Proyecto.Proyecto.Service.CitasService;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,7 @@ public class CitasController {
     }
 
     @PostMapping("/modificar2")
-    public String citaModificar2(@RequestParam("idCita") Long idCita, @RequestParam("placa") String placa, @RequestParam("fechaHora") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm") Date fechaHora, @RequestParam("idServicio") Long idServicio, @RequestParam("idEmpleado") Long idEmpleado,@RequestParam("idSede") Long idSede, @RequestParam(value = "estado", defaultValue = "false") boolean estado) {
+    public String citaModificar2(@RequestParam("idCita") Long idCita, @RequestParam("placa") String placa, @RequestParam("fechaHora") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaHora, @RequestParam("idServicio") Long idServicio, @RequestParam("idEmpleado") Long idEmpleado,@RequestParam("idSede") Long idSede, @RequestParam(value = "estado", defaultValue = "false") boolean estado) {
         citasService.update(idCita, placa, fechaHora, idServicio, idEmpleado, idSede, estado);
         return "redirect:/citas/listado";
     }

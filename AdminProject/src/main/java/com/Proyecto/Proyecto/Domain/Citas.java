@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,8 +34,8 @@ public class Citas implements Serializable {
     @Column(name = "PLACA")
     private String placa;
     @Column(name = "FECHA")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    private Date  fechaHora;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime  fechaHora;
     @Column(name = "ID_SERVICIO")
     private Long idServicio;
     @Column(name = "ID_EMPLEADO")
@@ -47,7 +48,7 @@ public class Citas implements Serializable {
     public Citas() {
     }
 
-    public Citas(Long idCita, String placa, Date fechaHora, Long idServicio, Long idEmpleado, Long idSede, boolean estado) {
+    public Citas(Long idCita, String placa, LocalDateTime fechaHora, Long idServicio, Long idEmpleado, Long idSede, boolean estado) {
         this.idCita = idCita;
         this.placa = placa;
         this.fechaHora = fechaHora;
@@ -56,5 +57,7 @@ public class Citas implements Serializable {
         this.idSede = idSede;
         this.estado = estado;
     }
+
+    
 
 }

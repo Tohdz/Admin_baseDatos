@@ -11,6 +11,7 @@ import com.Proyecto.Proyecto.Domain.Sedes;
 import com.Proyecto.Proyecto.Domain.Servicios;
 import com.Proyecto.Proyecto.Domain.Vehiculos;
 import com.Proyecto.Proyecto.Service.CitasService;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,7 @@ public class CitasServiceImpl implements CitasService{
     }
 
     @Override
-    public void update(Long ID, String PLAC, Date FECH, Long SERID, Long EMPID, Long IDSED, boolean ACT) {
+    public void update(Long ID, String PLAC, LocalDateTime FECH, Long SERID, Long EMPID, Long IDSED, boolean ACT) {
         citasDao.updateCitas(ID, PLAC, FECH, SERID, EMPID, IDSED, ACT);
     }
 

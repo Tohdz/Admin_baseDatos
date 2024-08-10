@@ -9,6 +9,7 @@ import com.Proyecto.Proyecto.Domain.Empleado;
 import com.Proyecto.Proyecto.Domain.Sedes;
 import com.Proyecto.Proyecto.Domain.Servicios;
 import com.Proyecto.Proyecto.Domain.Vehiculos;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public interface CitasService {
     public List<Sedes> getSedesbyState();
     public void save(Citas cita);
     public void delete(Citas cita);
-    public void update(Long ID, String PLAC,Date FECH,Long SERID,Long EMPID,Long IDSED,boolean ACT);
+    public void update(Long ID, String PLAC,LocalDateTime FECH,Long SERID,Long EMPID,Long IDSED,boolean ACT);
     public List<Servicios> getServicios();
     public List<Empleado> getEmpleados();
     public List<Sedes> getSedes();

@@ -12,6 +12,7 @@ import com.Proyecto.Proyecto.Domain.Vehiculos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class CitasDao {
                         Citas cita = new Citas();
                         cita.setIdCita(rs.getLong("ID_CITA"));
                         cita.setPlaca(rs.getString("PLACA"));
-                        cita.setFechaHora(rs.getDate("FECHA"));
+                        cita.setFechaHora(rs.getObject("FECHA", LocalDateTime.class));
                         cita.setIdServicio(rs.getLong("ID_SERVICIO"));
                         cita.setIdEmpleado(rs.getLong("ID_EMPLEADO"));
                         cita.setIdSede(rs.getLong("ID_SEDE"));
@@ -69,7 +70,7 @@ public class CitasDao {
                         Citas cita = new Citas();
                         cita.setIdCita(rs.getLong("ID_CITA"));
                         cita.setPlaca(rs.getString("PLACA"));
-                        cita.setFechaHora(rs.getDate("FECHA"));
+                        cita.setFechaHora(rs.getObject("FECHA", LocalDateTime.class));
                         cita.setIdServicio(rs.getLong("ID_SERVICIO"));
                         cita.setIdEmpleado(rs.getLong("ID_EMPLEADO"));
                         cita.setIdSede(rs.getLong("ID_SEDE"));
@@ -116,7 +117,7 @@ public class CitasDao {
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     
-    public void updateCitas(Long ID, String PLAC,Date FECH,Long SERID,Long EMPID,Long IDSED,boolean ACT) {
+    public void updateCitas(Long ID, String PLAC,LocalDateTime FECH,Long SERID,Long EMPID,Long IDSED,boolean ACT) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CITAS_TB_UPDATE_CITA_SP")
