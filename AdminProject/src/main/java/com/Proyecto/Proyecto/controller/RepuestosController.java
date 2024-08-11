@@ -39,16 +39,27 @@ public class RepuestosController {
         List<Sedes> sedes = repuestosService.getSedesbyState();
         model.addAttribute("sedes", sedes);
         //
-//        List<Categorias> categorias2 = juegosService.cateMask();
-//        Map<Long, String> categoriasMap = categorias2.stream()
-//                .collect(Collectors.toMap(Categorias::getIdCategoria, Categorias::getDescripcion));
-//        model.addAttribute("categoriasMap", categoriasMap);
+        List<Categorias> categorias2 = repuestosService.getCategorias();
+        Map<Long, String> categoriasMap = categorias2.stream()
+                .collect(Collectors.toMap(Categorias::getIdCategoria, Categorias::getDescripcion));
+        model.addAttribute("categoriasMap", categoriasMap);
+        //
+        List<Marcas> marcas2 = repuestosService.getMarcas();
+        Map<Long, String> marcasMap = marcas2.stream()
+                .collect(Collectors.toMap(Marcas::getIdMarca, Marcas::getNombre));
+        model.addAttribute("marcasMap", marcasMap);
+        //
+        List<Sedes> sedes2 = repuestosService.getSedes();
+        Map<Long, String> sedesMap = sedes2.stream()
+                .collect(Collectors.toMap(Sedes::getIdSede, Sedes::getNombre));
+        model.addAttribute("sedesMap", sedesMap);
         return "repuestos/listado";
     }
 
 
     @PostMapping("/guardar")
-    public String Guardar(Repuestos repuesto) {
+    public String Guardar(@RequestParam(value = "estado", defaultValue = "false") boolean estado,Repuestos repuesto) {
+        repuesto.setEstado(estado);
         repuestosService.save(repuesto);
         return "redirect:/repuestos/listado";
     }
@@ -82,7 +93,7 @@ public class RepuestosController {
             @RequestParam("cantidad") int cantidad,
             @RequestParam("idCategoria") Long idCategoria,
             @RequestParam("idSede") Long idSede,
-            @RequestParam("estado") boolean estado){
+            @RequestParam(value="estado",defaultValue = "false") boolean estado){
         repuestosService.update(idRepuesto,imagen,nombre,idMarca,precio,cantidad,idCategoria,idSede,estado);
         return "redirect:/repuestos/listado";
     }

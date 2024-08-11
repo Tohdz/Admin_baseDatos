@@ -123,11 +123,11 @@
                                                 <td style="color: white; "th:text="${contador.count}"></td>
                                                 <td><img th:src="${repuesto.imagen}" width="250" height="250" /></td>
                                                 <td style="color: white; "th:text="${repuesto.nombre}"></td>
-                                                <td style="color: white; "th:text="${repuesto.idMarca}"></td>
+                                                <td style="color: white; "th:text="${marcasMap[repuesto.idMarca]}"></td>
                                                 <td style="color: white; "th:text="'$' + ${repuesto.precio}"></td> <!-- Agregar signo de dólar al precio -->
                                                 <td style="color: white; "th:text="${repuesto.cantidad}"></td>
-                                                <td style="color: white; "th:text="${repuesto.idCategoria}"></td><!-- Mostrar solo el nombre de la categoría -->
-                                                <td style="color: white; "th:text="${repuesto.idSede}"></td>
+                                                <td style="color: white; "th:text="${categoriasMap[repuesto.idCategoria]}"></td><!-- Mostrar solo el nombre de la categoría -->
+                                                <td style="color: white; "th:text="${sedesMap[repuesto.idSede]}"></td>
                                                 <td style="color: white; "th:text="${repuesto.estado}"></td>
                                                 <td>
                                                     <div>

@@ -30,7 +30,7 @@ public class FacturaDao {
                 .declareParameters(
                         new SqlParameter("IDSED", Types.BIGINT),
                         new SqlParameter("FECHA", Types.DATE),
-                        new SqlParameter("TOTAL", Types.BIGINT),
+                        new SqlParameter("TOTAL", Types.DOUBLE),
                         new SqlParameter("USERID", Types.BIGINT)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();

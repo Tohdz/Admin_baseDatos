@@ -44,7 +44,7 @@ public class CarritoController {
         return "/index";
     }
 
-    @GetMapping("/respuestosPorCategoria")
+    @GetMapping("/repuestosPorCategoria")
     public String mostrarJuegosPorCategoria(@RequestParam(name = "categoriaId", required = false) Long categoriaId, Model model) {
         List<Repuestos> respuestos;
         if (categoriaId != null) {

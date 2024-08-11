@@ -26,9 +26,9 @@ public class Detalle_FacturaDao  {
                 .declareParameters(
                         new SqlParameter("IDFACT", Types.BIGINT),
                         new SqlParameter("IDORD", Types.BIGINT),
-                        new SqlParameter("IDREP", Types.DOUBLE),
+                        new SqlParameter("IDREP", Types.BIGINT),
                         new SqlParameter("CANT", Types.BIGINT),
-                        new SqlParameter("PREC", Types.BIGINT)
+                        new SqlParameter("PREC", Types.DOUBLE)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("IDFACT", detalle.getIdFactura());
