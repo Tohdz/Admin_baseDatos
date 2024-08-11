@@ -3,6 +3,8 @@ package com.Proyecto.Proyecto.controller;
 import com.Proyecto.Proyecto.Domain.Repuestos;
 import com.Proyecto.Proyecto.Service.CategoriaService; // Importar el servicio de categorías
 import com.Proyecto.Proyecto.Domain.Categorias; // Importar la clase de categorías
+import com.Proyecto.Proyecto.Domain.Marcas;
+import com.Proyecto.Proyecto.Domain.Sedes;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -18,67 +20,70 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.Proyecto.Proyecto.Service.RepuestosService;
 
 @Controller
-@RequestMapping("/juego")
+@RequestMapping("/repuestos")
 public class RepuestosController {
 
     @Autowired
-    private RepuestosService juegosService;
+    private RepuestosService repuestosService;
 
-    @Autowired
-    private CategoriaService categoriaService;
 
-    @GetMapping("/juegos")
-    public String mostrarJuegos(Model model) {
-        var juegos = juegosService.getJuegos();
-        model.addAttribute("juegos", juegos);
-        List<Categorias> categorias2 = juegosService.cateMask();
-        Map<Long, String> categoriasMap = categorias2.stream()
-                .collect(Collectors.toMap(Categorias::getIdCategoria, Categorias::getDescripcion));
-        List<Categorias> categorias = juegosService.getCates();
+    @GetMapping("/listado")
+    public String mostrarRepuestos(Model model) {
+        var repuestos = repuestosService.getRepuestos();
+        model.addAttribute("repuestos", repuestos);
+        //
+        List<Marcas> marcas = repuestosService.getMarcasbyState();
+        model.addAttribute("marcas", marcas);
+        List<Categorias> categorias = repuestosService.getCategoriasbyState();
         model.addAttribute("categorias", categorias);
-        model.addAttribute("categoriasMap", categoriasMap);
-        return "juego/juegos";
+        List<Sedes> sedes = repuestosService.getSedesbyState();
+        model.addAttribute("sedes", sedes);
+        //
+//        List<Categorias> categorias2 = juegosService.cateMask();
+//        Map<Long, String> categoriasMap = categorias2.stream()
+//                .collect(Collectors.toMap(Categorias::getIdCategoria, Categorias::getDescripcion));
+//        model.addAttribute("categoriasMap", categoriasMap);
+        return "repuestos/listado";
     }
 
-    @GetMapping("/nuevo")
-    public String hotelNuevo(Repuestos juego) {
-        return "/juego/modifica";
-    }
 
     @PostMapping("/guardar")
-    public String hotelGuardar(Repuestos juego) {
-        juegosService.save(juego);
-        return "redirect:/juego/juegos";
+    public String Guardar(Repuestos repuesto) {
+        repuestosService.save(repuesto);
+        return "redirect:/repuestos/listado";
     }
 
-    @GetMapping("/eliminar/{id_juego}")
-    public String hotelEliminar(Repuestos juego) {
-        juegosService.delete(juego);
-        return "redirect:/juego/juegos";
+    @GetMapping("/eliminar/{idRepuesto}")
+    public String Eliminar(Repuestos repuesto) {
+        repuestosService.delete(repuesto);
+        return "redirect:/repuestos/listado";
     }
 
-    @GetMapping("/modificar/{id_juego}")
-    public String hotelModificar(Repuestos juego, Model model) {
-        juego = juegosService.getJuego(juego);
-        model.addAttribute("juego", juego);
-
-        // Obtener todas las categorías y agregarlas al modelo
-        List<Categorias> categorias = juegosService.getCates();
+    @GetMapping("/modificar/{idRepuesto}")
+    public String Modificar(Repuestos repuesto, Model model) {
+        repuesto = repuestosService.getRepuesto(repuesto);
+        model.addAttribute("repuesto", repuesto);
+        //
+        List<Marcas> marcas = repuestosService.getMarcasbyState();
+        model.addAttribute("marcas", marcas);
+        List<Categorias> categorias = repuestosService.getCategoriasbyState();
         model.addAttribute("categorias", categorias);
-
-        return "/juego/modifica";
+        List<Sedes> sedes = repuestosService.getSedesbyState();
+        model.addAttribute("sedes", sedes);
+        return "/repuestos/modifica";
     }
 
     @PostMapping("/modificar2")
-    public String categoriaModificar2(@RequestParam("id_juego") Long idJuego,
+    public String Modificar2(@RequestParam("idRepuesto") Long idRepuesto,
             @RequestParam("imagen") String imagen,
             @RequestParam("nombre") String nombre,
-            @RequestParam("empresa") String empresa,
+            @RequestParam("idMarca") Long idMarca,
             @RequestParam("precio") double precio,
-            @RequestParam("existencias") int existencias,
-            @RequestParam("estado") boolean estado,
-            @RequestParam("idcategoria") Long idcategoria) {
-        juegosService.update(idJuego, imagen, nombre, empresa, precio, existencias, estado, idcategoria);
-        return "redirect:/juego/juegos";
+            @RequestParam("cantidad") int cantidad,
+            @RequestParam("idCategoria") Long idCategoria,
+            @RequestParam("idSede") Long idSede,
+            @RequestParam("estado") boolean estado){
+        repuestosService.update(idRepuesto,imagen,nombre,idMarca,precio,cantidad,idCategoria,idSede,estado);
+        return "redirect:/repuestos/listado";
     }
 }

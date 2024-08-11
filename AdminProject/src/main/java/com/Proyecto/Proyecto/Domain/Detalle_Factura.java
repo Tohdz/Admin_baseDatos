@@ -10,20 +10,22 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "DETALLE_FACTURA")
+@Table(name = "FIDE_DETALLES_TB")
 public class Detalle_Factura implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_DETALLE_FACTURA")
+    @Column(name = "ID_DETALLE")
     private Long idVenta;
     @Column(name = "ID_FACTURA")
     private Long idFactura;
-    @Column(name = "ID_JUEGO")
-    private Long id_juego;
-    @Column(name = "PRECIO")
+    @Column(name = "ID_ORDEN")
+    private Long idOrden;
+    @Column(name = "ID_REPUESTO")
+    private Long idRepuesto;
+    @Column(name = "PRECIO_UNITARIO")
     private double precio;
     @Column(name = "CANTIDAD")
     private int cantidad;
@@ -31,9 +33,9 @@ public class Detalle_Factura implements Serializable {
     public Detalle_Factura() {
     }
 
-    public Detalle_Factura(Long idFactura, Long id_juego, double precio, int cantidad) {
+    public Detalle_Factura(Long idFactura, Long idRepuesto, double precio, int cantidad) {
         this.idFactura = idFactura;
-        this.id_juego = id_juego;
+        this.idRepuesto = idRepuesto;
         this.precio = precio;
         this.cantidad = cantidad;
     }

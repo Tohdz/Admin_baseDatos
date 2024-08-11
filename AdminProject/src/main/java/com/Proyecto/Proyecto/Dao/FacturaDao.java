@@ -25,24 +25,26 @@ public class FacturaDao {
 
     public void savefactura(Factura factura) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("ADD_FACTURA")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_FACTURAS_TB_ADD_FACTURA_SP")
                 .declareParameters(
-                        new SqlParameter("USID", Types.BIGINT),
+                        new SqlParameter("IDSED", Types.BIGINT),
                         new SqlParameter("FECHA", Types.DATE),
-                        new SqlParameter("TOTAL", Types.BIGINT)
+                        new SqlParameter("TOTAL", Types.BIGINT),
+                        new SqlParameter("USERID", Types.BIGINT)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("USID", factura.getIdUsuario());
+        mapSqlParameterSource.addValue("IDSED", factura.getIdSede());
         mapSqlParameterSource.addValue("FECHA", factura.getFecha());
         mapSqlParameterSource.addValue("TOTAL", factura.getTotal());
+        mapSqlParameterSource.addValue("USERID", factura.getIdUsuario());
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     
     public void updatefactura(Long id,Double total) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("UPDATE_FACTURA")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_FACTURAS_TB_UPDATE_FACTURA_SP")
                 .declareParameters(
                         new SqlParameter("FID", Types.BIGINT),
                         new SqlParameter("TOTL", Types.DOUBLE)
@@ -55,8 +57,8 @@ public class FacturaDao {
     
     public Factura getfactura(Date FECHA) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_FACTURA_ID")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_FACTURAS_TB_GET_FACTURABYDATE_SP")
                 .declareParameters(new SqlParameter("FECH", Types.DATE),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Factura>() {
                     @Override

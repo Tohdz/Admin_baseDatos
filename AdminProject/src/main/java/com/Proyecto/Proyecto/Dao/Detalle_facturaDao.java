@@ -21,19 +21,21 @@ public class Detalle_FacturaDao  {
 
     public void savedetalle(Detalle_Factura detalle) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("ADD_DETALLE_FACTURA")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_DETALLES_TB_ADD_DETALLE_SP")
                 .declareParameters(
                         new SqlParameter("IDFACT", Types.BIGINT),
-                        new SqlParameter("IDJUEGO", Types.BIGINT),
-                        new SqlParameter("PRECIO", Types.DOUBLE),
-                        new SqlParameter("CANTIDAD", Types.BIGINT)
+                        new SqlParameter("IDORD", Types.BIGINT),
+                        new SqlParameter("IDREP", Types.DOUBLE),
+                        new SqlParameter("CANT", Types.BIGINT),
+                        new SqlParameter("PREC", Types.BIGINT)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("IDFACT", detalle.getIdFactura());
-        mapSqlParameterSource.addValue("IDJUEGO", detalle.getId_juego());
-        mapSqlParameterSource.addValue("PRECIO", detalle.getPrecio());
-        mapSqlParameterSource.addValue("CANTIDAD", detalle.getCantidad());
+        mapSqlParameterSource.addValue("IDORD", detalle.getIdOrden());
+        mapSqlParameterSource.addValue("IDREP", detalle.getIdRepuesto());
+        mapSqlParameterSource.addValue("CANT", detalle.getCantidad());
+        mapSqlParameterSource.addValue("PREC", detalle.getPrecio());
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
 }

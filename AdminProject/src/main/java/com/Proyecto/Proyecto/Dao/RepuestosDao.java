@@ -1,7 +1,9 @@
 package com.Proyecto.Proyecto.Dao;
 
 import com.Proyecto.Proyecto.Domain.Categorias;
+import com.Proyecto.Proyecto.Domain.Marcas;
 import com.Proyecto.Proyecto.Domain.Repuestos;
+import com.Proyecto.Proyecto.Domain.Sedes;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -21,22 +23,23 @@ public class RepuestosDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public List<Repuestos> getListJuegos() {
+    public List<Repuestos> getRepuestos() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_JUEGOS")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_REPUESTOS_TB_GET_REPUESTOS_SP")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Repuestos>() {
                     @Override
                     public Repuestos mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Repuestos repuesto = new Repuestos();
-                        repuesto.setId_juego(rs.getLong("ID_JUEGO"));
+                        repuesto.setIdRepuesto(rs.getLong("ID_REPUESTO"));
                         repuesto.setImagen(rs.getString("IMAGEN"));
                         repuesto.setNombre(rs.getString("NOMBRE"));
-                        repuesto.setEmpresa(rs.getString("EMPRESA"));
+                        repuesto.setIdMarca(rs.getLong("ID_MARCA"));
                         repuesto.setPrecio(rs.getDouble("PRECIO"));
-                        repuesto.setExistencias(rs.getInt("EXISTENCIAS"));
-                        repuesto.setIdcategoria(rs.getLong("ID_CATEGORIA"));
+                        repuesto.setCantidad(rs.getInt("CANTIDAD"));
+                        repuesto.setIdCategoria(rs.getLong("ID_CATEGORIA"));
+                        repuesto.setIdSede(rs.getLong("ID_SEDE"));
                         repuesto.setEstado(rs.getBoolean("ESTADO"));
                         return repuesto;
                     }
@@ -47,129 +50,250 @@ public class RepuestosDao {
         return repuestoList;
     }
 
-    public Repuestos getIdJuegos(Long id) {
+    public Repuestos getRepuesto(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_ONE_JUEGO")
-                .declareParameters(new SqlParameter("JID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_REPUESTOS_TB_GET_REPUESTO_SP")
+                .declareParameters(new SqlParameter("RID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Repuestos>() {
                     @Override
                     public Repuestos mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Repuestos repuesto = new Repuestos();
-                        repuesto.setId_juego(rs.getLong("ID_JUEGO"));
+                        repuesto.setIdRepuesto(rs.getLong("ID_REPUESTO"));
                         repuesto.setImagen(rs.getString("IMAGEN"));
                         repuesto.setNombre(rs.getString("NOMBRE"));
-                        repuesto.setEmpresa(rs.getString("EMPRESA"));
-                        repuesto.setPrecio(rs.getInt("PRECIO"));
-                        repuesto.setExistencias(rs.getInt("EXISTENCIAS"));
-                        repuesto.setIdcategoria(rs.getLong("ID_CATEGORIA"));
+                        repuesto.setIdMarca(rs.getLong("ID_MARCA"));
+                        repuesto.setPrecio(rs.getDouble("PRECIO"));
+                        repuesto.setCantidad(rs.getInt("CANTIDAD"));
+                        repuesto.setIdCategoria(rs.getLong("ID_CATEGORIA"));
+                        repuesto.setIdSede(rs.getLong("ID_SEDE"));
                         repuesto.setEstado(rs.getBoolean("ESTADO"));
                         return repuesto;
                     }
                 });
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("JID", id);
+        mapSqlParameterSource.addValue("RID", id);
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
         List<Repuestos> repuestoList = (List<Repuestos>) results.get("DATOS");
         return repuestoList.isEmpty() ? null : repuestoList.get(0);
     }
 
-    public void saveJuegos(Repuestos repuesto) {
+    public void saveRepuesto(Repuestos repuesto) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("ADD_JUEGO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_REPUESTOS_TB_ADD_REPUESTO_SP")
                 .declareParameters(
                         new SqlParameter("IMG", Types.VARCHAR),
                         new SqlParameter("NOM", Types.VARCHAR),
-                        new SqlParameter("EMP", Types.VARCHAR),
+                        new SqlParameter("IDM", Types.BIGINT),
                         new SqlParameter("PREC", Types.DOUBLE),
-                        new SqlParameter("EXI", Types.BIGINT),
-                        new SqlParameter("EST", Types.BOOLEAN),
-                        new SqlParameter("ID_CAT", Types.BIGINT)
+                        new SqlParameter("CANT", Types.BIGINT),
+                        new SqlParameter("CID", Types.BIGINT),
+                        new SqlParameter("IDSED", Types.BIGINT),
+                        new SqlParameter("EST", Types.BOOLEAN)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("IMG", repuesto.getImagen());
         mapSqlParameterSource.addValue("NOM", repuesto.getNombre());
-        mapSqlParameterSource.addValue("EMP", repuesto.getEmpresa());
+        mapSqlParameterSource.addValue("IDM", repuesto.getIdMarca());
         mapSqlParameterSource.addValue("PREC", repuesto.getPrecio());
-        mapSqlParameterSource.addValue("EXI", repuesto.getExistencias());
+        mapSqlParameterSource.addValue("CANT", repuesto.getCantidad());
+        mapSqlParameterSource.addValue("CID", repuesto.getIdCategoria());
+        mapSqlParameterSource.addValue("IDSED", repuesto.getIdSede());
         mapSqlParameterSource.addValue("EST", repuesto.isEstado());
-        mapSqlParameterSource.addValue("ID_CAT", repuesto.getIdcategoria());
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
 
-    public void deleteJuegos(Long id) {
+    public void deleteRepuesto(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("DELETE_JUEGO")
-                .declareParameters(new SqlParameter("JID", Types.BIGINT));
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_REPUESTOS_TB_DELETE_REPUESTO_SP")
+                .declareParameters(new SqlParameter("RID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("JID", id);
+        mapSqlParameterSource.addValue("RID", id);
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
 
-    public void updateJuegos(Long JID , String IMG ,String NOM, String EMP ,double PREC , int EXI, boolean EST , Long ID_CAT) {
+    public void updateRepuesto(Long RID , String IMG ,String NOM, Long MID ,double PREC , int CANT,Long CID,Long IDSED, boolean EST) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("UPDATE_JUEGO")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_REPUESTOS_TB_UPDATE_REPUESTO_SP")
                 .declareParameters(
-                        new SqlParameter("JID", Types.BIGINT),
+                        new SqlParameter("RID", Types.BIGINT),
                         new SqlParameter("IMG", Types.VARCHAR),
                         new SqlParameter("NOM", Types.VARCHAR),
-                        new SqlParameter("EMP", Types.VARCHAR),
+                        new SqlParameter("MID", Types.BIGINT),
                         new SqlParameter("PREC", Types.DOUBLE),
-                        new SqlParameter("EXI", Types.BIGINT),
-                        new SqlParameter("EST", Types.BOOLEAN),
-                        new SqlParameter("ID_CAT", Types.BIGINT)
+                        new SqlParameter("CANT", Types.BIGINT),
+                        new SqlParameter("CID", Types.BIGINT),
+                        new SqlParameter("IDSED", Types.BIGINT),
+                        new SqlParameter("EST", Types.BOOLEAN)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("JID", JID);
+        mapSqlParameterSource.addValue("RID", RID);
         mapSqlParameterSource.addValue("IMG", IMG);
         mapSqlParameterSource.addValue("NOM", NOM);
-        mapSqlParameterSource.addValue("EMP", EMP);
+        mapSqlParameterSource.addValue("MID", MID);
         mapSqlParameterSource.addValue("PREC", PREC);
-        mapSqlParameterSource.addValue("EXI", EXI);
+        mapSqlParameterSource.addValue("CANT", CANT);
+        mapSqlParameterSource.addValue("CID", CID);
+        mapSqlParameterSource.addValue("IDSED", IDSED);
         mapSqlParameterSource.addValue("EST", EST);
-        mapSqlParameterSource.addValue("ID_CAT", ID_CAT);
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
-
+    
+    public List<Marcas> getMarcasbyState() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_MARCAS_TB_GET_MARCASBYSTATE_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Marcas>() {
+                    @Override
+                    public Marcas mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Marcas marca = new Marcas();
+                        marca.setIdMarca(rs.getLong("ID_MARCA"));
+                        marca.setNombre(rs.getString("NOMBRE"));
+                        marca.setEstado(rs.getBoolean("ESTADO"));
+                        return marca;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Marcas> marcaList = (List<Marcas>) results.get("DATOS");
+        return marcaList;
+    }
+    
+    public List<Marcas> getMarcas() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_MARCAS_TB_GET_MARCAS_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Marcas>() {
+                    @Override
+                    public Marcas mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Marcas marca = new Marcas();
+                        marca.setIdMarca(rs.getLong("ID_MARCA"));
+                        marca.setNombre(rs.getString("NOMBRE"));
+                        marca.setEstado(rs.getBoolean("ESTADO"));
+                        return marca;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Marcas> marcaList = (List<Marcas>) results.get("DATOS");
+        return marcaList;
+    }
+    
+    public List<Sedes> getSedesbyState() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_SEDES_TB_GET_SEDESBYSTATE_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Sedes>() {
+                    @Override
+                    public Sedes mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Sedes sede = new Sedes();
+                        sede.setIdSede(rs.getLong("ID_SEDE"));
+                        sede.setNombre(rs.getString("NOMBRE"));
+                        sede.setCiudad(rs.getString("CIUDAD"));
+                        sede.setDireccion(rs.getString("DIRECCION"));
+                        sede.setTelefono(rs.getString("TELEFONO"));
+                        sede.setEstado(rs.getBoolean("ESTADO"));
+                        return sede;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Sedes> sedeList = (List<Sedes>) results.get("DATOS");
+        return sedeList;
+    }
+    
+    public List<Sedes> getSedes() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_SEDES_TB_GET_SEDES_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Sedes>() {
+                    @Override
+                    public Sedes mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Sedes sede = new Sedes();
+                        sede.setIdSede(rs.getLong("ID_SEDE"));
+                        sede.setNombre(rs.getString("NOMBRE"));
+                        sede.setCiudad(rs.getString("CIUDAD"));
+                        sede.setDireccion(rs.getString("DIRECCION"));
+                        sede.setTelefono(rs.getString("TELEFONO"));
+                        sede.setEstado(rs.getBoolean("ESTADO"));
+                        return sede;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Sedes> sedeList = (List<Sedes>) results.get("DATOS");
+        return sedeList;
+    }
+    
     public List<Categorias> getCategorias() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_CATEGORIAS")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_CATEGORIAS_TB_GET_CATEGORIA_SP")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Categorias>() {
                     @Override
                     public Categorias mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Categorias categoria = new Categorias();
-                        categoria.setIdCategoria(rs.getLong("ID_CATEGORIA")); 
-                        categoria.setDescripcion(rs.getString("DESCRIPCION")); 
+                        categoria.setIdCategoria(rs.getLong("ID_CATEGORIA"));
+                        categoria.setDescripcion(rs.getString("DESCRIPCION"));
+                        categoria.setRutaImagen(rs.getString("IMAGEN"));
+                        categoria.setEstado(rs.getBoolean("ESTADO"));
                         return categoria;
                     }
                 });
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
-        List<Categorias> cateList = (List<Categorias>) results.get("DATOS");
-        return cateList;
+        List<Categorias> categoriaList = (List<Categorias>) results.get("DATOS");
+        return categoriaList;
     }
     
-    public List<Repuestos> getJuegosbycate(Long id) {
+    public List<Categorias> getCategoriasbyState() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_JUEGOSBYCATEGORIA")
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_CATEGORIAS_TB_GET_CATEGORIABYSTATE_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Categorias>() {
+                    @Override
+                    public Categorias mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Categorias categoria = new Categorias();
+                        categoria.setIdCategoria(rs.getLong("ID_CATEGORIA"));
+                        categoria.setDescripcion(rs.getString("DESCRIPCION"));
+                        categoria.setRutaImagen(rs.getString("IMAGEN"));
+                        categoria.setEstado(rs.getBoolean("ESTADO"));
+                        return categoria;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Categorias> categoriaList = (List<Categorias>) results.get("DATOS");
+        return categoriaList;
+    }
+
+
+    public List<Repuestos> getRepuestosbycate(Long id) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_REPUESTOS_TB_GET_REPUESTOSBYCATEGORIA_SP")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Repuestos>() {
                     @Override
                     public Repuestos mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Repuestos repuesto = new Repuestos();
-                        repuesto.setId_juego(rs.getLong("ID_JUEGO"));
+                        repuesto.setIdRepuesto(rs.getLong("ID_REPUESTO"));
                         repuesto.setImagen(rs.getString("IMAGEN"));
                         repuesto.setNombre(rs.getString("NOMBRE"));
-                        repuesto.setEmpresa(rs.getString("EMPRESA"));
+                        repuesto.setIdMarca(rs.getLong("ID_MARCA"));
                         repuesto.setPrecio(rs.getDouble("PRECIO"));
-                        repuesto.setExistencias(rs.getInt("EXISTENCIAS"));
-                        repuesto.setIdcategoria(rs.getLong("ID_CATEGORIA"));
+                        repuesto.setCantidad(rs.getInt("CANTIDAD"));
+                        repuesto.setIdCategoria(rs.getLong("ID_CATEGORIA"));
+                        repuesto.setIdSede(rs.getLong("ID_SEDE"));
                         repuesto.setEstado(rs.getBoolean("ESTADO"));
                         return repuesto;
                     }
@@ -179,26 +303,6 @@ public class RepuestosDao {
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
         List<Repuestos> repuestoList = (List<Repuestos>) results.get("DATOS");
         return repuestoList;
-    }
-    
-    public List<Categorias> getdesc() {
-        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withSchemaName("admin_lenguajes")
-                .withProcedureName("GET_CATEGORIA_DESC")
-                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
-                .returningResultSet("DATOS", new RowMapper<Categorias>() {
-                    @Override
-                    public Categorias mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        Categorias categoria = new Categorias();
-                        categoria.setIdCategoria(rs.getLong("ID_CATEGORIA")); 
-                        categoria.setDescripcion(rs.getString("DESCRIPCION")); 
-                        return categoria;
-                    }
-                });
-        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
-        List<Categorias> categoriasList = (List<Categorias>) results.get("DATOS");
-        return categoriasList;
     }
 
 }

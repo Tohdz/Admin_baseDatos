@@ -1,24 +1,23 @@
 package com.Proyecto.Proyecto.Service;
 
 import com.Proyecto.Proyecto.Domain.Categorias;
+import com.Proyecto.Proyecto.Domain.Marcas;
 import com.Proyecto.Proyecto.Domain.Repuestos;
+import com.Proyecto.Proyecto.Domain.Sedes;
 import java.util.List;
 
 public interface RepuestosService {
-    List<Repuestos> getJuegos();
+    public Repuestos getRepuesto(Repuestos repuesto);
+    public List<Repuestos> getRepuestos();
+    public List<Repuestos> getRepuestosbycategoria(Long CID);
+    public List<Marcas> getMarcasbyState();
+    public List<Categorias> getCategoriasbyState();
+    public List<Sedes> getSedesbyState();
+    public void save(Repuestos repuesto);
+    public void delete(Repuestos repuesto);
+    public void update(Long RID , String IMG ,String NOM, Long MID ,double PREC , int CANT,Long CID,Long IDSED, boolean EST);
+    public List<Marcas> getMarcas();
+    public List<Categorias> getCategorias();
+    public List<Sedes> getSedes();
     
-    List<Categorias> getCates();
-    
-    List<Repuestos> getJuegosbycate(Long id);
-
-    Repuestos getJuego(Repuestos juegos);
-    
-    public List<Categorias> cateMask();
-
-    public void save(Repuestos juegos);
-
-    public void delete(Repuestos juegos);
-    
-    public void update(Long JID , String IMG ,String NOM, String EMP ,double PREC , int EXI, boolean EST , Long ID_CAT);
-
 }

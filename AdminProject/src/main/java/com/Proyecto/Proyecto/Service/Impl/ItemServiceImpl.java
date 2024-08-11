@@ -39,9 +39,9 @@ public class ItemServiceImpl implements ItemService {
         for (Item i : listaItems) {
 
             //Busca si ya existe el producto en el carrito
-            if (Objects.equals(i.getId_juego(), item.getId_juego())) {
+            if (Objects.equals(i.getIdRepuesto(), item.getIdRepuesto())) {
                 //Valida si aún puede colocar un item adicional -segun existencias-
-                if (i.getCantidad() < item.getExistencias()) {
+                if (i.getCantidad() < item.getCantidad()) {
                     //Incrementa en 1 la cantidad de elementos
                     i.setCantidad(i.getCantidad() + 1);
                 }
@@ -62,7 +62,7 @@ public class ItemServiceImpl implements ItemService {
         var existe = false;
         for (Item i : listaItems) {
             ++posicion;
-            if (Objects.equals(i.getId_juego(), item.getId_juego())) {
+            if (Objects.equals(i.getIdRepuesto(), item.getIdRepuesto())) {
                 existe = true;
                 break;
             }
@@ -76,7 +76,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Item get(Item item) {
         for (Item i : listaItems) {
-            if (Objects.equals(i.getId_juego(), item.getId_juego())) {
+            if (Objects.equals(i.getIdRepuesto(), item.getIdRepuesto())) {
                 return i;
             }
         }
@@ -87,7 +87,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void actualiza(Item item) {
         for (Item i : listaItems) {
-            if (Objects.equals(i.getId_juego(), item.getId_juego())) {
+            if (Objects.equals(i.getIdRepuesto(), item.getIdRepuesto())) {
                 i.setCantidad(item.getCantidad());
                 break;
             }
@@ -101,7 +101,7 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private Detalle_FacturaDao Detalle_FacturaDao;
     @Autowired
-    private RepuestosDao juegosDao;
+    private RepuestosDao repuestoDao;
 
     @Override
     public void facturar() {
@@ -121,24 +121,25 @@ public class ItemServiceImpl implements ItemService {
         if (usuario == null) {
             return;
         }
-        Factura factura = new Factura(usuario.getIdUsuario());
+        Factura factura = new Factura(usuario.getIdUsuario(),usuario.getIdSede());
         facturaDao.savefactura(factura);
         factura=facturaDao.getfactura(Calendar.getInstance().getTime());
         double total = 0;
         for (Item i : listaItems) {
             System.out.println("Juego: " + i.getNombre()+ " Cantidad: " + i.getCantidad() + " Total: " + i.getPrecio() * i.getCantidad());
-            Detalle_Factura detalle_factura = new Detalle_Factura(factura.getIdFactura(),i.getId_juego(), i.getPrecio(), i.getCantidad());
+            Detalle_Factura detalle_factura = new Detalle_Factura(factura.getIdFactura(),i.getIdRepuesto(), i.getPrecio(), i.getCantidad());
             Detalle_FacturaDao.savedetalle(detalle_factura);
-            Repuestos juegos = juegosDao.getIdJuegos(i.getId_juego());
-            Long id=juegos.getId_juego();
-            String img=juegos.getImagen();
-            String nom=juegos.getNombre();
-            String emp=juegos.getEmpresa();
-            double prec=juegos.getPrecio();
-            int exi=(juegos.getExistencias()- i.getCantidad());
-            boolean est=juegos.isEstado();
-            Long idc=juegos.getIdcategoria();
-            juegosDao.updateJuegos(id,img,nom,emp,prec,exi,est,idc);
+            Repuestos repuesto = repuestoDao.getRepuesto(i.getIdRepuesto());
+            Long id=repuesto.getIdRepuesto();
+            String img=repuesto.getImagen();
+            String nom=repuesto.getNombre();
+            Long mid=repuesto.getIdMarca();
+            double prec=repuesto.getPrecio();
+            int cant=(repuesto.getCantidad()- i.getCantidad());
+            Long idc=repuesto.getIdCategoria();
+            Long idsed=repuesto.getIdSede();
+            boolean est=repuesto.isEstado();
+            repuestoDao.updateRepuesto(id,img,nom,mid,prec,cant,idc,idsed,est);
             total += i.getPrecio() * i.getCantidad();
         }
         facturaDao.updatefactura(factura.getIdFactura(),total);

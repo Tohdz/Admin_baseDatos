@@ -3,7 +3,9 @@ package com.Proyecto.Proyecto.Service.Impl;
 import com.Proyecto.Proyecto.Dao.CategoriaDao;
 import com.Proyecto.Proyecto.Dao.RepuestosDao;
 import com.Proyecto.Proyecto.Domain.Categorias;
+import com.Proyecto.Proyecto.Domain.Marcas;
 import com.Proyecto.Proyecto.Domain.Repuestos;
+import com.Proyecto.Proyecto.Domain.Sedes;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,50 +16,76 @@ import com.Proyecto.Proyecto.Service.RepuestosService;
 public class RepuestosServiceImpl implements RepuestosService {
 
     @Autowired
-    private RepuestosDao juegosDao;
+    private RepuestosDao repuestosDao;
+
+    @Override
+    public Repuestos getRepuesto(Repuestos repuesto) {
+        return repuestosDao.getRepuesto(repuesto.getIdRepuesto());
+    }
+
+    @Override
+    public List<Repuestos> getRepuestos() {
+        var lista = repuestosDao.getRepuestos();
+        return lista;
+    }
+
+    @Override
+    public List<Repuestos> getRepuestosbycategoria(Long CID) {
+        var lista = repuestosDao.getRepuestosbycate(CID);
+        return lista;
+    }
+
+    @Override
+    public List<Marcas> getMarcasbyState() {
+        var lista = repuestosDao.getMarcasbyState();
+        return lista;
+    }
+
+    @Override
+    public List<Categorias> getCategoriasbyState() {
+        var lista = repuestosDao.getCategoriasbyState();
+        return lista;
+    }
+
+    @Override
+    public List<Sedes> getSedesbyState() {
+        var lista = repuestosDao.getSedesbyState();
+        return lista;
+    }
+
+    @Override
+    public void save(Repuestos repuesto) {
+        repuestosDao.saveRepuesto(repuesto);
+    }
+
+    @Override
+    public void delete(Repuestos repuesto) {
+        repuestosDao.deleteRepuesto(repuesto.getIdRepuesto());
+    }
+
+    @Override
+    public void update(Long RID , String IMG ,String NOM, Long MID ,double PREC , int CANT,Long CID,Long IDSED, boolean EST) {
+        repuestosDao.updateRepuesto(RID, IMG, NOM, MID, PREC, CANT, CID, IDSED, EST);
+    }
+
+    @Override
+    public List<Marcas> getMarcas() {
+        var lista = repuestosDao.getMarcas();
+        return lista;
+    }
+
+    @Override
+    public List<Categorias> getCategorias() {
+        var lista = repuestosDao.getCategorias();
+        return lista;
+    }
+
+    @Override
+    public List<Sedes> getSedes() {
+        var lista = repuestosDao.getSedes();
+        return lista;
+    }
     
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<Repuestos> getJuegos() {
-        return juegosDao.getListJuegos();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Repuestos getJuego(Repuestos juegos) {
-        return juegosDao.getIdJuegos(juegos.getId_juego());
-    }
-
-    @Override
-    @Transactional
-    public void save(Repuestos juegos) {
-        juegosDao.saveJuegos(juegos);
-    }
-
-    @Override
-    @Transactional
-    public void delete(Repuestos juegos) {
-        juegosDao.deleteJuegos(juegos.getId_juego());
-    }
-
-    @Override
-    public List<Categorias> getCates() {
-        return juegosDao.getCategorias();
-    }
-
-    @Override
-    public void update(Long JID , String IMG ,String NOM, String EMP ,double PREC , int EXI, boolean EST , Long ID_CAT) {
-        juegosDao.updateJuegos(JID,IMG,NOM,EMP,PREC,EXI,EST,ID_CAT);
-    }
-
-    @Override
-    public List<Repuestos> getJuegosbycate(Long id) {
-        return juegosDao.getJuegosbycate(id);
-    }
-
-    @Override
-    public List<Categorias> cateMask() {
-        return juegosDao.getdesc();
-    }
+    
 }

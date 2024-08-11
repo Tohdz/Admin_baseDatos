@@ -18,14 +18,15 @@ public class Item extends Repuestos {
     }
 
     public Item(Repuestos repuesto) {
-        super.setId_juego(repuesto.getId_juego());
+        super.setIdRepuesto(repuesto.getIdRepuesto());
         super.setImagen(repuesto.getImagen());
         super.setNombre(repuesto.getNombre());
-        super.setEmpresa(repuesto.getEmpresa());
+        super.setIdMarca(repuesto.getIdMarca());
         super.setPrecio(repuesto.getPrecio());
-        super.setExistencias(repuesto.getExistencias());
+        super.setCantidad(repuesto.getCantidad());
+        super.setIdCategoria(repuesto.getIdCategoria());
+        super.setIdSede(repuesto.getIdSede());
         super.setEstado(repuesto.isEstado());
-        super.setIdcategoria(repuesto.getIdcategoria());
         this.cantidad = 0;
     }
 

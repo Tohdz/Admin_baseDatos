@@ -27,15 +27,15 @@ public class CarritoController {
       @Autowired
     private ItemService itemService;
     @Autowired
-    private RepuestosService juegosService;
+    private RepuestosService repuestosService;
     @Autowired
     private CategoriaService categoriaService;
 
     @GetMapping("/")
     public String mostrarJuegos(Model model) {
-        // Lógica para obtener juegos con filtros
-        List<Repuestos> juegos = juegosService.getJuegos();
-        model.addAttribute("juegos", juegos);
+        // Lógica para obtener respuestos con filtros
+        List<Repuestos> respuestos = repuestosService.getRepuestos();
+        model.addAttribute("respuestos", respuestos);
 
         // Obtener todas las categorías y agregarlas al modelo
         List<Categorias> categorias = categoriaService.getCategorias();
@@ -44,21 +44,21 @@ public class CarritoController {
         return "/index";
     }
 
-    @GetMapping("/juegosPorCategoria")
+    @GetMapping("/respuestosPorCategoria")
     public String mostrarJuegosPorCategoria(@RequestParam(name = "categoriaId", required = false) Long categoriaId, Model model) {
-        List<Repuestos> juegos;
+        List<Repuestos> respuestos;
         if (categoriaId != null) {
-            juegos = juegosService.getJuegosbycate(categoriaId);
+            respuestos = repuestosService.getRepuestosbycategoria(categoriaId);
         } else {
-            juegos = juegosService.getJuegos();
+            respuestos = repuestosService.getRepuestos();
         }
-        model.addAttribute("juegos", juegos);
+        model.addAttribute("respuestos", respuestos);
 
         // Obtener todas las categorías y agregarlas al modelo
         List<Categorias> categorias = categoriaService.getCategorias();
         model.addAttribute("categorias", categorias);
 
-        return "/index"; // Ruta correcta para la vista de juegos
+        return "/index"; // Ruta correcta para la vista de respuestos
     }
 
     
@@ -85,8 +85,8 @@ public class CarritoController {
         Item item2 = itemService.get(item);
         System.out.println(item);
         if (item2 == null) {
-            Repuestos juegos = juegosService.getJuego(item);
-            item2 = new Item(juegos);
+            Repuestos respuestos = repuestosService.getRepuesto(item);
+            item2 = new Item(respuestos);
 
         }
         itemService.save(item2);
@@ -139,8 +139,8 @@ public class CarritoController {
         Item item2 = itemService.get(item);
         System.out.println(item);
         if (item2 == null) {
-            Repuestos juegos = juegosService.getJuego(item);
-            item2 = new Item(juegos);
+            Repuestos respuestos = repuestosService.getRepuesto(item);
+            item2 = new Item(respuestos);
 
         }
         itemService.save(item2);
@@ -162,8 +162,8 @@ public class CarritoController {
         Item item2 = itemService.get(item);
         System.out.println(item);
         if (item2 == null) {
-            Repuestos juegos = juegosService.getJuego(item);
-            item2 = new Item(juegos);
+            Repuestos respuestos = repuestosService.getRepuesto(item);
+            item2 = new Item(respuestos);
 
         }
         itemService.save(item2);

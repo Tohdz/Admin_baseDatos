@@ -13,25 +13,40 @@ public class Repuestos implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_JUEGO")
-    private Long id_juego;
+    @Column(name = "ID_REPUESTO")
+    private Long idRepuesto;
     @Column(name = "IMAGEN")
     private String imagen;
     @Column(name = "NOMBRE")
     private String nombre;
-    @Column(name = "EMPRESA")
-    private String empresa;
+    @Column(name = "ID_MARCA")
+    private Long idMarca;
     @Column(name = "PRECIO")
     private double precio;
-    @Column(name = "EXISTENCIAS")
-    private int existencias;
+    @Column(name = "CANTIDAD")
+    private int cantidad;
+    @Column(name="ID_CATEGORIA")
+    private Long idCategoria;
+    @Column(name="ID_SEDE")
+    private Long idSede;
     @Column(name = "ESTADO")
     private boolean estado;
-    @Column(name="ID_CATEGORIA")
-    private Long idcategoria;
+    
     
 
     public Repuestos() {
+    }
+
+    public Repuestos(Long idRepuesto, String imagen, String nombre, Long idMarca, double precio, int cantidad, Long idCategoria, Long idSede, boolean estado) {
+        this.idRepuesto = idRepuesto;
+        this.imagen = imagen;
+        this.nombre = nombre;
+        this.idMarca = idMarca;
+        this.precio = precio;
+        this.cantidad = cantidad;
+        this.idCategoria = idCategoria;
+        this.idSede = idSede;
+        this.estado = estado;
     }
 
     

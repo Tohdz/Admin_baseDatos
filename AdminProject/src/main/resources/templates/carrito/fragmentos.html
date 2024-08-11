@@ -7,7 +7,7 @@
         <title>TuJuego.com</title>
     </head>
     <body>
-        <section th:fragment="listadoJuegos" id="juegos">
+        <section th:fragment="listadoRepuestos" id="repuestos">
             <div class="container">
                 <div class="card" style="background-color: rgba(0, 0, 0, 0.5);">
                     <div class="container" style="background-color: rgba(0, 0, 0, 0); padding: 10px; text-align: center;">
@@ -17,20 +17,20 @@
                         <div id="resultsBlock"></div>
                     </div>
                 </div>
-                <div class="row row-cols-3" th:if="${juegos != null and !juegos.empty}">
-                    <div class="card" th:each="juego : ${juegos}" style="background-color: rgba(0, 0, 0, 0.5);">
+                <div class="row row-cols-3" th:if="${respuestos != null and !respuestos.empty}">
+                    <div class="card" th:each="repuesto : ${respuestos}" style="background-color: rgba(0, 0, 0, 0.5);">
                         <div class="card-body" style="color: white;">
-                            <h5 class="card-title">[[${juego.nombre}]]</h5>
+                            <h5 class="card-title">[[${repuesto.nombre}]]</h5>
                             <figure style="">
-                                <img th:src="@{${juego.imagen}}" height="200"/>
-                                <figcaption>[[${juego.precio} + ' (' + ${juego.existencias} + ')']]</figcaption>
+                                <img th:src="@{${repuesto.imagen}}" height="200"/>
+                                <figcaption>[[${repuesto.precio} + ' (' + ${repuesto.cantidad} + ')']]</figcaption>
                             </figure>
                             <form>
-                                <input type="hidden" name="id" th:value="${juego.id_juego}"/>
-                                <input type="hidden" name="existencia" th:value="${juego.existencias}"/>
+                                <input type="hidden" name="idRepuesto" th:value="${repuesto.idRepuesto}"/>
+                                <input type="hidden" name="cantidad" th:value="${repuesto.cantidad}"/>
                                 <button style="background-color: rgba(0, 255, 0, 0.5); color: white; "class="btn btn-trasparent" id="addCar" name="addCar" onclick="addCard(this.form)" type="button"><i class="fas fa-cart-plus"></i></button>
                             </form>
-                            <p class="card-text">[[${juego.empresa}]]</p> 
+                            <p class="card-text">[[${repuesto.idMarca}]]</p> 
                         </div>
                     </div>
                 </div>
