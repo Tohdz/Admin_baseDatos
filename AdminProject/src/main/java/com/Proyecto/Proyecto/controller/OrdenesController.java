@@ -62,7 +62,8 @@ public class OrdenesController {
     }
 
     @PostMapping("/guardar")
-    public String ordenGuardar(Ordenes orden) {
+    public String ordenGuardar(@RequestParam(value = "estado", defaultValue = "false") boolean estado,Ordenes orden) {
+        orden.setEstado(estado);
         ordenesService.save(orden);
         return "redirect:/ordenes/listado";
     }
@@ -88,8 +89,8 @@ public class OrdenesController {
     }
 
     @PostMapping("/modificar2")
-    public String ordenModificar2(@RequestParam("idOrden") Long idOrden, @RequestParam("idCita") Long idCita, @RequestParam("fechaHora") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaHora, @RequestParam("comentario") String comentario, @RequestParam("idEmpleado") Long idEmpleado,@RequestParam("idSede") Long idSede) {
-        ordenesService.update(idOrden, idCita, fechaHora, comentario, idEmpleado, idSede);
+    public String ordenModificar2(@RequestParam("idOrden") Long idOrden, @RequestParam("idCita") Long idCita, @RequestParam("fechaHora") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaHora, @RequestParam("comentario") String comentario, @RequestParam("idEmpleado") Long idEmpleado,@RequestParam("idSede") Long idSede,@RequestParam(value = "estado", defaultValue = "false") boolean estado) {
+        ordenesService.update(idOrden, idCita, fechaHora, comentario, idEmpleado, idSede,estado);
         return "redirect:/ordenes/listado";
     }
 }

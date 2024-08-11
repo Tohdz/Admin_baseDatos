@@ -23,7 +23,7 @@ public interface OrdenesService {
     public List<Sedes> getSedesbyState();
     public void save(Ordenes orden);
     public void delete(Ordenes orden);
-    public void update(Long OID, Long CID,LocalDateTime FECH,String COMS,Long EMPID,Long IDSED);
+    public void update(Long OID, Long CID,LocalDateTime FECH,String COMS,Long EMPID,Long IDSED,boolean ACT);
     public List<Citas> getCitas();
     public List<Empleado> getEmpleados();
     public List<Sedes> getSedes();

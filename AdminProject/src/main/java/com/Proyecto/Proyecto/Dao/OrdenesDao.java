@@ -46,6 +46,7 @@ public class OrdenesDao {
                         orden.setComentario(rs.getString("COMENTARIOS"));
                         orden.setIdEmpleado(rs.getLong("ID_EMPLEADO"));
                         orden.setIdSede(rs.getLong("ID_SEDE"));
+                        orden.setEstado(rs.getBoolean("ESTADO"));
                         return orden;
                     }
                 });
@@ -70,6 +71,7 @@ public class OrdenesDao {
                         orden.setComentario(rs.getString("COMENTARIOS"));
                         orden.setIdEmpleado(rs.getLong("ID_EMPLEADO"));
                         orden.setIdSede(rs.getLong("ID_SEDE"));
+                        orden.setEstado(rs.getBoolean("ESTADO"));
                         return orden;
                     }
                 });
@@ -89,7 +91,8 @@ public class OrdenesDao {
                         new SqlParameter("FECH", Types.DATE),
                         new SqlParameter("COMS", Types.VARCHAR),
                         new SqlParameter("EMPID", Types.BIGINT),
-                        new SqlParameter("IDSED", Types.BIGINT)
+                        new SqlParameter("IDSED", Types.BIGINT),
+                        new SqlParameter("ACT", Types.BOOLEAN)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("CID", orden.getIdCita());
@@ -97,6 +100,7 @@ public class OrdenesDao {
         mapSqlParameterSource.addValue("COMS", orden.getComentario());
         mapSqlParameterSource.addValue("EMPID", orden.getIdEmpleado());
         mapSqlParameterSource.addValue("IDSED", orden.getIdSede());
+        mapSqlParameterSource.addValue("ACT", orden.isEstado());
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     
@@ -110,7 +114,7 @@ public class OrdenesDao {
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     
-    public void updateOrden(Long OID, Long CID,LocalDateTime FECH,String COMS,Long EMPID,Long IDSED) {
+    public void updateOrden(Long OID, Long CID,LocalDateTime FECH,String COMS,Long EMPID,Long IDSED,boolean ACT) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ORDENES_TB_UPDATE_ORDEN_SP")
@@ -120,7 +124,8 @@ public class OrdenesDao {
                         new SqlParameter("FECH", Types.DATE),
                         new SqlParameter("COMS", Types.VARCHAR),
                         new SqlParameter("EMPID", Types.BIGINT),
-                        new SqlParameter("IDSED", Types.BIGINT)
+                        new SqlParameter("IDSED", Types.BIGINT),
+                        new SqlParameter("ACT", Types.BOOLEAN)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
        mapSqlParameterSource.addValue("OID", OID);
@@ -129,6 +134,7 @@ public class OrdenesDao {
         mapSqlParameterSource.addValue("COMS", COMS);
         mapSqlParameterSource.addValue("EMPID", EMPID);
         mapSqlParameterSource.addValue("IDSED", IDSED);
+        mapSqlParameterSource.addValue("ACT", ACT);
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     

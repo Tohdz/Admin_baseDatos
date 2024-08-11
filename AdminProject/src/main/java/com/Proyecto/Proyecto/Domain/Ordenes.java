@@ -40,19 +40,21 @@ public class Ordenes implements Serializable {
     private Long idEmpleado;
     @Column(name = "ID_SEDE")
     private Long idSede;
+    @Column(name = "ESTADO")
+    private boolean estado;
 
     public Ordenes() {
     }
 
-    public Ordenes(Long idOrden, Long idCita, LocalDateTime fechaHora, String comentario, Long idEmpleado, Long idSede) {
+    public Ordenes(Long idOrden, Long idCita, LocalDateTime fechaHora, String comentario, Long idEmpleado, Long idSede, boolean estado) {
         this.idOrden = idOrden;
         this.idCita = idCita;
         this.fechaHora = fechaHora;
         this.comentario = comentario;
         this.idEmpleado = idEmpleado;
         this.idSede = idSede;
+        this.estado = estado;
     }
-
 }
 
 

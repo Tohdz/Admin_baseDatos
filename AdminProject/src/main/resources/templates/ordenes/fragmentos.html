@@ -69,6 +69,10 @@
                                                 th:text="${u.nombre}"></option>
                                     </select>
                                 </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="estado" name="estado" />
+                                    <label style="color: white; "class="form-check-label" for="estado">State</label>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="submit" style="background-color: rgba(0, 0, 0, 255); color: white;"class="btn btn-trasparent">[[#{accion.guardar}]]</button>
@@ -99,6 +103,7 @@
                                                 <th>Comments</th>
                                                 <th>Employee</th>
                                                 <th>Workshop</th>
+                                                <th>State</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -110,6 +115,7 @@
                                                 <td style="color: white; "th:text="${orden.comentario}"></td>
                                                 <td style="color: white; "th:text="${empleadosMap[orden.idEmpleado]}"></td>
                                                 <td style="color: white; "th:text="${sedesMap[orden.idSede]}"></td>
+                                                <td style="color: white; "th:text="${orden.estado}"></td>
                                                 <td>
                                                     <div>
                                                         <a th:href="@{/ordenes/eliminar/}+${orden.idOrden}" style="background-color: rgba(255, 0, 0, 0.5); color: white; "class="btn btn-trasparent">
@@ -197,6 +203,10 @@
                                                                     th:value="${u.idSede}"
                                                                     th:text="${u.nombre}"></option>
                                                         </select>
+                                                    </div>
+                                                    <div class="mb-3 form-check">
+                                                        <input type="checkbox" class="form-check-input" id="estado" th:field="*{estado}" name="estado" />
+                                                        <label style="color: black; "class="form-check-label" for="estado">State</label>
                                                     </div>
                                                 </div>
                                             </div>

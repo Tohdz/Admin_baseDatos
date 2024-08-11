@@ -65,8 +65,8 @@ public class OrdenServiceImpl implements OrdenesService {
     }
 
     @Override
-    public void update(Long OID, Long CID, LocalDateTime FECH, String COMS, Long EMPID, Long IDSED) {
-        ordenesDao.updateOrden(OID, CID, FECH, COMS, EMPID, IDSED);
+    public void update(Long OID, Long CID, LocalDateTime FECH, String COMS, Long EMPID, Long IDSED,boolean ACT) {
+        ordenesDao.updateOrden(OID, CID, FECH, COMS, EMPID, IDSED,ACT);
     }
 
     @Override
