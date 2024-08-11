@@ -521,6 +521,60 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ROLES_TB_DELETE_ROL_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE  PROCEDURE FIDE_ROLES_TB_DELETE_ROLBYID_SP (RID IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    DELETE FROM FIDE_ROLES_TB WHERE ID_ROL=RID;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ROLES_TB_DELETE_ROLBYID_SP',SYSDATE, VCOD || ' - '|| VMES );
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ROLES_TB_DELETE_ROLBYID_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Create or replace PROCEDURE FIDE_ROLES_TB_GET_ROLES_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_ROL,NOMBRE,ID_USUARIO FROM FIDE_ROLES_TB;
+EXCEPTION
+     WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ROLES_TB_GET_ROLES_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Create or replace PROCEDURE FIDE_ROLES_TB_GET_ROL_SP (RID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_ROL,NOMBRE,ID_USUARIO FROM FIDE_ROLES_TB WHERE ID_ROL=RID;
+EXCEPTION
+     WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ROLES_TB_GET_ROL_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_ROLES_TB_UPDATE_ROL_SP (RID IN NUMBER,NOMB IN VARCHAR2,USID IN NUMBER) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(500);
+BEGIN
+    UPDATE FIDE_ROLES_TB SET NOMBRE=NOMB,ID_USUARIO=USID WHERE ID_ROL=RID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ROLES_TB_UPDATE_ROL_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*CREATE OR REPLACE PROCEDURE FIDE_USUARIOS_TB_ADD_USUARIO_SP (USID IN NUMBER,UNAME IN VARCHAR2,PASS IN VARCHAR2,UNOM IN VARCHAR2,APELL IN VARCHAR2,CORRE IN VARCHAR2,TEL IN VARCHAR2,IDS IN NUMBER,EST IN NUMBER ) AS
     VCOD NUMBER;
@@ -1788,7 +1842,7 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MARCAS_REPUESTOS_TB_UPDATE_MARCA_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
