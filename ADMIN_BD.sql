@@ -256,6 +256,30 @@ PROFILE:FIDE_PROYECTO_FINAL_PROF*/
             FROM DUAL;
         END IF;
     END;*/
+--------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE SEQUENCE ID_MARCA_REPUESTO_SEQ
+    START WITH 1
+    INCREMENT BY 1
+    NOCACHE
+    NOCYCLE;
+    
+    CREATE TABLE FIDE_MARCAS_REPUESTOS_TB (	
+    ID_MARCA_REPUESTO NUMBER, 
+	NOMBRE VARCHAR2(50)NOT NULL,
+    ESTADO NUMBER(1) NOT NULL,
+    CONSTRAINT MARCAS_ID_MARCA_REPUESTO_PK PRIMARY KEY (ID_MARCA_REPUESTO)USING INDEX (CREATE INDEX MARCAS_ID_MARCA_REPUESTO_IDX ON FIDE_MARCAS_REPUESTOS_TB (ID_MARCA_REPUESTO)),
+    CONSTRAINT MARCAS_REPUESTOS_ESTADO_FK FOREIGN KEY (ESTADO)REFERENCES FIDE_ESTADOS_TB (ESTADO));
+    
+    CREATE OR REPLACE TRIGGER FIDE_ID_MARCA_REPUESTO_TRG
+    BEFORE INSERT ON FIDE_MARCAS_REPUESTOS_TB
+    FOR EACH ROW
+    BEGIN
+        IF :NEW.ID_MARCA_REPUESTO IS NULL THEN
+            SELECT ID_MARCA_REPUESTO_SEQ.NEXTVAL
+            INTO :NEW.ID_MARCA_REPUESTO
+            FROM DUAL;
+        END IF;
+    END;*/
 ------------------------------------------------------------------------------------------------------------------------------------------------
 /*CREATE SEQUENCE ID_MODELO_SEQ
     START WITH 1
@@ -349,7 +373,7 @@ PROFILE:FIDE_PROYECTO_FINAL_PROF*/
     ID_SEDE NUMBER NOT NULL,
     ESTADO NUMBER(1) NOT NULL,
     CONSTRAINT REPUESTOS_ID_REPUESTO_PK PRIMARY KEY (ID_REPUESTO)USING INDEX (CREATE INDEX REPUESTOS_ID_REPUESTO_IDX ON FIDE_REPUESTOS_TB (ID_REPUESTO)),
-    CONSTRAINT REPUESTOS_ID_MARCA_FK FOREIGN KEY (ID_MARCA)REFERENCES FIDE_MARCAS_TB (ID_MARCA),
+    CONSTRAINT REPUESTOS_ID_MARCA_REPUESTO_FK FOREIGN KEY (ID_MARCA)REFERENCES FIDE_MARCAS_REPUESTOS_TB (ID_MARCA_REPUESTO),
     CONSTRAINT REPUESTOS_ID_CATEGORIA_FK FOREIGN KEY (ID_CATEGORIA)REFERENCES FIDE_CATEGORIAS_TB (ID_CATEGORIA),
     CONSTRAINT REPUESTOS_ID_SEDE_FK FOREIGN KEY (ID_SEDE)REFERENCES FIDE_SEDES_TB (ID_SEDE),
     CONSTRAINT REPUESTOS_ESTADO_FK FOREIGN KEY (ESTADO)REFERENCES FIDE_ESTADOS_TB (ESTADO));
@@ -1683,8 +1707,87 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_REPUESTOS_TB_GET_REPUESTOSBYCATEGORIA_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_MARCAS_REPUESTOS_TB_GET_MARCASBYSTATE_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_MARCA_REPUESTO,NOMBRE,ESTADO FROM FIDE_MARCAS_REPUESTOS_TB WHERE ESTADO=1;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MARCAS_REPUESTOS_TB_GET_MARCASBYSTATE_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_MARCAS_REPUESTOS_TB_GET_MARCAS_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_MARCA_REPUESTO,NOMBRE,ESTADO FROM FIDE_MARCAS_REPUESTOS_TB;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MARCAS_REPUESTOS_TB_GET_MARCAS_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_MARCAS_REPUESTOS_TB_GET_MARCA_SP (CID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_MARCA_REPUESTO,NOMBRE,ESTADO FROM FIDE_MARCAS_REPUESTOS_TB WHERE ID_MARCA_REPUESTO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MARCAS_REPUESTOS_TB_GET_MARCA_SP',SYSDATE, VCOD || ' - '|| VMES );
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MARCAS_REPUESTOS_TB_GET_MARCA_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_MARCAS_REPUESTOS_TB_ADD_MARCA_SP (NOM IN VARCHAR2,ACT IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    INSERT INTO FIDE_MARCAS_REPUESTOS_TB (NOMBRE,ESTADO) VALUES (NOM,ACT);
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MARCAS_REPUESTOS_TB_ADD_MARCA_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_MARCAS_REPUESTOS_TB_DELETE_MARCA_SP (CID IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    DELETE FROM FIDE_MARCAS_REPUESTOS_TB WHERE ID_MARCA_REPUESTO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MARCAS_REPUESTOS_TB_DELETE_MARCA_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------
+/*CREATE OR REPLACE PROCEDURE FIDE_MARCAS_REPUESTOS_TB_UPDATE_MARCA_SP (CID IN NUMBER,NOM IN VARCHAR2,ACT IN NUMBER ) AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+    UPDATE FIDE_MARCAS_REPUESTOS_TB SET NOMBRE=NOM,ESTADO = ACT WHERE ID_MARCA_REPUESTO=CID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_MARCAS_REPUESTOS_TB_UPDATE_MARCA_SP',SYSDATE, VCOD || ' - '|| VMES );
+END;*/
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 

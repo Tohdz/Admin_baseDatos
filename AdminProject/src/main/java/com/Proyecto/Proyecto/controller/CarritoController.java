@@ -80,7 +80,7 @@ public class CarritoController {
     }
 
     //Para Agregar un producto al carrito
-    @GetMapping("/carrito/agregar/{id_juego}")
+    @GetMapping("/carrito/agregar/{idRepuesto}")
     public ModelAndView agregarItem(Model model, Item item) {
         Item item2 = itemService.get(item);
         System.out.println(item);
@@ -105,7 +105,7 @@ public class CarritoController {
     }
     //Para mofificar un producto del carrito
 
-    @GetMapping("/carrito/modificar/{id_juego}")
+    @GetMapping("/carrito/modificar/{idRepuesto}")
     public String modificarItem(Item item, Model model) {
         item = itemService.get(item);
         model.addAttribute("item", item);
@@ -113,7 +113,7 @@ public class CarritoController {
     }
     //Para eliminar un elemento del carrito
 
-    @GetMapping("/carrito/eliminar/{id_juego}")
+    @GetMapping("/carrito/eliminar/{idRepuesto}")
     public String eliminarItem(Item item) {
         itemService.delete(item);
         return "redirect:/carrito/listado";
@@ -134,7 +134,7 @@ public class CarritoController {
         return "redirect:/carrito/mensaje";
     }
     
-          @GetMapping("/carrito/sumar/{id_juego}")
+          @GetMapping("/carrito/sumar/{idRepuesto}")
     public String sumar(Model model, Item item) {
         Item item2 = itemService.get(item);
         System.out.println(item);
@@ -157,7 +157,7 @@ public class CarritoController {
         model.addAttribute("carritoTotal", carritoTotalVenta);
         return "redirect:/carrito/listado";
     }
-    @GetMapping("/carrito/restar/{id_juego}")
+    @GetMapping("/carrito/restar/{idRepuesto}")
     public String restar(Model model, Item item) {
         Item item2 = itemService.get(item);
         System.out.println(item);

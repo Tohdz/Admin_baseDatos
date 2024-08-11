@@ -25,7 +25,7 @@
                                 <img th:src="@{${repuesto.imagen}}" height="200"/>
                                 <figcaption>[[${repuesto.precio} + ' (' + ${repuesto.cantidad} + ')']]</figcaption>
                             </figure>
-                            <form>
+                            <form> 
                                 <input type="hidden" name="idRepuesto" th:value="${repuesto.idRepuesto}"/>
                                 <input type="hidden" name="cantidad" th:value="${repuesto.cantidad}"/>
                                 <button style="background-color: rgba(0, 255, 0, 0.5); color: white; "class="btn btn-trasparent" id="addCar" name="addCar" onclick="addCard(this.form)" type="button"><i class="fas fa-cart-plus"></i></button>
@@ -72,7 +72,7 @@
                                             <td class="text-center"  style="color: white;">[[${item.cantidad}]]</td>
                                             <td class="text-center"  style="color: white;">[[${item.cantidad*item.precio}]]</td>
                                             <td>
-                                                <a th:href="@{/carrito/eliminar/}+${item.id_juego}" class="btn btn-danger">
+                                                <a th:href="@{/carrito/eliminar/}+${item.idRepuesto}" class="btn btn-danger">
                                                     <i class='fas fa-trash'></i><span th:text="#{accion.eliminar}"></span>
                                                 </a>
                                             </td>
