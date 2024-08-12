@@ -142,9 +142,9 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_VEHICULOS_TB_DELETE_VEHICULO_SP")
-                .declareParameters(new SqlParameter("PLACA", Types.VARCHAR));
+                .declareParameters(new SqlParameter("PLAC", Types.VARCHAR));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("PLACA", PLACA);
+        mapSqlParameterSource.addValue("PLAC", PLACA);
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     

@@ -6,7 +6,7 @@
     <body>
         <!-- Sección para crear el botón de agregar... llamará a una ventana modal -->
         <section th:fragment="BotonAgregar" class="py-4 mb-4">
-            <div class="container" sec:authorize="hasRole('ROLE_ADMIN')">
+            <div class="container" sec:authorize="hasRole('ROLE_USER')">
                 <div class="row">
                     <div class="col-md-3">
                         <button type="button" style="background-color: rgba(0, 255, 255, 0.7); color: white; "class="btn btn-trasparent btn-block" data-bs-toggle="modal" data-bs-target="#ModalAgregar">
@@ -26,7 +26,7 @@
                             <h5 class="modal-title">New Appointment</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form th:action="@{/citas/guardar}" method="POST" class="was-validated" enctype="multipart/form-data">
+                        <form th:action="@{/clientscitas/guardar}" method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="placa">Register Plate</label>
@@ -55,17 +55,6 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="idEmpleado">Employee</label>
-                                    <select class="form-select" 
-                                            name="idEmpleado"
-                                            required="true">
-                                        <option value="" disabled selected>Select Employee</option>
-                                        <option th:each="s : ${empleados}" 
-                                                th:value="${s.idEmpleado}"
-                                                th:text="${s.nombre}"></option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
                                     <label for="idSede">Workshops</label>
                                     <select class="form-select" 
                                             name="idSede"
@@ -75,10 +64,6 @@
                                                 th:value="${u.idSede}"
                                                 th:text="${u.nombre}"></option>
                                     </select>
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="estado" name="estado"/>
-                                    <label style="color: white; "class="form-check-label" for="estado">State</label>
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -97,7 +82,7 @@
                     <div class="col-md-12">
                         <div class="card" style="background-color: rgba(0, 0, 0, 0.5); color: white;">
                             <div class="card-header">
-                                <h4>Appointments</h4>
+                                <h4>Active Appointments</h4>
                             </div>
                             <div class="card-body">
                                 <div th:if="${citas != null and not #lists.isEmpty(citas)}" class="table-responsive">
@@ -108,9 +93,7 @@
                                                 <th>Registration Plate</th>
                                                 <th>Date</th>
                                                 <th>Service</th>
-                                                <th>Employee</th>
                                                 <th>Workshop</th>
-                                                <th>State</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -120,15 +103,13 @@
                                                 <td style="color: white; "th:text="${cita.placa}"</td>
                                                 <td style="color: white; "th:text="${cita.fechaHora}"</td>
                                                 <td style="color: white; "th:text="${serviciosMap[cita.idServicio]}"></td>
-                                                <td style="color: white; "th:text="${empleadosMap[cita.idEmpleado]}"></td>
                                                 <td style="color: white; "th:text="${sedesMap[cita.idSede]}"></td>
-                                                <td style="color: white; "th:text="${cita.estado}"></td>
                                                 <td>
                                                     <div>
-                                                        <a th:href="@{/citas/eliminar/}+${cita.idCita}" style="background-color: rgba(255, 0, 0, 0.5); color: white; "class="btn btn-trasparent">
+                                                        <a th:href="@{/clientscitas/eliminar/}+${cita.idCita}" style="background-color: rgba(255, 0, 0, 0.5); color: white; "class="btn btn-trasparent">
                                                             <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                                                         </a>
-                                                        <a th:href="@{/citas/modificar/}+${cita.idCita}" style="background-color: rgba(0, 255, 0, 0.5); color: white; "class="btn btn-trasparent">
+                                                        <a th:href="@{/clientscitas/modificar/}+${cita.idCita}" style="background-color: rgba(0, 255, 0, 0.5); color: white; "class="btn btn-trasparent">
                                                             <i class="fas fa-pencil"></i> [[#{accion.actualizar}]]
                                                         </a>
                                                     </div>
@@ -152,12 +133,12 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <form method="POST"
-                              th:action="@{/citas/modificar2}" 
+                              th:action="@{/clientscitas/modificar2}" 
                               th:object="${cita}"
                               class="was-validated"                          
                               enctype="multipart/form-data">
                             <input type="hidden" name="idCita" th:field="*{idCita}"/>
-                            <section th:replace="~{citas/fragmentos :: BotonesModificar}"/>
+                            <section th:replace="~{clientscitas/fragmentos :: BotonesModificar}"/>
                             <div id=details>
                                 <div class="container">
                                     <div class="row">
@@ -196,18 +177,6 @@
                                                         </select>
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="idEmpleado">Employee</label>
-                                                        <select class="form-select" 
-                                                                name="idEmpleado"
-                                                                th:field="*{idEmpleado}"
-                                                                required="true">
-                                                            <option value="" disabled selected>Select Employee</option>
-                                                            <option th:each="e : ${empleados}" 
-                                                                    th:value="${e.idEmpleado}"
-                                                                    th:text="${e.nombre}"></option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
                                                         <label for="idSede">Workshops</label>
                                                         <select class="form-select" 
                                                                 name="idSede"
@@ -218,10 +187,6 @@
                                                                     th:value="${s.idSede}"
                                                                     th:text="${s.nombre}"></option>
                                                         </select>
-                                                    </div>
-                                                    <div class="mb-3 form-check">
-                                                        <input type="checkbox" class="form-check-input" id="estado" name="estado" th:field="*{estado}"/>
-                                                        <label style="color: black; "class="form-check-label" for="estado">State</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,12 +205,12 @@
             <div class="container py-4 mb-4">
                 <div class="row">
                     <div class="col-md-4 d-grid">
-                        <a th:href="@{/citas/listado}" class="btn btn-primary">
+                        <a th:href="@{/clientscitas/listado}" class="btn btn-primary">
                             <i class="fas fa-arrow-left"></i>
                         </a>
                     </div>
                     <div class="col-md-4 d-grid">                                
-                        <a th:href="@{/citas/eliminar/}+${cita.idCita}"
+                        <a th:href="@{/clientscitas/eliminar/}+${cita.idCita}"
                            class="btn btn-danger">
                             <i class="fas fa-trash"></i>
                         </a>

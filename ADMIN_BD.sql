@@ -1449,6 +1449,19 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_GET_VEHICULOSBYSTATE_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_VEHICULOS_TB_GET_VEHICULOSBYUSERANDSTATE_SP (USID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT PLACA,ID_MARCA,ID_MODELO,ID_TIPO,ANO,ID_SEDE,ID_USUARIO,ESTADO FROM FIDE_VEHICULOS_TB WHERE ID_USUARIO=USID AND ESTADO=1;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_GET_VEHICULOSBYUSERANDSTATE_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*create or replace PROCEDURE FIDE_VEHICULOS_TB_GET_VEHICULO_SP (PLACA IN VARCHAR2,DATOS OUT SYS_REFCURSOR)
  AS
@@ -1479,11 +1492,20 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_ADD_VEHICULO_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 --------------------------------------------------------------------------------------------------------------------------------------
-/*CREATE OR REPLACE PROCEDURE FIDE_VEHICULOS_TB_DELETE_VEHICULO_SP (PLACA IN VARCHAR2) AS
+/*CREATE OR REPLACE PROCEDURE FIDE_VEHICULOS_TB_DELETE_VEHICULO_SP (PLAC IN VARCHAR2) AS
     VCOD NUMBER;
     VMES VARCHAR2(1024);
+    v_count INTEGER;
 BEGIN
-    DELETE FROM FIDE_VEHICULOS_TB WHERE PLACA=PLACA;
+    SELECT COUNT(*)
+    INTO v_count
+    FROM FIDE_CITAS_TB
+    WHERE PLACA = PLAC AND ESTADO=1;
+    IF v_count > 0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'El vehículo tiene citas asociadas y no se puede eliminar.');
+    ELSE
+       DELETE FROM FIDE_VEHICULOS_TB WHERE PLACA=PLAC;
+    END IF;
 EXCEPTION
     WHEN VALUE_ERROR THEN
         VMES := SQLERRM;
@@ -1515,6 +1537,20 @@ EXCEPTION
         VMES := SQLERRM;
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CITAS_TB_GET_CITAS_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_CITAS_TB_GET_CITASBYUSER_SP (USID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_CITA,PLACA,FECHA,ID_SERVICIO,ID_EMPLEADO,ID_SEDE,ESTADO FROM FIDE_CITAS_TB 
+   WHERE ESTADO=1 AND PLACA in (SELECT PLACA FROM FIDE_VEHICULOS_TB WHERE ID_USUARIO=USID);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CITAS_TB_GET_CITASBYUSER_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
  -----------------------------------------------------------------------------------------------------------------------------------------------------------------
  /*create or replace PROCEDURE FIDE_CITAS_TB_GET_CITASBYSTATE_SP (DATOS OUT SYS_REFCURSOR)

@@ -9,6 +9,7 @@ import com.Proyecto.Proyecto.Domain.Citas;
 import com.Proyecto.Proyecto.Domain.Empleado;
 import com.Proyecto.Proyecto.Domain.Sedes;
 import com.Proyecto.Proyecto.Domain.Servicios;
+import com.Proyecto.Proyecto.Domain.Usuario;
 import com.Proyecto.Proyecto.Domain.Vehiculos;
 import com.Proyecto.Proyecto.Service.CitasService;
 import java.time.LocalDateTime;
@@ -92,6 +93,23 @@ public class CitasServiceImpl implements CitasService{
     @Override
     public List<Sedes> getSedes() {
         var lista = citasDao.getSedes();
+        return lista;
+    }
+
+    @Override
+    public List<Vehiculos> getVehiculosbyuserandstate(Long id) {
+        var lista = citasDao.getVehiculosbyuserandstate(id);
+        return lista;
+    }
+
+    @Override
+    public Usuario getUsuariosbyUsername(String UNAME) {
+        return citasDao.getUsuariobyUsername(UNAME);
+    }
+
+    @Override
+    public List<Citas> getCitasbyuser(Long id) {
+        var lista = citasDao.getCitasbyuser(id);
         return lista;
     }
     
