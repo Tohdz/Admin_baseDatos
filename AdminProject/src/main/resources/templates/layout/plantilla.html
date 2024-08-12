@@ -32,12 +32,17 @@
             <nav class="navbar navbar-expand-sm navbar-dark  p-0" style="background-color: rgba(0,0,0,0.5); color: white;">
                 <div class="container d-flex justify-content-between align-items-center">
                     <!-- Logo -->
-                    <div class="col-md-6 d-flex align-items-center">
+                    <div class="col-md-1 d-flex align-items-center">
                         <a th:href="@{/}">
                             <img src="/images/hhernan.png" alt="Logo" class="img-fluid" style="max-height: 80px;" /> 
                         </a>
                     </div>
                     <!-- Menú de navegación -->
+                    <div class="col-md-3 d-flex align-items-center">
+                        <a class="nav-link fs-5 me-3" th:href="@{/clientsvehicles/listado}">Vehicles</a>
+                        <a class="nav-link fs-5 me-3" th:href="@{/nosotros}">Services</a>
+                        <a class="nav-link fs-5 me-3" th:href="@{/nosotros}">Appointments</a>
+                    </div>
                     <div class="d-flex">
                         <a class="nav-link fs-5 me-3" th:href="@{/nosotros}">About us</a>
                         <!-- Carrito de compras -->
@@ -53,8 +58,8 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" th:href="@{/categoria/categorias}" sec:authorize="hasRole('ROLE_ADMIN')">Categories</a></li>
                                 <li><a class="dropdown-item" th:href="@{/marcarepuestos/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Spare Brands</a></li>
-                                <li><a class="dropdown-item" th:href="@{/repuestos/listado}">Spare Parts</a></li>
-                                <li><a class="dropdown-item" th:href="@{/roles/listado}">Roles</a></li>
+                                <li><a class="dropdown-item" th:href="@{/repuestos/listado}"sec:authorize="hasRole('ROLE_ADMIN')">Spare Parts</a></li>
+                                <li><a class="dropdown-item" th:href="@{/roles/listado}"sec:authorize="hasRole('ROLE_ADMIN')">Roles</a></li>
                                 <li><a class="dropdown-item" th:href="@{/usuario/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Users</a></li>
                                 <li><a class="dropdown-item" th:href="@{/sedes/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Workshops</a></li>
                                 <li><a class="dropdown-item" th:href="@{/servicios/listado}" sec:authorize="hasRole('ROLE_ADMIN')">Services</a></li>

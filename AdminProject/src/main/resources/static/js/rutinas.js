@@ -42,3 +42,20 @@ function updateModels(idMarca) {
                 });
     }
 }
+
+function updateCliModels(idMarca) {
+    var modeloSelect = document.getElementById('idModelo');
+    modeloSelect.innerHTML = '<option value="">Select Model</option>';
+    if (idMarca) {
+        fetch('/clientsvehicles/getModelos?idMarca=' + idMarca)
+                .then(response => response.json())
+                .then(modelos => {
+                    modelos.forEach(modelo => {
+                        var option = document.createElement('option');
+                        option.value = modelo.idModelo;
+                        option.text = modelo.nombre;
+                        modeloSelect.add(option);
+                    });
+                });
+    }
+}

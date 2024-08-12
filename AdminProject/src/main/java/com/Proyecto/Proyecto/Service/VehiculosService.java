@@ -19,11 +19,13 @@ import java.util.List;
 public interface VehiculosService {
     public Vehiculos getVehiculo(Vehiculos vehiculo);
     public List<Vehiculos> getVehiculos();
+    public List<Vehiculos> getVehiculosbyUser(Long id);
     public List<Marcas> getMarcasbyState();
     public List<Modelos> getModelosbyMarca(Long MID);
     public List<Tipos> getTiposbyState();
     public List<Sedes> getSedesbyState();
     public List<Usuario> getUsuariosbyState();
+    public Usuario getUsuariosbyUsername(String UNAME);
     public void save(Vehiculos vehiculo);
     public void delete(Vehiculos vehiculo);
     public void update(String plac,Long mid,Long idm,Long tid,int ano,Long ids,Long usid,boolean act);

@@ -111,5 +111,16 @@ public class VehiculoServiceImpl implements VehiculosService{
         var lista = vehiculosDao.getUsuarios();
         return lista;
     }
+
+    @Override
+    public List<Vehiculos> getVehiculosbyUser(Long id) {
+        var lista = vehiculosDao.getVehiculosbyUser(id);
+        return lista;
+    }
+
+    @Override
+    public Usuario getUsuariosbyUsername(String UNAME) {
+        return vehiculosDao.getUsuariobyUsername(UNAME);
+    }
     
 }
