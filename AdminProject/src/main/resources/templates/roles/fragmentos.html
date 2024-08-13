@@ -23,17 +23,22 @@
                 <div class="modal-dialog modal-md">
                     <div class="modal-content" style="background-color: rgba(81, 30, 164, 0.7); color: white;">
                         <div class="modal-header bg-black text-white">
-                            <h5 class="modal-title">New Job Title</h5>
+                            <h5 class="modal-title">New Role</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form th:action="@{/roles/guardar}" method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="nombre">Name</label>
-                                    <input type="text" class="form-control" name="nombre" required="true" />
+                                    <select class="form-select" name="nombre" required="true">
+                                        <option value="" disabled selected>Select Rol Name</option>
+                                        <option th:each="role : ${rols}" 
+                                                th:value="${role}"
+                                                th:text="${role}"></option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="idUsuario">Category</label>
+                                    <label for="idUsuario">User</label>
                                     <select class="form-select" 
                                             name="idUsuario"
                                             required="true">
@@ -60,7 +65,7 @@
                     <div class="col-md-12">
                         <div class="card" style="background-color: rgba(0, 0, 0, 0.5); color: white;">
                             <div class="card-header">
-                                <h4>Job Titles</h4>
+                                <h4>Roles</h4>
                             </div>
                             <div class="card-body">
                                 <div th:if="${roles != null and not #lists.isEmpty(roles)}" class="table-responsive">
@@ -119,14 +124,17 @@
                                         <div class="col">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <h4>Update Job Title</h4>
+                                                    <h4>Update Role</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="mb-3">
                                                         <label for="nombre">Name</label>
-                                                        <input type="text" class="form-control" 
-                                                               name="nombre" th:field="*{nombre}"
-                                                               required="true">
+                                                        <select class="form-select" name="nombre" th:field="*{nombre}" required="true">
+                                                            <option value="" disabled selected>Select Role Name</option>
+                                                            <option th:each="role : ${rols}" 
+                                                                    th:value="${role}"
+                                                                    th:text="${role}"></option>
+                                                        </select>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="idUsuario">Category</label>

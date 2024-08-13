@@ -7,6 +7,7 @@ package com.Proyecto.Proyecto.controller;
 import com.Proyecto.Proyecto.Domain.Rol;
 import com.Proyecto.Proyecto.Domain.Usuario;
 import com.Proyecto.Proyecto.Service.RolService;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,6 +38,11 @@ public class RolController {
         List<Usuario> usuarios = rolService.getUsuariobyState();
         model.addAttribute("usuarios", usuarios);
         //
+        List<String> rols = Arrays.asList("ROLE_ADMIN", "ROLE_USER", "ROLE_MEC", "ROLE_ADMIDS", "ROLE_CASH");
+        model.addAttribute("rols", rols);
+        //
+        
+        //
         List<Usuario> usuarios2 = rolService.getUsuarios();
         Map<Long, String> usuariosMap = usuarios2.stream()
                 .collect(Collectors.toMap(Usuario::getIdUsuario, Usuario::getUsername));
@@ -63,6 +69,8 @@ public class RolController {
         model.addAttribute("rol", rol);
         List<Usuario> usuarios = rolService.getUsuariobyState();
         model.addAttribute("usuarios", usuarios);
+        List<String> rols = Arrays.asList("ROLE_ADMIN", "ROLE_USER", "ROLE_MEC", "ROLE_ADMIDS", "ROLE_CASH");
+        model.addAttribute("rols", rols);
         return "/roles/modifica";
     }
 

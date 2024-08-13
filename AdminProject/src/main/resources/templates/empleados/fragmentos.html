@@ -41,6 +41,10 @@
                                     <input type="text" class="form-control" name="telefono" required="true" />
                                 </div>
                                 <div class="mb-3">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" name="username" required="true" />
+                                </div>
+                                <div class="mb-3">
                                     <label for="correo">Mail</label>
                                     <input type="text" class="form-control" name="correo" required="true" />
                                 </div>
@@ -106,6 +110,7 @@
                                                 <th>Firstname</th>
                                                 <th>Lastname</th>
                                                 <th>Phone</th>
+                                                <th>Username</th>
                                                 <th>Mail</th>
                                                 <th>Hiredate</th>
                                                 <th>Salary</th>
@@ -121,6 +126,7 @@
                                                 <td style="color: white; "th:text="${empleado.nombre}"</td>
                                                 <td style="color: white; "th:text="${empleado.apellido}"</td>
                                                 <td style="color: white; "th:text="${empleado.telefono}"></td>
+                                                <td style="color: white; "th:text="${empleado.username}"></td>
                                                 <td style="color: white; "th:text="${empleado.correo}"></td>
                                                 <td style="color: white; "th:text="${empleado.fecha}"></td>
                                                 <td style="color: white; "th:text="${empleado.salario}"></td>
@@ -182,6 +188,10 @@
                                                     <div class="mb-3">
                                                         <label for="telefono">Phone</label>
                                                         <input type="text" class="form-control" name="telefono" th:field="*{telefono}" required="true" />
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="username">Username</label>
+                                                        <input type="text" class="form-control" name="username" th:field="*{username}" required="true" />
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="correo">Mail</label>

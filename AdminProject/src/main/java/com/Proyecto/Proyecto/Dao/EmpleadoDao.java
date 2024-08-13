@@ -49,6 +49,7 @@ public class EmpleadoDao {
                         empleado.setIdPuesto(rs.getLong("ID_PUESTO"));
                         empleado.setIdSede(rs.getLong("ID_SEDE"));
                         empleado.setEstado(rs.getBoolean("ESTADO"));
+                        empleado.setUsername(rs.getString("USERNAME"));
                         return empleado;
                     }
                 });
@@ -56,6 +57,36 @@ public class EmpleadoDao {
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
         List<Empleado> empleadoList = (List<Empleado>) results.get("DATOS");
         return empleadoList;
+    }
+    
+    public Empleado getEmpleadosbyusername(String name) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_EMPLEADOS_TB_GET_EMPLEADOSBYUSERNAME_SP")
+                .declareParameters(new SqlParameter("UNAME", Types.VARCHAR),new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Empleado>() {
+                    @Override
+                    public Empleado mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Empleado empleado = new Empleado();
+                        empleado.setIdEmpleado(rs.getLong("ID_EMPLEADO"));
+                        empleado.setNombre(rs.getString("NOMBRE"));
+                        empleado.setApellido(rs.getString("APELLIDO"));
+                        empleado.setTelefono(rs.getString("TELEFONO"));
+                        empleado.setCorreo(rs.getString("CORREO"));
+                        empleado.setFecha(rs.getDate("FECHA_CONTRATO"));
+                        empleado.setSalario(rs.getString("SALARIO"));
+                        empleado.setIdPuesto(rs.getLong("ID_PUESTO"));
+                        empleado.setIdSede(rs.getLong("ID_SEDE"));
+                        empleado.setEstado(rs.getBoolean("ESTADO"));
+                        empleado.setUsername(rs.getString("USERNAME"));
+                        return empleado;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("UNAME", name);
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Empleado> empleadoList = (List<Empleado>) results.get("DATOS");
+        return empleadoList.isEmpty() ? null : empleadoList.get(0);
     }
 
     public Empleado getOneEmpleado(Long id) {
@@ -77,6 +108,7 @@ public class EmpleadoDao {
                         empleado.setIdPuesto(rs.getLong("ID_PUESTO"));
                         empleado.setIdSede(rs.getLong("ID_SEDE"));
                         empleado.setEstado(rs.getBoolean("ESTADO"));
+                        empleado.setUsername(rs.getString("USERNAME"));
                         return empleado;
                     }
                 });
@@ -100,7 +132,8 @@ public class EmpleadoDao {
                         new SqlParameter("SAL", Types.VARCHAR),
                         new SqlParameter("IDP", Types.BIGINT),
                         new SqlParameter("IDS", Types.BIGINT),
-                        new SqlParameter("ACT", Types.BOOLEAN)
+                        new SqlParameter("ACT", Types.BOOLEAN),
+                        new SqlParameter("UNAME", Types.VARCHAR)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("NOM", empleado.getNombre());
@@ -112,6 +145,7 @@ public class EmpleadoDao {
         mapSqlParameterSource.addValue("IDP", empleado.getIdPuesto());
         mapSqlParameterSource.addValue("IDS", empleado.getIdSede());
         mapSqlParameterSource.addValue("ACT", empleado.isEstado());
+        mapSqlParameterSource.addValue("UNAME", empleado.getUsername());
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     
@@ -125,7 +159,7 @@ public class EmpleadoDao {
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     
-    public void updateEmpleado(Long EID,String NOM,String APE,String TEL,String CORRE,Date FECH,String SAL,Long IDP,Long IDS,boolean ACT) {
+    public void updateEmpleado(Long EID,String NOM,String APE,String TEL,String CORRE,Date FECH,String SAL,Long IDP,Long IDS,boolean ACT,String UNAME) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_EMPLEADOS_TB_UPDATE_EMPLEADO_SP")
@@ -139,7 +173,8 @@ public class EmpleadoDao {
                         new SqlParameter("SAL", Types.VARCHAR),
                         new SqlParameter("IDP", Types.BIGINT),
                         new SqlParameter("IDS", Types.BIGINT),
-                        new SqlParameter("ACT", Types.BOOLEAN)
+                        new SqlParameter("ACT", Types.BOOLEAN),
+                        new SqlParameter("UNAME", Types.VARCHAR)
                 );
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
        mapSqlParameterSource.addValue("EID", EID);
@@ -152,6 +187,7 @@ public class EmpleadoDao {
         mapSqlParameterSource.addValue("IDP", IDP);
         mapSqlParameterSource.addValue("IDS", IDS);
         mapSqlParameterSource.addValue("ACT", ACT);
+        mapSqlParameterSource.addValue("UNAME", UNAME);
         simpleJdbcCall.execute(mapSqlParameterSource);
     }
     

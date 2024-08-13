@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 import lombok.Data;
 
 @Entity
@@ -25,4 +27,6 @@ public class Rol implements Serializable {
     
     @Column(name = "ID_USUARIO")
     private Long idUsuario;
+    
+  
 }

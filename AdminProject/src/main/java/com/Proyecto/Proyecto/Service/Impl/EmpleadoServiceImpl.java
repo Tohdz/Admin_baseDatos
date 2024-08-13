@@ -58,8 +58,8 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     }
 
     @Override
-    public void update(Long EID, String NOM, String APE, String TEL, String CORRE, Date FECH, String SAL, Long IDP, Long IDS, boolean ACT) {
-        empleadoDao.updateEmpleado(EID, NOM, APE, TEL, CORRE, FECH, SAL, IDP, IDS, ACT);
+    public void update(Long EID, String NOM, String APE, String TEL, String CORRE, Date FECH, String SAL, Long IDP, Long IDS, boolean ACT,String UNAME) {
+        empleadoDao.updateEmpleado(EID, NOM, APE, TEL, CORRE, FECH, SAL, IDP, IDS, ACT, UNAME);
     }
 
     @Override
@@ -72,5 +72,10 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     public List<Sedes> getSedesbyState() {
         var lista = empleadoDao.getSedesbyState();
         return lista;
+    }
+
+    @Override
+    public Empleado getEmpleadobyusername(String name) {
+        return empleadoDao.getEmpleadosbyusername(name);
     }
 }

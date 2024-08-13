@@ -394,4 +394,29 @@ public class CitasDao {
         List<Usuario> usuarioList = (List<Usuario>) results.get("DATOS");
         return usuarioList.isEmpty() ? null : usuarioList.get(0);
     }
+    
+    public List<Citas> getCitasbyState() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_CITAS_TB_GET_CITASBYSTATE_SP")
+                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Citas>() {
+                    @Override
+                    public Citas mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Citas cita = new Citas();
+                        cita.setIdCita(rs.getLong("ID_CITA"));
+                        cita.setPlaca(rs.getString("PLACA"));
+                        cita.setFechaHora(rs.getObject("FECHA", LocalDateTime.class));
+                        cita.setIdServicio(rs.getLong("ID_SERVICIO"));
+                        cita.setIdEmpleado(rs.getLong("ID_EMPLEADO"));
+                        cita.setIdSede(rs.getLong("ID_SEDE"));
+                        cita.setEstado(rs.getBoolean("ESTADO"));
+                        return cita;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Citas> citaList = (List<Citas>) results.get("DATOS");
+        return citaList;
+    }
 }

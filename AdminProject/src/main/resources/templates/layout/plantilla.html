@@ -38,12 +38,29 @@
                         </a>
                     </div>
                     <!-- Menú de navegación -->
+                    <div class="dropdown d-flex me-3 col-md-1">
+                            <a class="nav-link fs-5 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" sec:authorize="hasRole('ROLE_ADMIDS')">
+                                [[#{plantilla.admin}]]
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Vehicles</a></li>
+                                <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Users</a></li>
+                                <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Appointments</a></li>
+                                <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Orders</a></li>
+                            </ul>
+                        </div>
+                    <div class="col-md-1 d-flex align-items-center">
+                        <a class="nav-link fs-5 me-3" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_CASH')">Invoices</a>  
+                    </div>
+                    <div class="col-md-1 d-flex align-items-center">
+                        <a class="nav-link fs-5 me-3" th:href="@{/mecanicos/listado}" sec:authorize="hasRole('ROLE_MEC')">Orders</a>  
+                    </div>
                     <div class="col-md-3 d-flex align-items-center">
                         <a class="nav-link fs-5 me-3" th:href="@{/clientsvehicles/listado}" sec:authorize="hasRole('ROLE_USER')">Vehicles</a>
                         <a class="nav-link fs-5 me-3" th:href="@{/clientscitas/listado}" sec:authorize="hasRole('ROLE_USER')">Appointments</a>
                         <a class="nav-link fs-5 me-3" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Services</a>  
                     </div>
-                    <div class="d-flex">
+                    <div class="d-flex col-md-1 align-items-center">
                         <a class="nav-link fs-5 me-3" th:href="@{/nosotros}">About us</a>
                         <!-- Carrito de compras -->
                         <div>
@@ -51,7 +68,7 @@
                                 <i class="fas fa-shopping-cart"></i> <!-- Ícono de carrito -->
                             </a>
                         </div>
-                        <div class="dropdown me-3">
+                        <div class="dropdown col-md-1">
                             <a class="nav-link fs-5 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" sec:authorize="hasRole('ROLE_ADMIN')">
                                 [[#{plantilla.admin}]]
                             </a>

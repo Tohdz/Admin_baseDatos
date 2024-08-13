@@ -63,9 +63,12 @@ public class ProjectConfig implements WebMvcConfigurer {
     }
 
     @Bean
-     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {http.authorizeHttpRequests((request) -> request.requestMatchers("/", "/index","/mensaje", "/errores/**", "/js/**", "/css/**","/images/**", "/webjars/**","/registro/**","/nosotros","/newproducts/**", "/juego/**" , "/repuestosPorCategoria").permitAll()
-                 .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**").hasRole("USER")
-                 .requestMatchers("/roles/**","/repuestos/**","/categoria/**","/usuario/**","/sedes/**","/servicios/**","/tipos/**","/puestos/**","/marcas/**","/modelos/**","/empleados/**","/vehiculos/**","/citas/**","/ordenes/**","/marcarepuestos/**").hasRole("ADMIN")).formLogin((form) -> form.loginPage("/login").permitAll()).logout((logout) -> logout.permitAll());
+     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {http.authorizeHttpRequests((request) -> request
+             .requestMatchers("/", "/index","/mensaje", "/errores/**", "/js/**", "/css/**","/images/**", "/webjars/**","/registro/**","/nosotros","/newproducts/**", "/juego/**" , "/repuestosPorCategoria").permitAll()
+             .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**","/mecanicos/**").hasRole("MEC")
+             .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**").hasRole("USER")
+             .requestMatchers("/roles/**","/repuestos/**","/categoria/**","/usuario/**","/sedes/**","/servicios/**","/tipos/**","/puestos/**","/marcas/**","/modelos/**","/empleados/**","/vehiculos/**","/citas/**","/ordenes/**","/marcarepuestos/**").hasRole("ADMIN")
+     ).formLogin((form) -> form.loginPage("/login").permitAll()).logout((logout) -> logout.permitAll());
          return http.build();
      }
     

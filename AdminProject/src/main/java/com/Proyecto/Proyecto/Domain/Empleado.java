@@ -48,13 +48,15 @@ public class Empleado implements Serializable {
     private Long idPuesto;
     @Column(name = "ID_SEDE")
     private Long idSede;
+    @Column(name = "USERNAME")
+    private String username;
     @Column(name = "ESTADO")
     private boolean estado;
 
     public Empleado() {
     }
 
-    public Empleado(Long idEmpleado, String nombre, String apellido, String telefono, String correo, Date fecha, String salario, Long idPuesto, Long idSede, boolean estado) {
+    public Empleado(Long idEmpleado, String nombre, String apellido, String telefono, String correo, Date fecha, String salario, Long idPuesto, Long idSede, String username, boolean estado) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -64,8 +66,11 @@ public class Empleado implements Serializable {
         this.salario = salario;
         this.idPuesto = idPuesto;
         this.idSede = idSede;
+        this.username = username;
         this.estado = estado;
     }
+
+    
     
     
 }

@@ -112,5 +112,16 @@ public class CitasServiceImpl implements CitasService{
         var lista = citasDao.getCitasbyuser(id);
         return lista;
     }
+
+    @Override
+    public List<Citas> getCitasbyState() {
+        var lista = citasDao.getCitasbyState();
+        return lista;
+    }
+
+    @Override
+    public Citas getCitaid(Long id) {
+        return citasDao.getCita(id);
+    }
     
 }

@@ -84,8 +84,8 @@ public class EmpleadoController {
     }
 
     @PostMapping("/modificar2")
-    public String empleadoModificar2(@RequestParam("idEmpleado") Long idEmpleado, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido, @RequestParam("telefono") String telefono, @RequestParam("correo") String correo, @RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam("salario") String salario, @RequestParam("idPuesto") Long idPuesto, @RequestParam("idSede") Long idSede, @RequestParam(value = "estado", defaultValue = "false") boolean estado) {
-        empleadoService.update(idEmpleado, nombre, apellido, telefono, correo, fecha, salario, idPuesto, idSede, estado);
+    public String empleadoModificar2(@RequestParam("idEmpleado") Long idEmpleado, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido, @RequestParam("telefono") String telefono, @RequestParam("correo") String correo, @RequestParam("fecha") @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha, @RequestParam("salario") String salario, @RequestParam("idPuesto") Long idPuesto, @RequestParam("idSede") Long idSede, @RequestParam(value = "estado", defaultValue = "false") boolean estado,@RequestParam("username") String username) {
+        empleadoService.update(idEmpleado, nombre, apellido, telefono, correo, fecha, salario, idPuesto, idSede, estado,username);
         return "redirect:/empleados/listado";
     }
 }
