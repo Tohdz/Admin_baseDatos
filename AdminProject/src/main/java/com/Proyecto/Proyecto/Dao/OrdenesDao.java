@@ -8,6 +8,7 @@ import com.Proyecto.Proyecto.Domain.Citas;
 import com.Proyecto.Proyecto.Domain.Empleado;
 import com.Proyecto.Proyecto.Domain.Ordenes;
 import com.Proyecto.Proyecto.Domain.Sedes;
+import com.Proyecto.Proyecto.Domain.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -51,6 +52,32 @@ public class OrdenesDao {
                     }
                 });
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Ordenes> ordenList = (List<Ordenes>) results.get("DATOS");
+        return ordenList;
+    }
+    
+    public List<Ordenes> getOrdenesbyStateandSede(Long id) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_ORDENES_TB_GET_ORDENESBYSTATEANDSEDE_SP")
+                .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Ordenes>() {
+                    @Override
+                    public Ordenes mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Ordenes orden = new Ordenes();
+                        orden.setIdOrden(rs.getLong("ID_ORDEN"));
+                        orden.setIdCita(rs.getLong("ID_CITA"));
+                        orden.setFechaHora(rs.getObject("FECHA", LocalDateTime.class));
+                        orden.setComentario(rs.getString("COMENTARIOS"));
+                        orden.setIdEmpleado(rs.getLong("ID_EMPLEADO"));
+                        orden.setIdSede(rs.getLong("ID_SEDE"));
+                        orden.setEstado(rs.getBoolean("ESTADO"));
+                        return orden;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("IDSED", id);
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
         List<Ordenes> ordenList = (List<Ordenes>) results.get("DATOS");
         return ordenList;
@@ -290,5 +317,33 @@ public class OrdenesDao {
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
         List<Sedes> sedeList = (List<Sedes>) results.get("DATOS");
         return sedeList;
+    }
+    
+    public Usuario getUsuariobyordenes(Long id) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOSBYORDENES_SP")
+                .declareParameters(new SqlParameter("ORDENID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Usuario>() {
+                    @Override
+                    public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Usuario usuario = new Usuario();
+                        usuario.setIdUsuario(rs.getLong("ID_USUARIO"));
+                        usuario.setUsername(rs.getString("USERNAME"));
+                        usuario.setPassword(rs.getString("UPASSWORD"));
+                        usuario.setNombre(rs.getString("NOMBRE"));
+                        usuario.setApellidos(rs.getString("APELLIDO"));
+                        usuario.setCorreo(rs.getString("CORREO"));
+                        usuario.setTelefono(rs.getString("TELEFONO"));
+                        usuario.setIdSede(rs.getLong("ID_SEDE"));
+                        usuario.setEstado(rs.getBoolean("ESTADO"));
+                        return usuario;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("ORDENID", id);
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Usuario> usuarioList = (List<Usuario>) results.get("DATOS");
+        return usuarioList.isEmpty() ? null : usuarioList.get(0);
     }
 }

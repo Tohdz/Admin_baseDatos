@@ -45,8 +45,9 @@ public class MecController {
     private EmpleadoService empleadoService;
     
     @GetMapping("/listado")
-    private String listado(Model model) {
-        var citas = citasService.getCitasbyState();
+    private String listado(Model model,Principal principal) {
+        Usuario user=citasService.getUsuariosbyUsername(principal.getName());
+        var citas = citasService.getCitasbyStateandSede(user.getIdSede());
         model.addAttribute("citas", citas);
         //
         List<Servicios> servicios2 = citasService.getServicios();

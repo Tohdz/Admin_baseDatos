@@ -1,0 +1,121 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title></title>
+    </head>
+
+    <body>
+
+        <section th:fragment="listadoordenes" id="vehiculo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card" style="background-color: rgba(0, 0, 0, 0.5); color: white;">
+                            <div class="card-header">
+                                <h4>Orders</h4>
+                            </div>
+                            <div class="card-body">
+                                <div th:if="${ordenes != null and not #lists.isEmpty(ordenes)}" class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Appointments</th>
+                                                <th>Date</th>
+                                                <th>Comments</th>
+                                                <th>Employee</th>
+                                                <th>Workshop</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="orden, contador : ${ordenes}">
+                                                <td style="color: white; "th:text="${contador.count}"></td>
+                                                <td style="color: white; "th:text="${citasMap[orden.idCita]}"</td>
+                                                <td style="color: white; "th:text="${orden.fechaHora}"</td>
+                                                <td style="color: white; "th:text="${orden.comentario}"></td>
+                                                <td style="color: white; "th:text="${empleadosMap[orden.idEmpleado]}"></td>
+                                                <td style="color: white; "th:text="${sedesMap[orden.idSede]}"></td>
+                                                <td>
+                                                    <div>
+                                                        <a th:href="@{/cajeros/modificar/}+${orden.idOrden}" style="background-color: rgba(0, 255, 0, 0.5); color: white; "class="btn btn-trasparent">
+                                                            <i class="fas fa-pencil"></i>Process
+                                                        </a>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-center p-2" style="color: white; "th:if="${ordenes == null or #lists.isEmpty(ordenes)}">
+                                    <span>Empty List</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section th:fragment="Modificarordenes">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <form method="POST"
+                              th:action="@{/cajeros/guardar}" 
+                              th:object="${orden}"
+                              class="was-validated"                          
+                              enctype="multipart/form-data">
+                            <input type="hidden" th:field="*{idOrden}"/>
+                            <section th:replace="~{cajeros/fragmentos :: BotonesModificar}"/>
+                            <div id=details>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4>Update Order</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="mb-3 text-center">
+                                                        <label style="font-weight: bold;">Important</label>
+                                                        <p>Please confirm the final price with your manager</p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label>Price</label>
+                                                        <input type="number" class="form-control" name="price" id="price" required="true" oninput="updateIva(this.value)"/>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label>Final price</label>
+                                                        <p id="ivaDisplay">0.00</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 5 Fragmento que se utiliza en el fragmento anterior -->
+        <section th:fragment="BotonesModificar">
+            <div class="container py-4 mb-4">
+                <div class="row">
+                    <div class="col-md-4 d-grid">
+                        <a th:href="@{/cajeros/listado}" class="btn btn-primary">
+                            <i class="fas fa-arrow-left"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-4 d-grid">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

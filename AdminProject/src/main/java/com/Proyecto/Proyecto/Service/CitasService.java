@@ -22,7 +22,7 @@ public interface CitasService {
     public Citas getCita(Citas cita);
     public Citas getCitaid(Long id);
     public List<Citas> getCitas();
-    public List<Citas> getCitasbyState();
+    public List<Citas> getCitasbyStateandSede(Long id);
     public List<Citas> getCitasbyuser(Long id);
     public List<Vehiculos> getVehiculosbyState();
     public List<Vehiculos> getVehiculosbyuserandstate(Long id);

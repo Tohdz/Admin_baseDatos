@@ -114,8 +114,8 @@ public class CitasServiceImpl implements CitasService{
     }
 
     @Override
-    public List<Citas> getCitasbyState() {
-        var lista = citasDao.getCitasbyState();
+    public List<Citas> getCitasbyStateandSede(Long id) {
+        var lista = citasDao.getCitasbyStateandSede(id);
         return lista;
     }
 

@@ -8,6 +8,7 @@ import com.Proyecto.Proyecto.Domain.Citas;
 import com.Proyecto.Proyecto.Domain.Empleado;
 import com.Proyecto.Proyecto.Domain.Ordenes;
 import com.Proyecto.Proyecto.Domain.Sedes;
+import com.Proyecto.Proyecto.Domain.Usuario;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,7 +18,10 @@ import java.util.List;
  */
 public interface OrdenesService {
     public Ordenes getOrden(Ordenes orden);
+    public Ordenes getOrdenbyid(Long id);
+    public Usuario getusuariobyordenes(Long id);
     public List<Ordenes> getOrdenes();
+    public List<Ordenes> getOrdenesbyStateandSede(Long id);
     public List<Citas> getCitasbyState();
     public List<Empleado> getEmpleadosbyState();
     public List<Sedes> getSedesbyState();

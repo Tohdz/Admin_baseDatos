@@ -9,6 +9,7 @@ import com.Proyecto.Proyecto.Domain.Citas;
 import com.Proyecto.Proyecto.Domain.Empleado;
 import com.Proyecto.Proyecto.Domain.Ordenes;
 import com.Proyecto.Proyecto.Domain.Sedes;
+import com.Proyecto.Proyecto.Domain.Usuario;
 import com.Proyecto.Proyecto.Service.OrdenesService;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -85,6 +86,22 @@ public class OrdenServiceImpl implements OrdenesService {
     public List<Sedes> getSedes() {
         var lista = ordenesDao.getSedes();
         return lista;
+    }
+
+    @Override
+    public List<Ordenes> getOrdenesbyStateandSede(Long id) {
+        var lista = ordenesDao.getOrdenesbyStateandSede(id);
+        return lista;
+    }
+
+    @Override
+    public Ordenes getOrdenbyid(Long id) {
+        return ordenesDao.getOrden(id);
+    }
+
+    @Override
+    public Usuario getusuariobyordenes(Long id) {
+        return ordenesDao.getUsuariobyordenes(id);
     }
     
 }

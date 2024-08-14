@@ -395,11 +395,11 @@ public class CitasDao {
         return usuarioList.isEmpty() ? null : usuarioList.get(0);
     }
     
-    public List<Citas> getCitasbyState() {
+    public List<Citas> getCitasbyStateandSede(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
-                .withProcedureName("FIDE_CITAS_TB_GET_CITASBYSTATE_SP")
-                .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+                .withProcedureName("FIDE_CITAS_TB_GET_CITASBYSTATEANDSEDE_SP")
+                .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Citas>() {
                     @Override
                     public Citas mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -415,6 +415,7 @@ public class CitasDao {
                     }
                 });
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("idsed", id);
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
         List<Citas> citaList = (List<Citas>) results.get("DATOS");
         return citaList;

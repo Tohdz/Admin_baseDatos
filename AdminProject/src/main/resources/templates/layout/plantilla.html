@@ -50,7 +50,7 @@
                             </ul>
                         </div>
                     <div class="col-md-1 d-flex align-items-center">
-                        <a class="nav-link fs-5 me-3" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_CASH')">Invoices</a>  
+                        <a class="nav-link fs-5 me-3" th:href="@{/cajeros/listado}" sec:authorize="hasRole('ROLE_CASH')">Invoices</a>  
                     </div>
                     <div class="col-md-1 d-flex align-items-center">
                         <a class="nav-link fs-5 me-3" th:href="@{/mecanicos/listado}" sec:authorize="hasRole('ROLE_MEC')">Orders</a>  

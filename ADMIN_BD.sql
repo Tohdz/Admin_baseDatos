@@ -625,6 +625,24 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_USUARIOS_TB_GET_USUARIOS_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Create or replace PROCEDURE FIDE_USUARIOS_TB_GET_USUARIOSBYORDENES_SP (ORDENID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_USUARIO, USERNAME, UPASSWORD, NOMBRE, APELLIDO, CORREO, TELEFONO,ID_SEDE,ESTADO 
+FROM FIDE_USUARIOS_TB 
+WHERE ID_USUARIO=(SELECT ID_USUARIO FROM FIDE_VEHICULOS_TB 
+WHERE PLACA=(SELECT PLACA FROM FIDE_CITAS_TB 
+WHERE ID_CITA=(SELECT ID_CITA FROM FIDE_ORDENES_TB 
+WHERE ID_ORDEN=ORDENID)));
+EXCEPTION
+     WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_USUARIOS_TB_GET_USUARIOSBYORDENES_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Create or replace PROCEDURE FIDE_USUARIOS_TB_GET_USUARIOSBYSTATE_SP (DATOS OUT SYS_REFCURSOR)
  AS
@@ -1566,17 +1584,17 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CITAS_TB_GET_CITASBYUSER_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
  -----------------------------------------------------------------------------------------------------------------------------------------------------------------
- /*create or replace PROCEDURE FIDE_CITAS_TB_GET_CITASBYSTATE_SP (DATOS OUT SYS_REFCURSOR)
+ /*create or replace PROCEDURE FIDE_CITAS_TB_GET_CITASBYSTATEANDSEDE_SP (IDSED IN NUMBER,DATOS OUT SYS_REFCURSOR)
  AS
     VCOD NUMBER;
     VMES VARCHAR2(1024);
  BEGIN
-   OPEN DATOS FOR SELECT ID_CITA,PLACA,FECHA,ID_SERVICIO,ID_EMPLEADO,ID_SEDE,ESTADO FROM FIDE_CITAS_TB WHERE ESTADO=1;
+   OPEN DATOS FOR SELECT ID_CITA,PLACA,FECHA,ID_SERVICIO,ID_EMPLEADO,ID_SEDE,ESTADO FROM FIDE_CITAS_TB WHERE ESTADO=1 AND ID_SEDE=IDSED;
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
         VMES := SQLERRM;
         VCOD := SQLCODE;
-        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CITAS_TB_GET_CITASBYSTATE_SP',SYSDATE, VCOD || ' - '|| VMES );
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_CITAS_TB_GET_CITASBYSTATEANDSEDE_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
  --------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*create or replace PROCEDURE FIDE_CITAS_TB_GET_CITA_SP (CID IN NUMBER,DATOS OUT SYS_REFCURSOR)
@@ -1644,6 +1662,19 @@ EXCEPTION
         VMES := SQLERRM;
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ORDENES_TB_GET_ORDENES_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_ORDENES_TB_GET_ORDENESBYSTATEANDSEDE_SP (IDSED IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_ORDEN,ID_CITA,FECHA,COMENTARIOS,ID_EMPLEADO,ID_SEDE,ESTADO FROM FIDE_ORDENES_TB WHERE ESTADO=1 AND ID_SEDE=IDSED;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ORDENES_TB_GET_ORDENESBYSTATEANDSEDE_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
  --------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*create or replace PROCEDURE FIDE_ORDENES_TB_GET_ORDEN_SP (OID IN NUMBER,DATOS OUT SYS_REFCURSOR)

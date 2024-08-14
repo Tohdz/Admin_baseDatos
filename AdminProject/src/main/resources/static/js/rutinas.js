@@ -59,3 +59,10 @@ function updateCliModels(idMarca) {
                 });
     }
 }
+
+function updateIva(price) {
+        const parsedPrice = parseFloat(price) || 0; 
+        const iva = (parsedPrice * 0.13).toFixed(2); 
+        const final = (parsedPrice + parseFloat(iva)).toFixed(2); 
+        document.getElementById('ivaDisplay').innerText = final;
+    }
