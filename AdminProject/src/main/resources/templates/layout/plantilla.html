@@ -43,11 +43,9 @@
                                 [[#{plantilla.admin}]]
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Vehicles</a></li>
-                                <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Roles</a></li>
-                                <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Users</a></li>
-                                <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Appointments</a></li>
-                                <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Orders</a></li>
+                                <li><a class="dropdown-item" th:href="@{/adminemployees/listado}" sec:authorize="hasRole('ROLE_ADMIDS')">Employees</a></li>
+                                <li><a class="dropdown-item" th:href="@{/adminroles/listado}" sec:authorize="hasRole('ROLE_ADMIDS')">Roles</a></li>
+                                <li><a class="dropdown-item" th:href="@{/adminusers/listado}" sec:authorize="hasRole('ROLE_ADMIDS')">Users</a></li>
                             </ul>
                         </div>
                     <div class="col-md-1 d-flex align-items-center">

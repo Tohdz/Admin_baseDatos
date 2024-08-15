@@ -69,6 +69,7 @@ public class ProjectConfig implements WebMvcConfigurer {
              .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**","/mecanicos/**").hasRole("MEC")
              .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**","/contadores/**").hasRole("CONT")
              .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**","/cajeros/**").hasRole("CASH")
+             .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**","/adminemployees/**").hasRole("ADMIDS")
              .requestMatchers("/roles/**","/repuestos/**","/categoria/**","/usuario/**","/sedes/**","/servicios/**","/tipos/**","/puestos/**","/marcas/**","/modelos/**","/empleados/**","/vehiculos/**","/citas/**","/ordenes/**","/marcarepuestos/**").hasRole("ADMIN")
      ).formLogin((form) -> form.loginPage("/login").permitAll()).logout((logout) -> logout.permitAll());
          return http.build();

@@ -17,6 +17,7 @@ import java.util.List;
  */
 public interface EmpleadoService {
     public List<Empleado> getEmpleados();
+    public List<Empleado> getEmpleadosbysede(Long id);
     public Empleado getEmpleado(Empleado empleado);
     public Empleado getEmpleadobyusername(String name);
     public List<Puestos> getPuestosbyState();

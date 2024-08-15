@@ -59,6 +59,36 @@ public class EmpleadoDao {
         return empleadoList;
     }
     
+    public List<Empleado> getEmpleadosbysede(Long id) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_EMPLEADOS_TB_GET_EMPLEADOSBYSEDE_SP")
+                .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Empleado>() {
+                    @Override
+                    public Empleado mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Empleado empleado = new Empleado();
+                        empleado.setIdEmpleado(rs.getLong("ID_EMPLEADO"));
+                        empleado.setNombre(rs.getString("NOMBRE"));
+                        empleado.setApellido(rs.getString("APELLIDO"));
+                        empleado.setTelefono(rs.getString("TELEFONO"));
+                        empleado.setCorreo(rs.getString("CORREO"));
+                        empleado.setFecha(rs.getDate("FECHA_CONTRATO"));
+                        empleado.setSalario(rs.getString("SALARIO"));
+                        empleado.setIdPuesto(rs.getLong("ID_PUESTO"));
+                        empleado.setIdSede(rs.getLong("ID_SEDE"));
+                        empleado.setEstado(rs.getBoolean("ESTADO"));
+                        empleado.setUsername(rs.getString("USERNAME"));
+                        return empleado;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("IDSED", id);
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Empleado> empleadoList = (List<Empleado>) results.get("DATOS");
+        return empleadoList;
+    }
+    
     public Empleado getEmpleadosbyusername(String name) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")

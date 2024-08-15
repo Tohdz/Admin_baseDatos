@@ -78,4 +78,10 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     public Empleado getEmpleadobyusername(String name) {
         return empleadoDao.getEmpleadosbyusername(name);
     }
+
+    @Override
+    public List<Empleado> getEmpleadosbysede(Long id) {
+        var lista = empleadoDao.getEmpleadosbysede(id);
+        return lista;
+    }
 }

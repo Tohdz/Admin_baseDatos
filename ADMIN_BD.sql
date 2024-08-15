@@ -1455,7 +1455,7 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_GET_VEHICULOS_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-create or replace PROCEDURE FIDE_VEHICULOS_TB_GET_PLACASBYORDEN_SP (DATOS OUT SYS_REFCURSOR)
+/*create or replace PROCEDURE FIDE_VEHICULOS_TB_GET_PLACASBYORDEN_SP (DATOS OUT SYS_REFCURSOR)
  AS
     VCOD NUMBER;
     VMES VARCHAR2(1024);
@@ -1466,7 +1466,7 @@ EXCEPTION
         VMES := SQLERRM;
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_GET_PLACASBYORDEN_SP',SYSDATE, VCOD || ' - '|| VMES );
- END;
+ END;*/
  --------------------------------------------------------------------------------------------------------------------------------------------------------------
 /* create or replace PROCEDURE FIDE_VEHICULOS_TB_GET_VEHICULOSBYUSER_SP (USID IN NUMBER,DATOS OUT SYS_REFCURSOR)
  AS
