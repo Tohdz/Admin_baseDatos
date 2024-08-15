@@ -74,4 +74,52 @@ public class FacturaDao {
         List<Factura> factList = (List<Factura>) results.get("DATOS");
         return factList.isEmpty() ? null : factList.get(0);
     }
+    
+    public List<Factura> getFacturas(Long id) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_FACTURAS_TB_GET_FACTURASBYSEDE_SP")
+                .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Factura>() {
+                    @Override
+                    public Factura mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Factura factura = new Factura();
+                        factura.setIdFactura(rs.getLong("ID_FACTURA"));
+                        factura.setIdSede(rs.getLong("ID_SEDE"));
+                        factura.setFecha(rs.getDate("FECHA"));
+                        factura.setTotal(rs.getInt("PRECIO_FINAL"));
+                        factura.setIdUsuario(rs.getLong("ID_USUARIO"));
+                        return factura;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("IDSED", id);
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Factura> facturaList = (List<Factura>) results.get("DATOS");
+        return facturaList;
+    }
+    
+    public Factura getfacturabyid(Long id) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_FACTURAS_TB_GET_FACTURABYID_SP")
+                .declareParameters(new SqlParameter("FID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Factura>() {
+                    @Override
+                    public Factura mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Factura factura = new Factura();
+                        factura.setIdFactura(rs.getLong("ID_FACTURA"));
+                        factura.setIdSede(rs.getLong("ID_SEDE"));
+                        factura.setFecha(rs.getDate("FECHA"));
+                        factura.setTotal(rs.getInt("PRECIO_FINAL"));
+                        factura.setIdUsuario(rs.getLong("ID_USUARIO"));
+                        return factura;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("FID", id);
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Factura> factList = (List<Factura>) results.get("DATOS");
+        return factList.isEmpty() ? null : factList.get(0);
+    }
 }

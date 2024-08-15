@@ -1755,6 +1755,32 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_FACTURAS_TB_GET_FACTURABYDATE_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_FACTURAS_TB_GET_FACTURASBYSEDE_SP (IDSED IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+   OPEN DATOS FOR SELECT ID_FACTURA,ID_SEDE,FECHA,PRECIO_FINAL,ID_USUARIO FROM FIDE_FACTURAS_TB WHERE ID_SEDE=IDSED;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_FACTURAS_TB_GET_FACTURASBYSEDE_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_FACTURAS_TB_GET_FACTURABYID_SP (FID IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+BEGIN
+   OPEN DATOS FOR SELECT ID_FACTURA,ID_SEDE,FECHA,PRECIO_FINAL,ID_USUARIO FROM FIDE_FACTURAS_TB WHERE ID_FACTURA=FID;
+EXCEPTION
+    WHEN VALUE_ERROR THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_FACTURAS_TB_GET_FACTURABYID_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*CREATE OR REPLACE PROCEDURE FIDE_FACTURAS_TB_UPDATE_FACTURA_SP (FID IN NUMBER,TOTL IN NUMBER) AS
     VCOD NUMBER;
@@ -1780,6 +1806,19 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_FACTURAS_TB_UPDATE_FACTURA_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_DETALLES_TB_GET_DETALLES_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_DETALLE,ID_FACTURA,ID_ORDEN,ID_REPUESTO,CANTIDAD,PRECIO_UNITARIO FROM FIDE_DETALLES_TB;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_DETALLES_TB_GET_DETALLES_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*CREATE OR REPLACE PROCEDURE FIDE_REPUESTOS_TB_ADD_REPUESTO_SP (IMG IN VARCHAR2,NOM IN VARCHAR2,IDM IN NUMBER,PREC IN NUMBER,CANT IN NUMBER,CID IN NUMBER,IDSED IN NUMBER,EST IN NUMBER) AS 

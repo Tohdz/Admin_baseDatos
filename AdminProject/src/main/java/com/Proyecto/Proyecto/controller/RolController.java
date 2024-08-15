@@ -38,7 +38,7 @@ public class RolController {
         List<Usuario> usuarios = rolService.getUsuariobyState();
         model.addAttribute("usuarios", usuarios);
         //
-        List<String> rols = Arrays.asList("ROLE_ADMIN", "ROLE_USER", "ROLE_MEC", "ROLE_ADMIDS", "ROLE_CASH");
+        List<String> rols = Arrays.asList("ROLE_ADMIN", "ROLE_USER", "ROLE_MEC", "ROLE_ADMIDS", "ROLE_CASH","ROLE_CONT");
         model.addAttribute("rols", rols);
         //
         

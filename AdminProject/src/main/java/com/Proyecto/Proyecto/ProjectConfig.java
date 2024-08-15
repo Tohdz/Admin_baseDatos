@@ -67,6 +67,7 @@ public class ProjectConfig implements WebMvcConfigurer {
              .requestMatchers("/", "/index","/mensaje", "/errores/**", "/js/**", "/css/**","/images/**", "/webjars/**","/registro/**","/nosotros","/newproducts/**", "/juego/**" , "/repuestosPorCategoria").permitAll()
              .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**").hasRole("USER")
              .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**","/mecanicos/**").hasRole("MEC")
+             .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**","/contadores/**").hasRole("CONT")
              .requestMatchers("/juego/juegos","/facturar/**","/carrito/**","/clientsvehicles/**","/clientscitas/**","/cajeros/**").hasRole("CASH")
              .requestMatchers("/roles/**","/repuestos/**","/categoria/**","/usuario/**","/sedes/**","/servicios/**","/tipos/**","/puestos/**","/marcas/**","/modelos/**","/empleados/**","/vehiculos/**","/citas/**","/ordenes/**","/marcarepuestos/**").hasRole("ADMIN")
      ).formLogin((form) -> form.loginPage("/login").permitAll()).logout((logout) -> logout.permitAll());

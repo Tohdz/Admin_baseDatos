@@ -44,11 +44,15 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Vehicles</a></li>
+                                <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Roles</a></li>
                                 <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Users</a></li>
                                 <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Appointments</a></li>
                                 <li><a class="dropdown-item" th:href="@{/nosotros}" sec:authorize="hasRole('ROLE_USER')">Orders</a></li>
                             </ul>
                         </div>
+                    <div class="col-md-1 d-flex align-items-center">
+                        <a class="nav-link fs-5 me-3" th:href="@{/contadores/listado}" sec:authorize="hasRole('ROLE_CONT')">Accountant</a>  
+                    </div>
                     <div class="col-md-1 d-flex align-items-center">
                         <a class="nav-link fs-5 me-3" th:href="@{/cajeros/listado}" sec:authorize="hasRole('ROLE_CASH')">Invoices</a>  
                     </div>
