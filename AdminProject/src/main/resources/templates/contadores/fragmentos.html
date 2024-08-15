@@ -77,8 +77,8 @@
                                             <tr th:each="detalle, contador : ${detalles}">
                                                 <td style="color: white; "th:text="${contador.count}"></td>
                                                 <td style="color: white; "th:text="${detalle.idFactura}"</td>
-                                                <td style="color: white; "th:text="${detalle.idOrden}"</td>
-                                                <td style="color: white; "th:text="${detalle.idRepuesto}"</td>
+                                                <td style="color: white; "th:text="${listaMap[detalle.idOrden]}"</td>
+                                                <td style="color: white; "th:text="${repuestosMap[detalle.idRepuesto]}"</td>
                                                 <td style="color: white; "th:text="${detalle.cantidad}"</td>
                                                 <td style="color: white; "th:text="${detalle.precio}"</td>
                                             </tr>

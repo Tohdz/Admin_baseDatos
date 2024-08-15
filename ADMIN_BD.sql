@@ -1454,6 +1454,19 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_GET_VEHICULOS_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+create or replace PROCEDURE FIDE_VEHICULOS_TB_GET_PLACASBYORDEN_SP (DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT O.ID_ORDEN,C.PLACA FROM FIDE_ORDENES_TB O JOIN FIDE_CITAS_TB C ON O.ID_CITA=C.ID_CITA;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_VEHICULOS_TB_GET_PLACASBYORDEN_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;
  --------------------------------------------------------------------------------------------------------------------------------------------------------------
 /* create or replace PROCEDURE FIDE_VEHICULOS_TB_GET_VEHICULOSBYUSER_SP (USID IN NUMBER,DATOS OUT SYS_REFCURSOR)
  AS
@@ -1807,17 +1820,17 @@ EXCEPTION
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_FACTURAS_TB_UPDATE_FACTURA_SP',SYSDATE, VCOD || ' - '|| VMES );
 END;*/
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/*create or replace PROCEDURE FIDE_DETALLES_TB_GET_DETALLES_SP (DATOS OUT SYS_REFCURSOR)
+/*create or replace PROCEDURE FIDE_DETALLES_TB_GET_DETALLESBYFACTURA_SP (FID IN NUMBER,DATOS OUT SYS_REFCURSOR)
  AS
     VCOD NUMBER;
     VMES VARCHAR2(1024);
  BEGIN
-   OPEN DATOS FOR SELECT ID_DETALLE,ID_FACTURA,ID_ORDEN,ID_REPUESTO,CANTIDAD,PRECIO_UNITARIO FROM FIDE_DETALLES_TB;
+   OPEN DATOS FOR SELECT ID_DETALLE,ID_FACTURA,ID_ORDEN,ID_REPUESTO,CANTIDAD,PRECIO_UNITARIO FROM FIDE_DETALLES_TB WHERE ID_FACTURA=FID;
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
         VMES := SQLERRM;
         VCOD := SQLCODE;
-        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_DETALLES_TB_GET_DETALLES_SP',SYSDATE, VCOD || ' - '|| VMES );
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_DETALLES_TB_GET_DETALLESBYFACTURA_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

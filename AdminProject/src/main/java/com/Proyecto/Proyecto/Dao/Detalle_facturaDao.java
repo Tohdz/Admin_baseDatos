@@ -68,5 +68,26 @@ public class Detalle_FacturaDao  {
         List<Detalle_Factura> detalleList = (List<Detalle_Factura>) results.get("DATOS");
         return detalleList;
     }
+     
+    public List<String> getplacasbyorden() {
+    SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+            .withSchemaName("ADMIN_FIDE_TALLER_USER")
+            .withProcedureName("FIDE_VEHICULOS_TB_GET_PLACASBYORDEN_SP")
+            .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
+            .returningResultSet("DATOS", new RowMapper<String>() {
+                @Override
+                public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    Long idOrden = rs.getLong("ID_ORDEN");
+                    String placa = rs.getString("PLACA");
+                    // Concatenar los valores en el formato deseado
+                    return idOrden + ": " + placa;
+                }
+            });
+    MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+    Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+    List<String> stringList = (List<String>) results.get("DATOS");
+    return stringList;
+}
+
 }
 
