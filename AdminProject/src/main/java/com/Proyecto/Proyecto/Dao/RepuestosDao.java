@@ -236,6 +236,7 @@ public class RepuestosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CATEGORIAS_TB_GET_CATEGORIA_SP")
+                .withCatalogName("FIDE_TALLER_CATEGORIAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Categorias>() {
                     @Override
@@ -258,6 +259,7 @@ public class RepuestosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CATEGORIAS_TB_GET_CATEGORIABYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_CATEGORIAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Categorias>() {
                     @Override

@@ -25,6 +25,7 @@ public class CategoriaDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CATEGORIAS_TB_GET_CATEGORIA_SP")
+                .withCatalogName("FIDE_TALLER_CATEGORIAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Categorias>() {
                     @Override
@@ -47,6 +48,7 @@ public class CategoriaDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CATEGORIAS_TB_GET_ONE_CATEGORIA_SP")
+                .withCatalogName("FIDE_TALLER_CATEGORIAS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Categorias>() {
                     @Override
@@ -70,6 +72,7 @@ public class CategoriaDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CATEGORIAS_TB_ADD_CATEGORIA_SP")
+                .withCatalogName("FIDE_TALLER_CATEGORIAS_PKG")
                 .declareParameters(
                         new SqlParameter("DESCRIP", Types.VARCHAR),
                         new SqlParameter("IMG", Types.VARCHAR),
@@ -86,6 +89,7 @@ public class CategoriaDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CATEGORIAS_TB_DELETE_CATEGORIA_SP")
+                .withCatalogName("FIDE_TALLER_CATEGORIAS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("CID", id);
@@ -96,6 +100,7 @@ public class CategoriaDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CATEGORIAS_TB_UPDATE_CATEGORIA_SP")
+                .withCatalogName("FIDE_TALLER_CATEGORIAS_PKG")
                 .declareParameters(
                         new SqlParameter("CID", Types.BIGINT),
                         new SqlParameter("DESCRIP", Types.VARCHAR),
