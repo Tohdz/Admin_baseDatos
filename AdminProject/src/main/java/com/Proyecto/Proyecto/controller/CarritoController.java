@@ -45,11 +45,6 @@ public class CarritoController {
         // Obtener todas las categorías y agregarlas al modelo
         List<Categorias> categorias = categoriaService.getCategorias();
         model.addAttribute("categorias", categorias);
-        //
-        List<MarcaRepuestos> marcas2 = marcarepuestoService.getMarcaRepuestos();
-        Map<Long, String> marcasMap = marcas2.stream()
-                .collect(Collectors.toMap(MarcaRepuestos::getIdMarcaRepuesto, MarcaRepuestos::getNombre));
-        model.addAttribute("marcasMap", marcasMap);
         return "/index";
     }
 
