@@ -27,6 +27,7 @@ public class FacturaDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_FACTURAS_TB_ADD_FACTURA_SP")
+                .withCatalogName("FIDE_TALLER_FACTURAS_PKG")
                 .declareParameters(
                         new SqlParameter("IDSED", Types.BIGINT),
                         new SqlParameter("FECHA", Types.DATE),
@@ -45,6 +46,7 @@ public class FacturaDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_FACTURAS_TB_UPDATE_FACTURA_SP")
+                .withCatalogName("FIDE_TALLER_FACTURAS_PKG")
                 .declareParameters(
                         new SqlParameter("FID", Types.BIGINT),
                         new SqlParameter("TOTL", Types.DOUBLE)
@@ -59,6 +61,7 @@ public class FacturaDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_FACTURAS_TB_GET_FACTURABYDATE_SP")
+                .withCatalogName("FIDE_TALLER_FACTURAS_PKG")
                 .declareParameters(new SqlParameter("FECH", Types.DATE),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Factura>() {
                     @Override
@@ -79,6 +82,7 @@ public class FacturaDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_FACTURAS_TB_GET_FACTURASBYSEDE_SP")
+                .withCatalogName("FIDE_TALLER_FACTURAS_PKG")
                 .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Factura>() {
                     @Override
@@ -103,6 +107,7 @@ public class FacturaDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_FACTURAS_TB_GET_FACTURABYID_SP")
+                .withCatalogName("FIDE_TALLER_FACTURAS_PKG")
                 .declareParameters(new SqlParameter("FID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Factura>() {
                     @Override

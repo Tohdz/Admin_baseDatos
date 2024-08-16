@@ -28,6 +28,7 @@ public class Detalle_FacturaDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_DETALLES_TB_ADD_DETALLE_SP")
+                .withCatalogName("FIDE_TALLER_DETALLES_PKG")
                 .declareParameters(
                         new SqlParameter("IDFACT", Types.BIGINT),
                         new SqlParameter("IDORD", Types.BIGINT),
@@ -48,6 +49,7 @@ public class Detalle_FacturaDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_DETALLES_TB_GET_DETALLESBYFACTURA_SP")
+                .withCatalogName("FIDE_TALLER_DETALLES_PKG")
                 .declareParameters(new SqlParameter("FID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Detalle_Factura>() {
                     @Override
@@ -73,6 +75,7 @@ public class Detalle_FacturaDao  {
     SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
             .withSchemaName("ADMIN_FIDE_TALLER_USER")
             .withProcedureName("FIDE_VEHICULOS_TB_GET_PLACASBYORDEN_SP")
+            .withCatalogName("FIDE_TALLER_VEHICULOS_PKG")
             .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
             .returningResultSet("DATOS", new RowMapper<String>() {
                 @Override

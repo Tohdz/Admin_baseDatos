@@ -31,6 +31,7 @@ public class ServicioDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SERVICIOS_TB_GET_SERVICIOS_SP")
+                .withCatalogName("FIDE_TALLER_SERVICIOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Servicios>() {
                     @Override
@@ -52,6 +53,7 @@ public class ServicioDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SERVICIOS_TB_GET_SERVICIO_SP")
+                .withCatalogName("FIDE_TALLER_SERVICIOS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Servicios>() {
                     @Override
@@ -74,6 +76,7 @@ public class ServicioDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SERVICIOS_TB_ADD_SERVICIO_SP")
+                .withCatalogName("FIDE_TALLER_SERVICIOS_PKG")
                 .declareParameters(
                         new SqlParameter("NOM", Types.VARCHAR),
                         new SqlParameter("ACT", Types.BOOLEAN)
@@ -88,6 +91,7 @@ public class ServicioDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SERVICIOS_TB_DELETE_SERVICIO_SP")
+                .withCatalogName("FIDE_TALLER_SERVICIOS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("CID", id);
@@ -98,6 +102,7 @@ public class ServicioDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SERVICIOS_TB_UPDATE_SERVICIO_SP")
+                .withCatalogName("FIDE_TALLER_SERVICIOS_PKG")
                 .declareParameters(
                         new SqlParameter("CID", Types.BIGINT),
                         new SqlParameter("NOM", Types.VARCHAR),

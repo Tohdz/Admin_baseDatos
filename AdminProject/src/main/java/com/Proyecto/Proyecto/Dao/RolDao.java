@@ -30,6 +30,7 @@ public class RolDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ROLES_TB_ADD_ROL_SP")
+                .withCatalogName("FIDE_TALLER_ROLES_PKG")
                 .declareParameters(
                         new SqlParameter("RNAME", Types.VARCHAR),
                         new SqlParameter("IDUSER", Types.BIGINT)
@@ -44,6 +45,7 @@ public class RolDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ROLES_TB_DELETE_ROLBYID_SP")
+                .withCatalogName("FIDE_TALLER_ROLES_PKG")
                 .declareParameters(new SqlParameter("RID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("RID", id);
@@ -54,6 +56,7 @@ public class RolDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ROLES_TB_GET_ROLES_SP")
+                .withCatalogName("FIDE_TALLER_ROLES_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Rol>() {
                     @Override
@@ -75,6 +78,7 @@ public class RolDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ROLES_TB_GET_ROLESBYSEDE_SP")
+                .withCatalogName("FIDE_TALLER_ROLES_PKG")
                 .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Rol>() {
                     @Override
@@ -97,6 +101,7 @@ public class RolDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ROLES_TB_GET_ROL_SP")
+                .withCatalogName("FIDE_TALLER_ROLES_PKG")
                 .declareParameters(new SqlParameter("RID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Rol>() {
                     @Override
@@ -119,6 +124,7 @@ public class RolDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ROLES_TB_UPDATE_ROL_SP")
+                .withCatalogName("FIDE_TALLER_ROLES_PKG")
                 .declareParameters(
                         new SqlParameter("RID", Types.BIGINT),
                         new SqlParameter("NOMB", Types.VARCHAR),
@@ -135,6 +141,7 @@ public class RolDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOSBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_USUARIOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override
@@ -162,6 +169,7 @@ public class RolDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOSBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_USUARIOS_PKG")
                 .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override
@@ -190,6 +198,7 @@ public class RolDao  {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOS_SP")
+                .withCatalogName("FIDE_TALLER_USUARIOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override

@@ -32,6 +32,7 @@ public class ModelosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MODELOS_TB_GET_MODELOS_SP")
+                .withCatalogName("FIDE_TALLER_MODELOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Modelos>() {
                     @Override
@@ -54,6 +55,7 @@ public class ModelosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MODELOS_TB_GET_MODELO_SP")
+                .withCatalogName("FIDE_TALLER_MODELOS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Modelos>() {
                     @Override
@@ -77,6 +79,7 @@ public class ModelosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MODELOS_TB_ADD_MODELO_SP")
+                .withCatalogName("FIDE_TALLER_MODELOS_PKG")
                 .declareParameters(
                         new SqlParameter("NOM", Types.VARCHAR),
                         new SqlParameter("MID", Types.BIGINT),
@@ -93,6 +96,7 @@ public class ModelosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MODELOS_TB_DELETE_MODELO_SP")
+                .withCatalogName("FIDE_TALLER_MODELOS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("CID", id);
@@ -103,6 +107,7 @@ public class ModelosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MODELOS_TB_UPDATE_MODELO_SP")
+                .withCatalogName("FIDE_TALLER_MODELOS_PKG")
                 .declareParameters(
                         new SqlParameter("CID", Types.BIGINT),
                         new SqlParameter("NOM", Types.VARCHAR),
@@ -121,6 +126,7 @@ public class ModelosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MARCAS_TB_GET_MARCASBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_MARCAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Marcas>() {
                     @Override
@@ -142,6 +148,7 @@ public class ModelosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MARCAS_TB_GET_MARCAS_SP")
+                .withCatalogName("FIDE_TALLER_MARCAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Marcas>() {
                     @Override

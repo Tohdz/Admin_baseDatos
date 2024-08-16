@@ -39,6 +39,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CITAS_TB_GET_CITAS_SP")
+                .withCatalogName("FIDE_TALLER_CITAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Citas>() {
                     @Override
@@ -64,6 +65,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CITAS_TB_GET_CITASBYUSER_SP")
+                .withCatalogName("FIDE_TALLER_CITAS_PKG")
                 .declareParameters(new SqlParameter("USID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Citas>() {
                     @Override
@@ -90,6 +92,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CITAS_TB_GET_CITA_SP")
+                .withCatalogName("FIDE_TALLER_CITAS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Citas>() {
                     @Override
@@ -116,6 +119,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CITAS_TB_ADD_CITA_SP")
+                .withCatalogName("FIDE_TALLER_CITAS_PKG")
                 .declareParameters(
                         new SqlParameter("PLAC", Types.VARCHAR),
                         new SqlParameter("FECH", Types.DATE),
@@ -138,6 +142,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CITAS_TB_DELETE_CITA_SP")
+                .withCatalogName("FIDE_TALLER_CITAS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("CID", id);
@@ -148,6 +153,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CITAS_TB_UPDATE_CITA_SP")
+                .withCatalogName("FIDE_TALLER_CITAS_PKG")
                 .declareParameters(
                         new SqlParameter("CID", Types.BIGINT),
                         new SqlParameter("PLAC", Types.VARCHAR),
@@ -172,6 +178,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_GET_SEDESBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Sedes>() {
                     @Override
@@ -196,6 +203,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_EMPLEADOS_TB_GET_EMPLEADOSBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_EMPLEADOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Empleado>() {
                     @Override
@@ -224,6 +232,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SERVICIOS_TB_GET_SERVICIOSBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_SERVICIOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Servicios>() {
                     @Override
@@ -245,6 +254,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_VEHICULOS_TB_GET_VEHICULOSBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_VEHICULOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Vehiculos>() {
                     @Override
@@ -271,6 +281,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SERVICIOS_TB_GET_SERVICIOS_SP")
+                .withCatalogName("FIDE_TALLER_SERVICIOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Servicios>() {
                     @Override
@@ -292,6 +303,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_EMPLEADOS_TB_GET_EMPLEADOS_SP")
+                .withCatalogName("FIDE_TALLER_EMPLEADOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Empleado>() {
                     @Override
@@ -320,6 +332,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_GET_SEDES_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Sedes>() {
                     @Override
@@ -344,6 +357,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_VEHICULOS_TB_GET_VEHICULOSBYUSERANDSTATE_SP")
+                .withCatalogName("FIDE_TALLER_VEHICULOS_PKG")
                 .declareParameters(new SqlParameter("USID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Vehiculos>() {
                     @Override
@@ -371,6 +385,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOBYUSERNAME_SP")
+                .withCatalogName("FIDE_TALLER_USUARIOS_PKG")
                 .declareParameters(new SqlParameter("UNAME", Types.VARCHAR), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override
@@ -399,6 +414,7 @@ public class CitasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CITAS_TB_GET_CITASBYSTATEANDSEDE_SP")
+                .withCatalogName("FIDE_TALLER_CITAS_PKG")
                 .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Citas>() {
                     @Override

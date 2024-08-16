@@ -32,6 +32,7 @@ public class SedesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_GET_SEDES_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Sedes>() {
                     @Override
@@ -56,6 +57,7 @@ public class SedesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_GET_SEDESBYID_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(new SqlParameter("IDS", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Sedes>() {
                     @Override
@@ -81,6 +83,7 @@ public class SedesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_ADD_SEDE_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(
                         new SqlParameter("NOMB", Types.VARCHAR),
                         new SqlParameter("CIT", Types.VARCHAR),
@@ -101,6 +104,7 @@ public class SedesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_DELETE_SEDE_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(new SqlParameter("IDS", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("IDS", id);
@@ -111,6 +115,7 @@ public class SedesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_UPDATE_SEDE_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(
                         new SqlParameter("IDS", Types.BIGINT),
                         new SqlParameter("NOMB", Types.VARCHAR),

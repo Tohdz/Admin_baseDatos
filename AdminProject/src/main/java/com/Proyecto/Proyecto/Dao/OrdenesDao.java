@@ -36,6 +36,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ORDENES_TB_GET_ORDENES_SP")
+                .withCatalogName("FIDE_TALLER_ORDENES_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Ordenes>() {
                     @Override
@@ -61,6 +62,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ORDENES_TB_GET_ORDENESBYSTATEANDSEDE_SP")
+                .withCatalogName("FIDE_TALLER_ORDENES_PKG")
                 .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Ordenes>() {
                     @Override
@@ -87,6 +89,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ORDENES_TB_GET_ORDEN_SP")
+                .withCatalogName("FIDE_TALLER_ORDENES_PKG")
                 .declareParameters(new SqlParameter("OID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Ordenes>() {
                     @Override
@@ -113,6 +116,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ORDENES_TB_ADD_ORDEN_SP")
+                .withCatalogName("FIDE_TALLER_ORDENES_PKG")
                 .declareParameters(
                         new SqlParameter("CID", Types.BIGINT),
                         new SqlParameter("FECH", Types.DATE),
@@ -135,6 +139,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ORDENES_TB_DELETE_ORDEN_SP")
+                .withCatalogName("FIDE_TALLER_ORDENES_PKG")
                 .declareParameters(new SqlParameter("OID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("OID", id);
@@ -145,6 +150,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_ORDENES_TB_UPDATE_ORDEN_SP")
+                .withCatalogName("FIDE_TALLER_ORDENES_PKG")
                 .declareParameters(
                         new SqlParameter("OID", Types.BIGINT),
                         new SqlParameter("CID", Types.BIGINT),
@@ -169,6 +175,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_GET_SEDESBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Sedes>() {
                     @Override
@@ -193,6 +200,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_EMPLEADOS_TB_GET_EMPLEADOSBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_EMPLEADOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Empleado>() {
                     @Override
@@ -221,6 +229,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CITAS_TB_GET_CITASBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_CITAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Citas>() {
                     @Override
@@ -246,6 +255,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_CITAS_TB_GET_CITAS_SP")
+                .withCatalogName("FIDE_TALLER_CITAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Citas>() {
                     @Override
@@ -271,6 +281,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_EMPLEADOS_TB_GET_EMPLEADOS_SP")
+                .withCatalogName("FIDE_TALLER_EMPLEADOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Empleado>() {
                     @Override
@@ -299,6 +310,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_GET_SEDES_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Sedes>() {
                     @Override
@@ -323,6 +335,7 @@ public class OrdenesDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOSBYORDENES_SP")
+                .withCatalogName("FIDE_TALLER_USUARIOS_PKG")
                 .declareParameters(new SqlParameter("ORDENID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override

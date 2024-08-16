@@ -31,6 +31,7 @@ public class MarcasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MARCAS_TB_GET_MARCAS_SP")
+                .withCatalogName("FIDE_TALLER_MARCAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Marcas>() {
                     @Override
@@ -52,6 +53,7 @@ public class MarcasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MARCAS_TB_GET_MARCA_SP")
+                .withCatalogName("FIDE_TALLER_MARCAS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Marcas>() {
                     @Override
@@ -74,6 +76,7 @@ public class MarcasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MARCAS_TB_ADD_MARCA_SP")
+                .withCatalogName("FIDE_TALLER_MARCAS_PKG")
                 .declareParameters(
                         new SqlParameter("NOM", Types.VARCHAR),
                         new SqlParameter("ACT", Types.BOOLEAN)
@@ -88,6 +91,7 @@ public class MarcasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MARCAS_TB_DELETE_MARCA_SP")
+                .withCatalogName("FIDE_TALLER_MARCAS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("CID", id);
@@ -98,6 +102,7 @@ public class MarcasDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MARCAS_TB_UPDATE_MARCA_SP")
+                .withCatalogName("FIDE_TALLER_MARCAS_PKG")
                 .declareParameters(
                         new SqlParameter("CID", Types.BIGINT),
                         new SqlParameter("NOM", Types.VARCHAR),

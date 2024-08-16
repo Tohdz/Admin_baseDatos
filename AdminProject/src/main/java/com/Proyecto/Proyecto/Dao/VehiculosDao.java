@@ -36,6 +36,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_VEHICULOS_TB_GET_VEHICULOS_SP")
+                .withCatalogName("FIDE_TALLER_VEHICULOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Vehiculos>() {
                     @Override
@@ -62,6 +63,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_VEHICULOS_TB_GET_VEHICULOSBYUSER_SP")
+                .withCatalogName("FIDE_TALLER_VEHICULOS_PKG")
                 .declareParameters(new SqlParameter("USID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Vehiculos>() {
                     @Override
@@ -89,6 +91,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_VEHICULOS_TB_GET_VEHICULO_SP")
+                .withCatalogName("FIDE_TALLER_VEHICULOS_PKG")
                 .declareParameters(new SqlParameter("PLACA", Types.VARCHAR),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Vehiculos>() {
                     @Override
@@ -116,6 +119,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_VEHICULOS_TB_ADD_VEHICULO_SP")
+                .withCatalogName("FIDE_TALLER_VEHICULOS_PKG")
                 .declareParameters(
                         new SqlParameter("PLAC", Types.VARCHAR),
                         new SqlParameter("MID", Types.BIGINT),
@@ -142,6 +146,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_VEHICULOS_TB_DELETE_VEHICULO_SP")
+                .withCatalogName("FIDE_TALLER_VEHICULOS_PKG")
                 .declareParameters(new SqlParameter("PLAC", Types.VARCHAR));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("PLAC", PLACA);
@@ -151,7 +156,8 @@ public class VehiculosDao {
     public void updateVehiculo(String plac,Long mid,Long idm,Long tid,int ano,Long ids,Long usid,boolean act) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
-                .withProcedureName("FIDE_VEHICULOS_TB_UPDATE_VEHICULO_SP") 
+                .withProcedureName("FIDE_VEHICULOS_TB_UPDATE_VEHICULO_SP")
+                .withCatalogName("FIDE_TALLER_VEHICULOS_PKG")
                 .declareParameters(
                         new SqlParameter("PLAC", Types.VARCHAR),
                         new SqlParameter("MID", Types.BIGINT),
@@ -178,6 +184,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_GET_SEDESBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Sedes>() {
                     @Override
@@ -202,6 +209,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOSBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_USUARIOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override
@@ -229,6 +237,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOBYUSERNAME_SP")
+                .withCatalogName("FIDE_TALLER_USUARIOS_PKG")
                 .declareParameters(new SqlParameter("UNAME", Types.VARCHAR), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override
@@ -257,6 +266,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_TIPOS_TB_GET_TIPOSBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_TIPOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Tipos>() {
                     @Override
@@ -278,6 +288,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MARCAS_TB_GET_MARCASBYSTATE_SP")
+                .withCatalogName("FIDE_TALLER_MARCAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Marcas>() {
                     @Override
@@ -299,6 +310,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MODELOS_TB_GET_MODELOSBYMARCA_SP")
+                .withCatalogName("FIDE_TALLER_MODELOS_PKG")
                 .declareParameters(new SqlParameter("MID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Modelos>() {
                     @Override
@@ -322,6 +334,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MODELOS_TB_GET_MODELOS_SP")
+                .withCatalogName("FIDE_TALLER_MODELOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Modelos>() {
                     @Override
@@ -344,6 +357,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_MARCAS_TB_GET_MARCAS_SP")
+                .withCatalogName("FIDE_TALLER_MARCAS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Marcas>() {
                     @Override
@@ -365,6 +379,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_TIPOS_TB_GET_TIPOS_SP")
+                .withCatalogName("FIDE_TALLER_TIPOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Tipos>() {
                     @Override
@@ -386,6 +401,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_SEDES_TB_GET_SEDES_SP")
+                .withCatalogName("FIDE_TALLER_SEDES_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Sedes>() {
                     @Override
@@ -410,6 +426,7 @@ public class VehiculosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOS_SP")
+                .withCatalogName("FIDE_TALLER_USUARIOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Usuario>() {
                     @Override

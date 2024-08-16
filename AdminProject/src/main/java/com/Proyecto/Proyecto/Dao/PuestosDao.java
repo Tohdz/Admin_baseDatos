@@ -32,6 +32,7 @@ public class PuestosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_PUESTOS_TB_GET_PUESTOS_SP")
+                .withCatalogName("FIDE_TALLER_PUESTOS_PKG")
                 .declareParameters(new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Puestos>() {
                     @Override
@@ -53,6 +54,7 @@ public class PuestosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_PUESTOS_TB_GET_PUESTO_SP")
+                .withCatalogName("FIDE_TALLER_PUESTOS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT), new SqlParameter("DATOS", Types.REF_CURSOR))
                 .returningResultSet("DATOS", new RowMapper<Puestos>() {
                     @Override
@@ -75,6 +77,7 @@ public class PuestosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_PUESTOS_TB_ADD_PUESTO_SP")
+                .withCatalogName("FIDE_TALLER_PUESTOS_PKG")
                 .declareParameters(
                         new SqlParameter("NOM", Types.VARCHAR),
                         new SqlParameter("ACT", Types.BOOLEAN)
@@ -89,6 +92,7 @@ public class PuestosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_PUESTOS_TB_DELETE_PUESTO_SP")
+                .withCatalogName("FIDE_TALLER_PUESTOS_PKG")
                 .declareParameters(new SqlParameter("CID", Types.BIGINT));
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("CID", id);
@@ -99,6 +103,7 @@ public class PuestosDao {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
                 .withProcedureName("FIDE_PUESTOS_TB_UPDATE_PUESTO_SP")
+                .withCatalogName("FIDE_TALLER_PUESTOS_PKG")
                 .declareParameters(
                         new SqlParameter("CID", Types.BIGINT),
                         new SqlParameter("NOM", Types.VARCHAR),
