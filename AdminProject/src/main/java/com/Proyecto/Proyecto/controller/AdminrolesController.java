@@ -6,7 +6,9 @@ package com.Proyecto.Proyecto.controller;
 
 import com.Proyecto.Proyecto.Domain.Rol;
 import com.Proyecto.Proyecto.Domain.Usuario;
+import com.Proyecto.Proyecto.Service.CitasService;
 import com.Proyecto.Proyecto.Service.RolService;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -24,21 +26,25 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author hhern
  */
 @Controller
-@RequestMapping("/roles")
-public class RolController {
+@RequestMapping("/adminroles")
+public class AdminrolesController {
     
     @Autowired
     private RolService rolService;
     
+    @Autowired
+    private CitasService citasService;
+    
     @GetMapping("/listado")
-    private String listado(Model model) {
-        var roles = rolService.getRoles();
+    private String listado(Model model,Principal principal) {
+        Usuario user=citasService.getUsuariosbyUsername(principal.getName());
+        var roles = rolService.getRolesbysede(user.getIdSede());
         model.addAttribute("roles", roles);
         //
-        List<Usuario> usuarios = rolService.getUsuariobyState();
+        List<Usuario> usuarios = rolService.getUsuariobyStateandsede(user.getIdSede());
         model.addAttribute("usuarios", usuarios);
         //
-        List<String> rols = Arrays.asList("ROLE_ADMIN", "ROLE_USER", "ROLE_MEC", "ROLE_ADMIDS", "ROLE_CASH","ROLE_CONT");
+        List<String> rols = Arrays.asList("ROLE_USER", "ROLE_MEC","ROLE_CASH","ROLE_CONT");
         model.addAttribute("rols", rols);
         //
         
@@ -47,36 +53,37 @@ public class RolController {
         Map<Long, String> usuariosMap = usuarios2.stream()
                 .collect(Collectors.toMap(Usuario::getIdUsuario, Usuario::getUsername));
         model.addAttribute("usuariosMap", usuariosMap);
-        return "/roles/listado";
+        return "/adminroles/listado";
     }
 
 
     @PostMapping("/guardar")
     public String rolGuardar(Rol rol) {
         rolService.save(rol);
-        return "redirect:/roles/listado";
+        return "redirect:/adminroles/listado";
     }
 
     @GetMapping("/eliminar/{idRol}")
     public String rolEliminar(Rol rol) {
         rolService.delete(rol);
-        return "redirect:/roles/listado";
+        return "redirect:/adminroles/listado";
     }
 
     @GetMapping("/modificar/{idRol}")
-    public String rolModificar(Rol rol, Model model) {
+    public String rolModificar(Rol rol, Model model,Principal principal) {
+        Usuario user=citasService.getUsuariosbyUsername(principal.getName());
         rol = rolService.getRol(rol);
         model.addAttribute("rol", rol);
-        List<Usuario> usuarios = rolService.getUsuariobyState();
+        List<Usuario> usuarios = rolService.getUsuariobyStateandsede(user.getIdSede());
         model.addAttribute("usuarios", usuarios);
-        List<String> rols = Arrays.asList("ROLE_ADMIN", "ROLE_USER", "ROLE_MEC", "ROLE_ADMIDS", "ROLE_CASH","ROLE_CONT");
+        List<String> rols = Arrays.asList("ROLE_USER", "ROLE_MEC","ROLE_CASH","ROLE_CONT");
         model.addAttribute("rols", rols);
-        return "/roles/modifica";
+        return "/adminroles/modifica";
     }
 
     @PostMapping("/modificar2")
     public String rolModificar2(@RequestParam("idRol")Long idRol, @RequestParam("nombre") String nombre,@RequestParam("idUsuario")Long idUsuario) {
         rolService.update(idRol, nombre, idUsuario);
-        return "redirect:/roles/listado";
+        return "redirect:/adminroles/listado";
     }
 }

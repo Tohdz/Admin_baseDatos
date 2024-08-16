@@ -57,5 +57,15 @@ public class RolServiceImpl implements RolService{
         return rolDao.getUsuarios();
 
     }
+
+    @Override
+    public List<Usuario> getUsuariobyStateandsede(Long id) {
+        return rolDao.getUsuariosbyStateandsede(id);
+    }
+
+    @Override
+    public List<Rol> getRolesbysede(Long id) {
+        return rolDao.getrolesbysede(id);
+    }
     
 }

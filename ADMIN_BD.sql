@@ -549,6 +549,19 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ROLES_TB_GET_ROLES_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Create or replace PROCEDURE FIDE_ROLES_TB_GET_ROLESBYSEDE_SP (IDSED IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT R.ID_ROL,R.NOMBRE,R.ID_USUARIO FROM FIDE_ROLES_TB R JOIN FIDE_USUARIOS_TB U ON R.ID_USUARIO=U.ID_USUARIO WHERE U.ID_SEDE=IDSED;
+EXCEPTION
+     WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_ROLES_TB_GET_ROLESBYSEDE_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Create or replace PROCEDURE FIDE_ROLES_TB_GET_ROL_SP (RID IN NUMBER,DATOS OUT SYS_REFCURSOR)
  AS

@@ -14,7 +14,9 @@ import java.util.List;
  */
 public interface RolService {
     public List<Rol> getRoles();
+    public List<Rol> getRolesbysede(Long id);
     public List<Usuario> getUsuariobyState();
+    public List<Usuario> getUsuariobyStateandsede(Long id);
     public List<Usuario> getUsuarios();
     public Rol getRol(Rol rol);
     public void save(Rol rol);

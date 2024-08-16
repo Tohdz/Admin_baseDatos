@@ -71,6 +71,28 @@ public class RolDao  {
         return rolesList;
     }
     
+    public List<Rol> getrolesbysede(Long id) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_ROLES_TB_GET_ROLESBYSEDE_SP")
+                .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Rol>() {
+                    @Override
+                    public Rol mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Rol rol = new Rol();
+                        rol.setIdRol(rs.getLong("ID_ROL"));
+                        rol.setNombre(rs.getString("NOMBRE"));
+                        rol.setIdUsuario(rs.getLong("ID_USUARIO"));
+                        return rol;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("IDSED", id);
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Rol> rolesList = (List<Rol>) results.get("DATOS");
+        return rolesList;
+    }
+    
     public Rol getRol(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")
@@ -131,6 +153,34 @@ public class RolDao  {
                     }
                 });
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Usuario> usuarioList = (List<Usuario>) results.get("DATOS");
+        return usuarioList;
+    }
+    
+    public List<Usuario> getUsuariosbyStateandsede(Long id) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOSBYSTATE_SP")
+                .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Usuario>() {
+                    @Override
+                    public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Usuario usuario = new Usuario();
+                        usuario.setIdUsuario(rs.getLong("ID_USUARIO"));
+                        usuario.setUsername(rs.getString("USERNAME"));
+                        usuario.setPassword(rs.getString("UPASSWORD"));
+                        usuario.setNombre(rs.getString("NOMBRE"));
+                        usuario.setApellidos(rs.getString("APELLIDO"));
+                        usuario.setCorreo(rs.getString("CORREO"));
+                        usuario.setTelefono(rs.getString("TELEFONO"));
+                        usuario.setIdSede(rs.getLong("ID_SEDE"));
+                        usuario.setEstado(rs.getBoolean("ESTADO"));
+                        return usuario;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("IDSED", id);
         Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
         List<Usuario> usuarioList = (List<Usuario>) results.get("DATOS");
         return usuarioList;
