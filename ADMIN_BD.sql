@@ -625,6 +625,19 @@ EXCEPTION
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_USUARIOS_TB_GET_USUARIOS_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*Create or replace PROCEDURE FIDE_USUARIOS_TB_GET_USUARIOSBYSEDE_SP (IDSED IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_USUARIO, USERNAME, UPASSWORD, NOMBRE, APELLIDO, CORREO, TELEFONO,ID_SEDE,ESTADO FROM FIDE_USUARIOS_TB WHERE ID_SEDE=IDSED;
+EXCEPTION
+     WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_USUARIOS_TB_GET_USUARIOSBYSEDE_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /*Create or replace PROCEDURE FIDE_USUARIOS_TB_GET_USUARIOSBYORDENES_SP (ORDENID IN NUMBER,DATOS OUT SYS_REFCURSOR)
  AS
@@ -1360,6 +1373,19 @@ EXCEPTION
         VMES := SQLERRM;
         VCOD := SQLCODE;
         INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_EMPLEADOS_TB_GET_EMPLEADOS_SP',SYSDATE, VCOD || ' - '|| VMES );
+ END;*/
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace PROCEDURE FIDE_EMPLEADOS_TB_GET_EMPLEADOSBYSEDE_SP (IDSED IN NUMBER,DATOS OUT SYS_REFCURSOR)
+ AS
+    VCOD NUMBER;
+    VMES VARCHAR2(1024);
+ BEGIN
+   OPEN DATOS FOR SELECT ID_EMPLEADO,NOMBRE,APELLIDO,TELEFONO,CORREO,FECHA_CONTRATO,DESCRIPT(SALARIO) as SALARIO,ID_PUESTO,ID_SEDE,ESTADO,USERNAME FROM FIDE_EMPLEADOS_TB WHERE ID_SEDE=IDSED;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        VMES := SQLERRM;
+        VCOD := SQLCODE;
+        INSERT INTO FIDE_ERRORES_TB VALUES (USER,'FIDE_EMPLEADOS_TB_GET_EMPLEADOSBYSEDE_SP',SYSDATE, VCOD || ' - '|| VMES );
  END;*/
  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /* create or replace PROCEDURE FIDE_EMPLEADOS_TB_GET_EMPLEADOSBYUSERNAME_SP (UNAME IN VARCHAR2,DATOS OUT SYS_REFCURSOR)

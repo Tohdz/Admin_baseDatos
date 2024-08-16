@@ -55,6 +55,34 @@ public class UsuarioDao {
         List<Usuario> usuarioList = (List<Usuario>) results.get("DATOS");
         return usuarioList;
     }
+    
+    public List<Usuario> getUsuariosbysede(Long id) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_USUARIOS_TB_GET_USUARIOSBYSEDE_SP")
+                .declareParameters(new SqlParameter("IDSED", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Usuario>() {
+                    @Override
+                    public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Usuario usuario = new Usuario();
+                        usuario.setIdUsuario(rs.getLong("ID_USUARIO"));
+                        usuario.setUsername(rs.getString("USERNAME"));
+                        usuario.setPassword(rs.getString("UPASSWORD"));
+                        usuario.setNombre(rs.getString("NOMBRE"));
+                        usuario.setApellidos(rs.getString("APELLIDO"));
+                        usuario.setCorreo(rs.getString("CORREO"));
+                        usuario.setTelefono(rs.getString("TELEFONO"));
+                        usuario.setIdSede(rs.getLong("ID_SEDE"));
+                        usuario.setEstado(rs.getBoolean("ESTADO"));
+                        return usuario;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("IDSED", id);
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Usuario> usuarioList = (List<Usuario>) results.get("DATOS");
+        return usuarioList;
+    }
 
     public Usuario getIdUsuario(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)

@@ -16,6 +16,7 @@ public interface UsuarioService {
     
     // Se obtiene un listado de usuarios en un List
     public List<Usuario> getUsuarios();
+    public List<Usuario> getUsuariosbysede(Long id);
     
     public List<Sedes> getSedes();
     

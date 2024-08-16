@@ -79,8 +79,6 @@ public class AdminEmploController {
         model.addAttribute("empleado", empleado);
         List<Puestos> puestos = empleadoService.getPuestosbyState();
         model.addAttribute("puestos", puestos);
-        List<Sedes> sedes = empleadoService.getSedesbyState();
-        model.addAttribute("sedes", sedes);
         return "/adminemployees/modifica";
     }
 
