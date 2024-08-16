@@ -30,7 +30,7 @@
                                 <input type="hidden" name="cantidad" th:value="${repuesto.cantidad}"/>
                                 <button style="background-color: rgba(0, 255, 0, 0.5); color: white; "class="btn btn-trasparent" id="addCar" name="addCar" onclick="addCard(this.form)" type="button"><i class="fas fa-cart-plus"></i></button>
                             </form>
-                            <p class="card-text">[[${repuesto.idMarca}]]</p> 
+                            <p class="card-text">[[${marcasMap[repuesto.idMarca]}]]</p> 
                         </div>
                     </div>
                 </div>

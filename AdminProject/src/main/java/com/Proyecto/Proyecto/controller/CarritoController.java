@@ -13,13 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Proyecto.Proyecto.Domain.Item;
+import com.Proyecto.Proyecto.Domain.MarcaRepuestos;
 import com.Proyecto.Proyecto.Domain.Repuestos;
 import com.Proyecto.Proyecto.Service.CategoriaService;
 import com.Proyecto.Proyecto.Service.ItemService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.Proyecto.Proyecto.Service.MarcaRepuestoService;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.Proyecto.Proyecto.Service.RepuestosService;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class CarritoController {
@@ -30,6 +33,8 @@ public class CarritoController {
     private RepuestosService repuestosService;
     @Autowired
     private CategoriaService categoriaService;
+    @Autowired
+    private MarcaRepuestoService marcarepuestoService;
 
     @GetMapping("/")
     public String mostrarJuegos(Model model) {
@@ -40,7 +45,11 @@ public class CarritoController {
         // Obtener todas las categorías y agregarlas al modelo
         List<Categorias> categorias = categoriaService.getCategorias();
         model.addAttribute("categorias", categorias);
-
+        //
+        List<MarcaRepuestos> marcas2 = marcarepuestoService.getMarcaRepuestos();
+        Map<Long, String> marcasMap = marcas2.stream()
+                .collect(Collectors.toMap(MarcaRepuestos::getIdMarcaRepuesto, MarcaRepuestos::getNombre));
+        model.addAttribute("marcasMap", marcasMap);
         return "/index";
     }
 
