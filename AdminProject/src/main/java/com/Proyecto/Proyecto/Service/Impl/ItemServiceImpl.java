@@ -145,6 +145,4 @@ public class ItemServiceImpl implements ItemService {
         facturaDao.updatefactura(factura.getIdFactura(),total);
         listaItems.clear();
     }
-
-
 }
