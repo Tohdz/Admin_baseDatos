@@ -58,6 +58,33 @@ public class OrdenesDao {
         return ordenList;
     }
     
+    public List<Ordenes> getOrdenesbyuser(Long id) {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withSchemaName("ADMIN_FIDE_TALLER_USER")
+                .withProcedureName("FIDE_ORDENES_TB_GET_ORDENESBYUSER_SP")
+                .withCatalogName("FIDE_TALLER_ORDENES_PKG")
+                .declareParameters(new SqlParameter("USID", Types.BIGINT),new SqlParameter("DATOS", Types.REF_CURSOR))
+                .returningResultSet("DATOS", new RowMapper<Ordenes>() {
+                    @Override
+                    public Ordenes mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Ordenes orden = new Ordenes();
+                        orden.setIdOrden(rs.getLong("ID_ORDEN"));
+                        orden.setIdCita(rs.getLong("ID_CITA"));
+                        orden.setFechaHora(rs.getObject("FECHA", LocalDateTime.class));
+                        orden.setComentario(rs.getString("COMENTARIOS"));
+                        orden.setIdEmpleado(rs.getLong("ID_EMPLEADO"));
+                        orden.setIdSede(rs.getLong("ID_SEDE"));
+                        orden.setEstado(rs.getBoolean("ESTADO"));
+                        return orden;
+                    }
+                });
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("USID", id);
+        Map<String, Object> results = simpleJdbcCall.execute(mapSqlParameterSource);
+        List<Ordenes> ordenList = (List<Ordenes>) results.get("DATOS");
+        return ordenList;
+    }
+    
     public List<Ordenes> getOrdenesbyStateandSede(Long id) {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withSchemaName("ADMIN_FIDE_TALLER_USER")

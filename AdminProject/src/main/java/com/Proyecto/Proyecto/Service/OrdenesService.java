@@ -21,6 +21,7 @@ public interface OrdenesService {
     public Ordenes getOrdenbyid(Long id);
     public Usuario getusuariobyordenes(Long id);
     public List<Ordenes> getOrdenes();
+    public List<Ordenes> getOrdenesbyuser(Long id);
     public List<Ordenes> getOrdenesbyStateandSede(Long id);
     public List<Citas> getCitasbyState();
     public List<Empleado> getEmpleadosbyState();

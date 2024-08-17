@@ -103,5 +103,11 @@ public class OrdenServiceImpl implements OrdenesService {
     public Usuario getusuariobyordenes(Long id) {
         return ordenesDao.getUsuariobyordenes(id);
     }
+
+    @Override
+    public List<Ordenes> getOrdenesbyuser(Long id) {
+        var lista = ordenesDao.getOrdenesbyuser(id);
+        return lista;
+    }
     
 }
