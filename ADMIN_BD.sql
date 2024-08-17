@@ -3825,7 +3825,51 @@ EXCEPTION
 END;
 END;*/
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create or replace view FIDE_USUARIOS_ACTIVOSBYSEDE_V as 
+SELECT U.ID_USUARIO AS "IDENTIFICADOR",
+       U.NOMBRE || ' ' || U.APELLIDO AS "NOMBRE COMPLETO",
+       U.USERNAME AS "NOMBRE DE USUARIO",
+       S.NOMBRE AS "SEDE"
+FROM FIDE_USUARIOS_TB U JOIN FIDE_SEDES_TB S ON U.ID_SEDE=S.ID_SEDE 
+WHERE U.ESTADO=1 ORDER BY U.ID_SEDE;*/
+
+--select * from FIDE_USUARIOS_ACTIVOSBYSEDE_V;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*create materialized view FIDE_ROLESBYUSER_VM refresh complete on demand as
+SELECT U.ID_USUARIO AS "IDENTIFICADOR",
+       U.NOMBRE || ' ' || U.APELLIDO AS "NOMBRE COMPLETO",
+       U.USERNAME AS "NOMBRE DE USUARIO",
+       R.NOMBRE AS "NOMBRE DE ROL"
+FROM FIDE_USUARIOS_TB U JOIN FIDE_ROLES_TB R ON U.ID_USUARIO=R.ID_USUARIO;*/
+
+--SELECT * FROM FIDE_ROLESBYUSER_VM;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ALTER TABLE autores
+ADD (fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     fecha_modificacion TIMESTAMP,
+     creado_por VARCHAR2(30),
+     modificado_por VARCHAR2(30),
+     accion varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER TRG_AUTORES_AUDITORIA
+BEFORE INSERT OR UPDATE ON autores
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.fecha_creacion := CURRENT_TIMESTAMP;
+        :NEW.creado_por := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.fecha_modificacion := CURRENT_TIMESTAMP;
+        :NEW.modificado_por := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
