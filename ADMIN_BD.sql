@@ -3846,30 +3846,363 @@ FROM FIDE_USUARIOS_TB U JOIN FIDE_ROLES_TB R ON U.ID_USUARIO=R.ID_USUARIO;*/
 --SELECT * FROM FIDE_ROLESBYUSER_VM;
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ALTER TABLE autores
-ADD (fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-     fecha_modificacion TIMESTAMP,
-     creado_por VARCHAR2(30),
-     modificado_por VARCHAR2(30),
-     accion varchar2(30));
+/*ALTER TABLE FIDE_CATEGORIAS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
 
 
-CREATE OR REPLACE TRIGGER TRG_AUTORES_AUDITORIA
-BEFORE INSERT OR UPDATE ON autores
+CREATE OR REPLACE TRIGGER FIDE_CATEGORIAS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_CATEGORIAS_TB
 FOR EACH ROW
 BEGIN
     IF INSERTING THEN
-        :NEW.fecha_creacion := CURRENT_TIMESTAMP;
-        :NEW.creado_por := USER;
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
         :NEW.ACCION:='INSERTAR';
     ELSIF UPDATING THEN
 
-        :NEW.fecha_modificacion := CURRENT_TIMESTAMP;
-        :NEW.modificado_por := USER;
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
         :NEW.ACCION:='ACTUALIZAR';
     END IF;
-END;
+END;*/
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_CITAS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
 
 
+CREATE OR REPLACE TRIGGER FIDE_CITAS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_CITAS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
 
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_EMPLEADOS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_EMPLEADOS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_EMPLEADOS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_MARCAS_REPUESTOS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_MARCAS_REPUESTOS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_MARCAS_REPUESTOS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_MODELOS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_MODELOS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_MODELOS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_MARCAS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_MARCAS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_MARCAS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_PUESTOS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_PUESTOS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_PUESTOS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_ORDENES_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_ORDENES_TRG
+BEFORE INSERT OR UPDATE ON FIDE_ORDENES_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_REPUESTOS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_REPUESTOS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_REPUESTOS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_ROLES_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_ROLES_TRG
+BEFORE INSERT OR UPDATE ON FIDE_ROLES_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_SEDES_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_SEDES_TRG
+BEFORE INSERT OR UPDATE ON FIDE_SEDES_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_SERVICIOS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_SERVICIOS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_SERVICIOS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_TIPOS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_TIPOS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_TIPOS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_USUARIOS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_USUARIOS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_USUARIOS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+/*ALTER TABLE FIDE_VEHICULOS_TB
+ADD (FECHA_CREACION TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     FECHA_MODIFICACION TIMESTAMP,
+     CREADO_POR VARCHAR2(30),
+     MODIFICADO_POR VARCHAR2(30),
+     ACCION varchar2(30));
+
+
+CREATE OR REPLACE TRIGGER FIDE_VEHICULOS_TRG
+BEFORE INSERT OR UPDATE ON FIDE_VEHICULOS_TB
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        :NEW.FECHA_CREACION := CURRENT_TIMESTAMP;
+        :NEW.CREADO_POR := USER;
+        :NEW.ACCION:='INSERTAR';
+    ELSIF UPDATING THEN
+
+        :NEW.FECHA_MODIFICACION := CURRENT_TIMESTAMP;
+        :NEW.MODIFICADO_POR := USER;
+        :NEW.ACCION:='ACTUALIZAR';
+    END IF;
+END;*/
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
